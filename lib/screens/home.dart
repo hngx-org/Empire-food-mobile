@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/screens/gift.free.lunch.2.dart';
 
 import 'bottom_nav_bar/HomeScreen.dart';
 import 'bottom_nav_bar/NotifyScreen.dart';
@@ -31,6 +32,10 @@ class _HomeState extends State<Home> {
       {
         'page': UserProfile(),
         'title': 'Profile',
+      },
+      {
+        'page': GiftFreeLunchScreen(),
+        'title': 'Gift Lunch',
       },
     ];
   }
