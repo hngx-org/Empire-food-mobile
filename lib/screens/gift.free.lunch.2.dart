@@ -12,9 +12,10 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: Container(
+          alignment: Alignment.center,
+          child: Text(
           "Gift Free Lunch",
-          textAlign: TextAlign.center,
           style: GoogleFonts.nunito(
             fontSize: 24.0,
             fontWeight: FontWeight.w700,
@@ -22,13 +23,14 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
             letterSpacing: 0.01,
             height: 40.0,
           ),
+          ),
         ),
       ),
       body: Center(
         child: Container(
           width: 380.0,
           height: 920.0,
-          margin: const EdgeInsets.only(top: 10.0, left: 24.0),
+          margin: const EdgeInsets.only(top: 8.0, left: 24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
