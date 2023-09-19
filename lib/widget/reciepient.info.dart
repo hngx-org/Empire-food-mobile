@@ -13,9 +13,35 @@ class RecipientInfoSection extends StatelessWidget {
           style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8.0),
-        const Text(
-          "John Doe", // Replace with the actual recipient's name
-          style: TextStyle(fontSize: 16.0),
+        Container(
+          width: double.infinity,
+          height: 60,
+          padding: const EdgeInsets.all(10),
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          child: Row(
+            children: [
+              CircleAvatar(
+                backgroundImage: AssetImage('images/dummy.png'),
+              ),
+              SizedBox(width: 10),
+              Text(
+                'UduakE',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontFamily: 'Nunito',
+                  fontWeight: FontWeight.w500,
+                  height: 0.06,
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 24.0),
         const Text(
@@ -28,18 +54,17 @@ class RecipientInfoSection extends StatelessWidget {
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
             border: OutlineInputBorder(
-              gapPadding: 24,
-              borderSide: BorderSide(
-                color: Colors.brown,
-                width: 12,
-              )
-            ),
+                gapPadding: 24,
+                borderSide: BorderSide(
+                  color: Colors.brown,
+                  width: 12,
+                )),
             hintText: "Enter the number of free lunches",
           ),
         ),
         const SizedBox(height: 16.0),
         const Text(
-          "20 = 2000",
+          "10 🍕 = ₦1,000",
           style: TextStyle(fontSize: 16.0),
         ),
         const SizedBox(height: 24.0),
@@ -51,18 +76,15 @@ class RecipientInfoSection extends StatelessWidget {
         TextFormField(
           decoration: const InputDecoration(
             border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.brown,
-                // width: 12,
-              )
-            ),
+                borderSide: BorderSide(
+              color: Colors.brown,
+              // width: 12,
+            )),
             hintText: "Type your free lunch message here",
           ),
-          maxLines: 7, 
+          maxLines: 4,
         ),
       ],
     );
   }
 }
-
-
