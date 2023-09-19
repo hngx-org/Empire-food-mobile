@@ -32,41 +32,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   ),
                 ],
               ),
+              SizedBox(height:20),
 
               
-              ListView.builder(
-                itemCount: 4,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return ListTile(
-                      title: Text('Lateef gifted you 3 free lunches.'),
-                      subtitle: Text('Today, 14:02'),
-                      trailing: IconButton(
-                        icon: Icon(Icons.redeem),
-                        onPressed: () {},
-                      ),
-                    );
-                  } else if (index == 1) {
-                    return ListTile(
-                      title: Text(
-                          'You successfully redeemed 20 free lunches. You currently have 100 free lunches left.'),
-                      subtitle: Text('Yesterday, 14:02'),
-                    );
-                  } else if (index == 2) {
-                    return ListTile(
-                      title: Text(
-                          'You gifted UduakE 20 free lunches. You currently have 100 free lunches left.'),
-                      subtitle: Text('Yesterday, 14:02'),
-                    );
-                  } else {
-                    return ListTile(
-                      title: Text('Tola gifted you 3 free lunches.'),
-                      subtitle: Text('Friday, 14:02'),
-                    );
-                  }
-                },
-              ),
+             
             ],
           ),
         ),
