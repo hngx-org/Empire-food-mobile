@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/ui/components/custom_button.dart';
-import 'package:free_lunch_app/ui/components/profile_pic.dart';
-import 'package:free_lunch_app/utils/colors.dart';
-import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../utils/colors.dart';
+import '../../utils/size_calculator.dart';
+import 'custom_button.dart';
+import 'profile_pic.dart';
 
 class HomeCard extends StatelessWidget {
   final String staffName;

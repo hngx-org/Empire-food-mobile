@@ -1,6 +1,6 @@
 # Free Lunch App
 
-![App Logo](app-logo.png)
+<!-- ![App Logo](app-logo.png) -->
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -67,8 +67,8 @@ Before you begin, ensure you have met the following requirements:
 
 ## App Screenshots
 
-![Screenshot 1](screenshots/screenshot1.png)
-![Screenshot 2](screenshots/screenshot2.png)
+![Screenshot 1](images/screenshots/Screenshot_1.png)
+![Screenshot 2](images/screenshots/Screenshot_2.png)
 
 ## Test
 

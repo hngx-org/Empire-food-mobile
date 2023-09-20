@@ -6,17 +6,15 @@ class CustomButton extends StatelessWidget {
   final double height;
   final Color color;
   final String content;
-  // final double textSize;
   final VoidCallback onTap;
   final bool isTextBig;
   const CustomButton({
-    super.key, 
-    required this.width, 
-    required this.height, 
-    required this.color, 
-    required this.content, 
-    // required this.textSize, 
-    required this.onTap, 
+    super.key,
+    required this.width,
+    required this.height,
+    required this.color,
+    required this.content,
+    required this.onTap,
     this.isTextBig = true,
   });
 
@@ -43,12 +41,11 @@ class CustomButton extends StatelessWidget {
             ),
           ],
         ),
-        child:  Center(
+        child: Center(
           child: Text(
             content,
             style: GoogleFonts.nunito(
               color: Colors.black,
-              // if isTextBig is true(which is the default), textSize is 16 else it will be 14
               fontSize: isTextBig ? 16 : 14,
               fontWeight: FontWeight.w700,
               height: 1,
@@ -59,4 +56,3 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
-

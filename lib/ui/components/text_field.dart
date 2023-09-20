@@ -54,7 +54,7 @@ class GeneralTextField extends StatelessWidget {
       controller: textController ?? _controller,
       onSaved: onSaved,
       onChanged: onChanged,
-      textAlignVertical: TextAlignVertical.center, // textAlignVertical,
+      textAlignVertical: TextAlignVertical.center, 
       autovalidateMode: autoValidateMode,
       maxLines: multiline ? 5 : 1,
       minLines: multiline ? 5 : 1,

@@ -32,7 +32,7 @@ class _DialogManagerState extends State<DialogManager> {
   void _showDialog(DialogRequest request) {
     _overlayEntry = _createOverlayEntry(request);
 
-    Overlay.of(context)!.insert(_overlayEntry!);
+    Overlay.of(context).insert(_overlayEntry!);
 
     //dismiss dialog after [request.duration] if [request.autoDismiss] is true
     if (request.autoDismiss) {

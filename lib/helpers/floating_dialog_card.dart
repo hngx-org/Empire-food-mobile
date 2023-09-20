@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/core/models/dialog_request.dart';
-import 'package:free_lunch_app/ui/components/full_button.dart';
-import 'package:free_lunch_app/utils/colors.dart';
-import 'package:free_lunch_app/utils/size_calculator.dart';
+
+import '../core/models/dialog_request.dart';
+import '../ui/components/full_button.dart';
+import '../utils/colors.dart';
+import '../utils/size_calculator.dart';
+
 
 class FloatingDialogCard extends StatelessWidget {
   final DialogRequest request;
