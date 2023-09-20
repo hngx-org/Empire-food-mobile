@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,6 +20,7 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
   bool lunch3 = false;
   @override
   Widget build(BuildContext context) {
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -53,9 +55,104 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   height: 0.06,
+
                 ),
-              ),
-            ],
+                SizedBox(width: 10),
+                Text(
+                  'UduakE',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24.0),
+          const Text(
+            "Number of Free Lunches",
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8.0),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: lunchNumbers.map((number) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedLunch = number;
+                    });
+                  },
+                  child: Container(
+                    width: 114.67,
+                    height: 78,
+                    padding: EdgeInsets.all(10),
+                    decoration: ShapeDecoration(
+                      color: selectedLunch == number
+                          ? Color(0xFFEBD9FC)
+                          : Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(width: 1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      shadows: [
+                        selectedLunch == number
+                            ? BoxShadow(
+                                color: Color(0xFF000000),
+                                blurRadius: 0,
+                                offset: Offset(2, 4),
+                                spreadRadius: 0,
+                              )
+                            : BoxShadow()
+                      ],
+                    ),
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          width: 50,
+                          child: Text(
+                            number,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.nunito(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: -15,
+                          right: -15,
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Radio(
+                              value: number,
+                              groupValue: selectedLunch,
+                              activeColor: Colors.black,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  selectedLunch = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).map((widget) {
+                return Row(
+                  children: [
+                    widget,
+                    SizedBox(width: 8),
+                  ],
+                );
+              }).toList(),
+            ),
           ),
         ),
         const SizedBox(height: 24.0),
@@ -141,9 +238,8 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
             ),
             hintText: "Type your free lunch message here",
           ),
-          maxLines: 4,
-        ),
-      ],
+        ],
+      ),
     );
   }
 
