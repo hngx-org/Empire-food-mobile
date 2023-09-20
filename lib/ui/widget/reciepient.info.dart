@@ -1,90 +1,175 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class RecipientInfoSection extends StatelessWidget {
-  const RecipientInfoSection({super.key});
+class RecipientInfoSection extends StatefulWidget {
+  const RecipientInfoSection({Key? key}) : super(key: key);
+
+  @override
+  State<RecipientInfoSection> createState() => _RecipientInfoSectionState();
+}
+
+class _RecipientInfoSectionState extends State<RecipientInfoSection> {
+  String selectedLunch = '1 Free Lunch';
+  List<String> lunchNumbers = [
+    '1 Free Lunch',
+    'Double Free Lunch',
+    'Triple Free Lunch'
+  ];
+
+  String? freeLunchMessage;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          "Recipient Name",
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 8.0),
-        Container(
-          width: double.infinity,
-          height: 60,
-          padding: const EdgeInsets.all(10),
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(width: 1),
-              borderRadius: BorderRadius.circular(12),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Recipient Name",
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8.0),
+          Container(
+            width: double.infinity,
+            height: 60,
+            padding: const EdgeInsets.all(10),
+            decoration: ShapeDecoration(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(width: 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('images/dummy.png'),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'UduakE',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
           ),
-          child: Row(
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage('images/dummy.png'),
-              ),
-              SizedBox(width: 10),
-              Text(
-                'UduakE',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w500,
-                  height: 0.06,
+          const SizedBox(height: 24.0),
+          const Text(
+            "Number of Free Lunches",
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8.0),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: lunchNumbers.map((number) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedLunch = number;
+                    });
+                  },
+                  child: Container(
+                    width: 114.67,
+                    height: 78,
+                    padding: EdgeInsets.all(10),
+                    decoration: ShapeDecoration(
+                      color: selectedLunch == number
+                          ? Color(0xFFEBD9FC)
+                          : Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(width: 1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      shadows: [
+                        selectedLunch == number
+                            ? BoxShadow(
+                                color: Color(0xFF000000),
+                                blurRadius: 0,
+                                offset: Offset(2, 4),
+                                spreadRadius: 0,
+                              )
+                            : BoxShadow()
+                      ],
+                    ),
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          width: 50,
+                          child: Text(
+                            number,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.nunito(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: -15,
+                          right: -15,
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Radio(
+                              value: number,
+                              groupValue: selectedLunch,
+                              activeColor: Colors.black,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  selectedLunch = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).map((widget) {
+                return Row(
+                  children: [
+                    widget,
+                    SizedBox(width: 8),
+                  ],
+                );
+              }).toList(),
+            ),
+          ),
+          const SizedBox(height: 24.0),
+          const Text(
+            "Free Lunch Message (Optional)",
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8.0),
+          Container(
+            height: 120,
+            child: TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.brown,
+                  ),
                 ),
+                hintText: "Type your free lunch message here",
               ),
-            ],
+              maxLines: 4,
+              onChanged: (value) {
+                setState(() {
+                  freeLunchMessage = value;
+                });
+              },
+            ),
           ),
-        ),
-        const SizedBox(height: 24.0),
-        const Text(
-          "Number of Free Lunches",
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 8.0),
-        TextFormField(
-          initialValue: "20",
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(
-                gapPadding: 24,
-                borderSide: BorderSide(
-                  color: Colors.brown,
-                  width: 12,
-                )),
-            hintText: "Enter the number of free lunches",
-          ),
-        ),
-        const SizedBox(height: 16.0),
-        const Text(
-          "10 🍕 = ₦1,000",
-          style: TextStyle(fontSize: 16.0),
-        ),
-        const SizedBox(height: 24.0),
-        const Text(
-          "Free Lunch Message (Optional)",
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 8.0),
-        TextFormField(
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(
-                borderSide: BorderSide(
-              color: Colors.brown,
-              // width: 12,
-            )),
-            hintText: "Type your free lunch message here",
-          ),
-          maxLines: 4,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
