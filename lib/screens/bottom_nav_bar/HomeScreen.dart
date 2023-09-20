@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:free_lunch_app/screens/gift_lunch/gift_free_lunch_2.dart';
 import '../../widget/widget.dart';
+import '../gift_lunch/gift_free_lunch_1.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key});
@@ -21,7 +23,6 @@ class HomeScreen extends StatelessWidget {
       'Product Designer',
       'Fullstack Developer'
     ];
-   
 
     return Scaffold(
       body: Material(
@@ -131,7 +132,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              button(133, 51, Color(0xFFF5FAFF), 'Gift Lunch'),
+                              buttonNext(133, 51, Color(0xFFF5FAFF),
+                                  'Gift Lunch', context, GiftFreeLunchScreen()),
                             ],
                           ),
                         ),
