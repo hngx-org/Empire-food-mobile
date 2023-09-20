@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/ui/components/cancel_button.dart';
 import 'package:free_lunch_app/ui/components/next_button.dart';
@@ -186,6 +187,7 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                         CancelButton(),
                         SizedBox(width: 25),
                         NextButton(onTap: () {
+                          HapticFeedback.lightImpact();
                             Navigator.pushNamed(
                               context, RouteHelper.giftFreeLunchScreen2);
                         }),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,7 +11,10 @@ class NextButton extends StatelessWidget {
   Widget build(BuildContext context) {
 
   return GestureDetector(
-    onTap: onTap,
+    onTap: (){
+             HapticFeedback.lightImpact();
+             onTap ();
+    },
     child: Container(
       width: 84,
       height: 51,
