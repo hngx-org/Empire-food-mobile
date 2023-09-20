@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../widget/widget.dart';
+
+import '../../ui/components/bottom_navigator.dart';
+import '../../ui/components/widget.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key});
@@ -35,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     menuIcon(),
-                    Text(
+                   const Text(
                       'Home',
                       style: TextStyle(
                         color: Color(0xFF583208),
@@ -49,8 +51,8 @@ class HomeScreen extends StatelessWidget {
                     Icon(Icons.search),
                   ],
                 ),
-                SizedBox(height: 20),
-                Row(
+               const SizedBox(height: 20),
+              const  Row(
                   children: [
                     CircleAvatar(
                       backgroundImage: AssetImage('images/dummy.png'),
@@ -87,9 +89,9 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 15),
+              const  SizedBox(height: 15),
                 button(130, 45, const Color(0xFFEDDDFC), 'Your Coworkers'),
-                SizedBox(height: 15),
+               const SizedBox(height: 15),
                 Column(
                   children: List.generate(staffName.length, (index) {
                     return Container(
@@ -102,12 +104,12 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  CircleAvatar(
+                                 const CircleAvatar(
                                     backgroundImage:
                                         AssetImage('images/dummy.png'),
                                     radius: 20,
                                   ),
-                                  SizedBox(width: 10),
+                                 const SizedBox(width: 10),
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment:
@@ -115,14 +117,14 @@ class HomeScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         staffName[index],
-                                        style: TextStyle(
+                                        style:const TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                       Text(
                                         roles[index],
-                                        style: TextStyle(
+                                        style:const TextStyle(
                                           fontSize: 14.0,
                                           color: Colors.grey,
                                         ),
@@ -139,7 +141,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   }),
                 ),
-                SizedBox(height: 20),
+               const SizedBox(height: 20),
               ],
             ),
           ),

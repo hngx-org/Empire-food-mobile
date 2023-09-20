@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'screens/home.dart';
+import 'helpers/locator.dart';
+import 'helpers/router.dart';
+import 'ui/home.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  setUpLocator();
   runApp(const MyApp());
 }
 
@@ -15,11 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Home(),
+      home:const Home(),
+      onGenerateRoute: RouteHelper().generateRoute,
     );
   }
 }
