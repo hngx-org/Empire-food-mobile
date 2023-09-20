@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import '../../widget/widget.dart';
-import 'gift_free_launch.dart';
+import 'gift_free_launch_screen2.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -134,10 +134,10 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                               InkWell(
-                                onTap:()=> nextScreen(
-                                  context,
-                                  FreeGiftScreen(staffName: staffName[index]),
-                                ),
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                      GiftFreeLunchScreen2.routeName);
+                                },
                                 child: button(133, 51, const Color(0xFFF5FAFF),
                                     'Gift Lunch'),
                               ),
