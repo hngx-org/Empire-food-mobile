@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/ui/components/cancel_button.dart';
+import 'package:free_lunch_app/ui/components/custom_button.dart';
 import 'package:free_lunch_app/ui/components/next_button.dart';
+import 'package:free_lunch_app/ui/components/success_bottomSheet.dart';
 import 'package:free_lunch_app/utils/colors.dart';
+import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GiftFreeLunchScreen3 extends StatefulWidget {
@@ -202,7 +205,31 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                   children: [
                     CancelButton(),
                     SizedBox(width: 25),
-                    NextButton(onTap: () {}),
+                    // NextButton(onTap: () {}),
+                    CustomButton(
+                        width: 175,
+                        height: 51,
+                        color: AppColors.accentPurple5,
+                        content: 'Gift Free Launch',
+                        onTap: (){
+                           showModalBottomSheet(
+                            context: context,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft:
+                                    Radius.circular(sizer(true, 24, context)),
+                                topRight:
+                                    Radius.circular(sizer(true, 24, context)),
+                              ),
+                            ),
+                            builder: (context) => FullQuoteBottomSheet(
+                              toast:   '🎉 Hooray!!! 🎉',
+                              message: 'UduakE has received your free lunch. Keep the positive vibes coming! 🚀',
+                              bottomSheetImageUrl: 'images/btmSht.png',
+                            ),
+                          );
+                          
+                        })
                   ],
                 )
               ],
