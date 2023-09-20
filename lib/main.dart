@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home:const Home(),
       onGenerateRoute: RouteHelper().generateRoute,
     );
   }
