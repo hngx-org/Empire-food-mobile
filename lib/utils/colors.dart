@@ -16,26 +16,17 @@ class AppColors {
   static const Color greyColor = Color(0xffB5B5B5);
   static Color text2 = Color(0xFF000000).withOpacity(0.7);
 
-
-
-
-
-
-
-
-
-
-
   static const Color lightGrey = Color(0xFFF5F5F5);
   static const Color text3 = Color(0xFFB5B5B5);
-  
+
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color greyBackground = Color(0xFFE5E5E5);
   static const Color greySecondBackground = Color(0xfffafafa);
-  
+
   static const Color navigationButtonInactive = Color(0xFF78502A);
 }
+
 
 Map<int, Color> color = {
   50: const Color.fromRGBO(136, 14, 79, .1),
@@ -51,5 +42,3 @@ Map<int, Color> color = {
 };
 
 MaterialColor colorCustom = MaterialColor(0xFF2AA893, color);
-
-

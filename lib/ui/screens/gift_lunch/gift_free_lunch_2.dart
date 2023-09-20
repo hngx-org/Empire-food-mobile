@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/ui/components/cancel_button.dart';
 import 'package:free_lunch_app/ui/components/next_button.dart';
-import 'package:free_lunch_app/ui/home.dart';
-import 'package:free_lunch_app/ui/widget/widget.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../widget/reciepient.info.dart';
-import 'gift_free_lunch_3.dart';
 
 class GiftFreeLunchScreen2 extends StatefulWidget {
+  const GiftFreeLunchScreen2({super.key});
+
   @override
-  _GiftFreeLunchScreen2State createState() => _GiftFreeLunchScreen2State();
+  State<GiftFreeLunchScreen2> createState() => _GiftFreeLunchScreen2State();
 }
 
 class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
@@ -23,7 +22,7 @@ class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
         appBar: AppBar(
           centerTitle: true,
           elevation: 0,
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0XFFF5FAFF),
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
@@ -50,6 +49,8 @@ class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
         ),
         body: GestureDetector(
           onTap: () {
+            // Dismiss the keyboard when the user taps on the screen
+
             FocusScope.of(context).unfocus();
           },
           child: SingleChildScrollView(
@@ -77,6 +78,7 @@ class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
                     children: [
                       CancelButton(),
                       SizedBox(width: 25),
+
                       NextButton(onTap: () {
                         Navigator.pushNamed(
                             context, RouteHelper.giftFreeLunchScreen3);
