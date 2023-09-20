@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void nextScreen(context, screen) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
@@ -28,40 +29,6 @@ void showSnackbar(context, Color color, message) {
   ));
 }
 
-Widget button(double width, double height, Color color, String content) {
-  return Container(
-    width: width,
-    height: height,
-    padding: const EdgeInsets.all(10),
-    decoration: ShapeDecoration(
-      color: color,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(width: 1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      shadows: [
-        BoxShadow(
-          color: Colors.black,
-          blurRadius: 0,
-          offset: Offset(2, 2),
-          spreadRadius: 0,
-        ),
-      ],
-    ),
-    child: Center(
-      child: Text(
-        content,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 14,
-          fontFamily: 'Tropiline',
-          fontWeight: FontWeight.w700,
-          height: 1.0,
-        ),
-      ),
-    ),
-  );
-}
 
 Widget buttonNext(
     double width, double height, Color color, String content, context, screen) {
@@ -146,6 +113,12 @@ Widget buttonPop(
 }
 
 Widget menuIcon() {
-  final String assetName = 'images/ham_icon.svg';
-  return SvgPicture.asset(assetName, semanticsLabel: 'Menu');
+  const String assetName = 'images/ham_icon.svg';
+  return SvgPicture.asset(
+    assetName, semanticsLabel: 'Menu');
+}
+Widget searchIcon() {
+  const String assetName = 'images/search_icon.svg';
+  return SvgPicture.asset(
+    assetName, semanticsLabel: 'Menu');
 }

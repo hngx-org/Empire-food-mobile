@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/widget/widget.dart';
+import 'package:free_lunch_app/ui/widget/widget.dart';
 
 class NotificationScreen extends StatefulWidget {
   @override
