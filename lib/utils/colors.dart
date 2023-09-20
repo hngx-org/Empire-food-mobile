@@ -7,6 +7,7 @@ class AppColors {
   static const Color secondaryPurpleColor = Color(0xFFEBD9FC);
   static const Color pinkColor = Color(0xFFFF97D9);
   static const Color bottomNavigationBackground = Color(0xFFF5C2B1);
+  static const Color cardBackground = Color(0xFFFBE6DF);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color whiteButtonColor = Color(0xFFF5FAFF);
   static const Color text1 = Color(0xFF583208);
