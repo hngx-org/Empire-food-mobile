@@ -50,7 +50,6 @@ class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
         body: GestureDetector(
           onTap: () {
             // Dismiss the keyboard when the user taps on the screen
-
             FocusScope.of(context).unfocus();
           },
           child: SingleChildScrollView(
