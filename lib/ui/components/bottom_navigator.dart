@@ -139,3 +139,11 @@ Widget pizzaIcon() {
   return SvgPicture.asset(
       assetName, semanticsLabel: 'Pizza');
 }
+Widget backIcon() {
+  const String assetName = 'images/back_icon.svg';
+  return InkWell(
+    onTap: (){},
+    child: SvgPicture.asset(
+        assetName, semanticsLabel: 'Back'),
+  );
+}

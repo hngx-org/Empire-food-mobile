@@ -278,6 +278,7 @@ packages:
       name: source_span
       sha256: "53e943d4206a5e30df338fd4c6e7a077e02254531b138a15aec3bd143c1a8b3c"
       url: "https://pub.flutter-io.cn"
+
     source: hosted
     version: "1.10.0"
   stack_trace:
@@ -366,6 +367,7 @@ packages:
       name: web
       sha256: dc8ccd225a2005c1be616fe02951e2e342092edf968cf0844220383757ef8f10
       url: "https://pub.flutter-io.cn"
+
     source: hosted
     version: "0.1.4-beta"
   win32:
