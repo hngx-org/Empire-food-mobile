@@ -1,7 +1,8 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/ui/home.dart';
 
+import '../../../helpers/router.dart';
 import '../../../utils/colors.dart';
 import '../../components/custom_button.dart';
 
@@ -18,49 +19,55 @@ class _StaffSignUpState extends State<StaffSignUp> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _passwordVisible = false;
     _confirmPasswordVisible = false;
   }
+
   @override
   Widget build(BuildContext context) {
-
-
-
     return Container(
       child: Column(
         children: [
-
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Work Email Address", style: TextStyle(fontSize: 18),),
-                SizedBox(height: 10,),
+                Text(
+                  "Work Email Address",
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    hintText: "Please enter your work email address",
+                      hintText: "Please enter your work email address",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))
-                      )
-                  ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
-
+          SizedBox(
+            height: 20,
+          ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Password", style: TextStyle(fontSize: 18),),
-                SizedBox(height: 10,),
+                Text(
+                  "Password",
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
-                  obscureText:
-                  !_passwordVisible,
+                  obscureText: !_passwordVisible,
                   decoration: InputDecoration(
                       hintText: "Please enter your password",
                       suffixIcon: IconButton(
@@ -78,26 +85,28 @@ class _StaffSignUpState extends State<StaffSignUp> {
                           });
                         },
                       ),
-
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))
-                      )
-                  ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
-
+          SizedBox(
+            height: 20,
+          ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Confirm Password", style: TextStyle(fontSize: 18),),
-                SizedBox(height: 10,),
+                Text(
+                  "Confirm Password",
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
-                  obscureText:
-                  !_confirmPasswordVisible,
+                  obscureText: !_confirmPasswordVisible,
                   decoration: InputDecoration(
                       hintText: "Please re-enter your password",
                       suffixIcon: IconButton(
@@ -116,33 +125,37 @@ class _StaffSignUpState extends State<StaffSignUp> {
                         },
                       ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))
-                      )
-                  ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
-
+          SizedBox(
+            height: 20,
+          ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(" Verification Code", style: TextStyle(fontSize: 18),),
-                SizedBox(height: 10,),
+                Text(
+                  " Verification Code",
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
                   decoration: InputDecoration(
                       hintText: "Please enter your verification code",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))
-                      )
-                  ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           CustomButton(
               width: 150,
               height: 45,
@@ -150,9 +163,11 @@ class _StaffSignUpState extends State<StaffSignUp> {
               isTextBig: false,
               color: AppColors.accentPurple5,
               content: 'Sign Up',
-              onTap: (){}
-          ),
+              onTap: () {
+                Navigator.pushNamed(context, RouteHelper.home);
+              }),
         ],
       ),
     );
-  }}
+  }
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../ui/home.dart';
 import '../ui/screens/HomeScreen.dart';
 import '../ui/screens/bottom_nav_bar/NotifyScreen.dart';
 import '../ui/screens/gift_lunch/gift_free_lunch_1.dart';
@@ -8,36 +9,37 @@ import '../ui/screens/gift_lunch/gift_free_lunch_2.dart';
 import '../ui/screens/gift_lunch/gift_free_lunch_3.dart';
 import 'dialog_manager.dart';
 
-
-
 class RouteHelper {
-
   static const String loginRoute = "Login";
-  static const String homeRoute = "Home";
+  static const String home = "Home";
+  static const String homeRoute = "HomeScreen";
   static const String giftFreeLunchScreen = "GiftFreeLunchScreen";
   static const String giftFreeLunchScreen2 = "GiftFreeLunchScreen2";
   static const String giftFreeLunchScreen3 = "GiftFreeLunchScreen3";
   static const String notificationsRoute = "NotificationScreen";
   static const String userProfileRoute = "GiftFreeLunchScreen3";
 
-
-
   Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case home:
+        return _getPageRoute(
+          routeName: settings.name!,
+          viewToShow: const Home(),
+        );
       case homeRoute:
         return _getPageRoute(
           routeName: settings.name!,
           viewToShow: const HomeScreen(),
         );
-  
-         case giftFreeLunchScreen:
+
+      case giftFreeLunchScreen:
         return _getTransistionPageRoute(
           type: PageTransitionType.bottomToTop,
           routeName: settings.name!,
           viewToShow: GiftFreeLunchScreen(),
         );
-        
-        case giftFreeLunchScreen2:
+
+      case giftFreeLunchScreen2:
         return _getTransistionPageRoute(
           type: PageTransitionType.leftToRight,
           routeName: settings.name!,
@@ -49,7 +51,7 @@ class RouteHelper {
           routeName: settings.name!,
           viewToShow: GiftFreeLunchScreen3(),
         );
-     
+
       // case loginRoute:
       //   return _getTransistionPageRoute(
       //     type: PageTransitionType.rightToLeft,
@@ -62,7 +64,6 @@ class RouteHelper {
           routeName: settings.name!,
           viewToShow: NotificationScreen(),
         );
- 
 
       default:
         return MaterialPageRoute(
