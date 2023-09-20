@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/utils/colors.dart';
 
-import 'bottom_nav_bar/HomeScreen.dart';
-import 'bottom_nav_bar/NotifyScreen.dart';
-import 'bottom_nav_bar/UserProfile.dart';
+import 'screens/HomeScreen.dart';
+import 'screens/bottom_nav_bar/NotifyScreen.dart';
+import 'screens/bottom_nav_bar/UserProfile.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -50,7 +51,7 @@ class _HomeState extends State<Home> {
         showUnselectedLabels: true,
         onTap: _selectPage,
         backgroundColor: Color(0xffF5C2B1),
-        unselectedItemColor: Colors.grey,
+        unselectedItemColor: AppColors.navigationButtonInactive,
         selectedItemColor: Colors.black,
         currentIndex: _selectedPageIndex,
         selectedLabelStyle: TextStyle(color: Colors.black),
