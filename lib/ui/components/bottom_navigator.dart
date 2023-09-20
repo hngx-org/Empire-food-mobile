@@ -122,3 +122,21 @@ Widget searchIcon() {
   return SvgPicture.asset(
     assetName, semanticsLabel: 'Menu');
 }
+Widget settingsIcon() {
+  const String assetName = 'images/settings_icon.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Settings');
+}
+Widget editIcon() {
+  const String assetName = 'images/edit_icon.svg';
+  return InkWell(
+    onTap: (){},
+    child: SvgPicture.asset(
+        assetName, semanticsLabel: 'Edit'),
+  );
+}
+Widget pizzaIcon() {
+  const String assetName = 'images/pizza_icon.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Pizza');
+}
