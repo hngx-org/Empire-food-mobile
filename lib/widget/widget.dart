@@ -36,10 +36,10 @@ Widget button(double width, double height, Color color, String content) {
     decoration: ShapeDecoration(
       color: color,
       shape: RoundedRectangleBorder(
-        side: BorderSide(width: 1),
+        side: const BorderSide(width: 1),
         borderRadius: BorderRadius.circular(12),
       ),
-      shadows: [
+      shadows: const [
         BoxShadow(
           color: Colors.black,
           blurRadius: 0,
@@ -51,7 +51,7 @@ Widget button(double width, double height, Color color, String content) {
     child: Center(
       child: Text(
         content,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.black,
           fontSize: 14,
           fontFamily: 'Tropiline',
@@ -64,6 +64,6 @@ Widget button(double width, double height, Color color, String content) {
 }
 
 Widget menuIcon() {
-  final String assetName = 'images/ham_icon.svg';
+  const String assetName = 'images/ham_icon.svg';
   return SvgPicture.asset(assetName, semanticsLabel: 'Menu');
 }

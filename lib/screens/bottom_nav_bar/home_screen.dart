@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import '../../widget/widget.dart';
+import 'gift_free_launch.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,6 @@ class HomeScreen extends StatelessWidget {
       'Product Designer',
       'Fullstack Developer'
     ];
-   
 
     return Scaffold(
       body: Material(
@@ -35,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     menuIcon(),
-                    Text(
+                    const Text(
                       'Home',
                       style: TextStyle(
                         color: Color(0xFF583208),
@@ -46,11 +48,11 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: 0.24,
                       ),
                     ),
-                    Icon(Icons.search),
+                    const Icon(Icons.search),
                   ],
                 ),
-                SizedBox(height: 20),
-                Row(
+                const SizedBox(height: 20),
+                const Row(
                   children: [
                     CircleAvatar(
                       backgroundImage: AssetImage('images/dummy.png'),
@@ -87,12 +89,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 button(130, 45, const Color(0xFFEDDDFC), 'Your Coworkers'),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Column(
                   children: List.generate(staffName.length, (index) {
-                    return Container(
+                    return SizedBox(
                       height: 93,
                       child: Card(
                         child: Padding(
@@ -102,12 +104,12 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  CircleAvatar(
+                                  const CircleAvatar(
                                     backgroundImage:
                                         AssetImage('images/dummy.png'),
                                     radius: 20,
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment:
@@ -115,14 +117,14 @@ class HomeScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         staffName[index],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                       Text(
                                         roles[index],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14.0,
                                           color: Colors.grey,
                                         ),
@@ -131,7 +133,14 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              button(133, 51, Color(0xFFF5FAFF), 'Gift Lunch'),
+                              InkWell(
+                                onTap:()=> nextScreen(
+                                  context,
+                                  FreeGiftScreen(staffName: staffName[index]),
+                                ),
+                                child: button(133, 51, const Color(0xFFF5FAFF),
+                                    'Gift Lunch'),
+                              ),
                             ],
                           ),
                         ),
@@ -139,7 +148,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   }),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),

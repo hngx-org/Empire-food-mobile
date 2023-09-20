@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'bottom_nav_bar/HomeScreen.dart';
-import 'bottom_nav_bar/NotifyScreen.dart';
-import 'bottom_nav_bar/UserProfile.dart';
+import 'bottom_nav_bar/home_screen.dart';
+import 'bottom_nav_bar/notify_screen.dart';
+import 'bottom_nav_bar/user_profile.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,11 +25,11 @@ class _HomeState extends State<Home> {
         'title': 'Home',
       },
       {
-        'page':  NotificationScreen(),
+        'page': const NotificationScreen(),
         'title': 'Order',
       },
       {
-        'page': UserProfile(),
+        'page': const UserProfile(),
         'title': 'Profile',
       },
     ];
@@ -49,12 +49,12 @@ class _HomeState extends State<Home> {
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
         onTap: _selectPage,
-        backgroundColor: Color(0xffF5C2B1),
+        backgroundColor: const Color(0xffF5C2B1),
         unselectedItemColor: Colors.grey,
         selectedItemColor: Colors.black,
         currentIndex: _selectedPageIndex,
-        selectedLabelStyle: TextStyle(color: Colors.black),
-        unselectedLabelStyle: TextStyle(color: Colors.grey),
+        selectedLabelStyle: const TextStyle(color: Colors.black),
+        unselectedLabelStyle: const TextStyle(color: Colors.grey),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -65,7 +65,6 @@ class _HomeState extends State<Home> {
             label: 'Notification',
           ),
           BottomNavigationBarItem(
-            
             icon: Icon(Icons.person),
             label: 'User Profile',
           ),
