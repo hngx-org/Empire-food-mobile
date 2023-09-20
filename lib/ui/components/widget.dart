@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/ui/components/custom_button.dart';
-import 'package:free_lunch_app/ui/components/profile_pic.dart';
-import 'package:free_lunch_app/utils/colors.dart';
+
+import '../../utils/colors.dart';
+import 'custom_button.dart';
+import 'profile_pic.dart';
+
 
 Widget button(double width, double height, Color color, String content) {
   return InkWell(

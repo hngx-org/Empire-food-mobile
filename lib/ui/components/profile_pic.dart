@@ -14,29 +14,12 @@ class ProfilePicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-              radius: outerRadius,
-              backgroundColor: Colors.black,
-              child: CircleAvatar(
-                radius: innerRadius,
-                backgroundImage: AssetImage('${imageUrl}'),
-              ),
-            );
-    // Container(
-    //   width: size + borderWidth * 2,
-    //   height: size + borderWidth * 2,
-    //   decoration: BoxDecoration(
-    //     shape: BoxShape.circle,
-    //     border: Border.all(
-    //       color: Colors.black,
-    //       width: borderWidth,
-    //     ),
-    //   ),
-    //   child: CircleAvatar(
-    //     radius: size / 2,
-    //     backgroundColor: Colors.transparent,
-    //     backgroundImage: AssetImage('assets/images/dummy.png'),
-    //   ),
-    // );
-
+      radius: outerRadius,
+      backgroundColor: Colors.black,
+      child: CircleAvatar(
+        radius: innerRadius,
+        backgroundImage: AssetImage('${imageUrl}'),
+      ),
+    );
   }
 }

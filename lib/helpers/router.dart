@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/helpers/dialog_manager.dart';
-import 'package:free_lunch_app/ui/screens/HomeScreen.dart';
-import 'package:free_lunch_app/ui/screens/bottom_nav_bar/NotifyScreen.dart';
-import 'package:free_lunch_app/ui/screens/gift_lunch/gift_free_lunch_1.dart';
-import 'package:free_lunch_app/ui/screens/gift_lunch/gift_free_lunch_2.dart';
-import 'package:free_lunch_app/ui/screens/gift_lunch/gift_free_lunch_3.dart';
-
 import 'package:page_transition/page_transition.dart';
+
+import '../ui/screens/HomeScreen.dart';
+import '../ui/screens/bottom_nav_bar/NotifyScreen.dart';
+import '../ui/screens/gift_lunch/gift_free_lunch_1.dart';
+import '../ui/screens/gift_lunch/gift_free_lunch_2.dart';
+import '../ui/screens/gift_lunch/gift_free_lunch_3.dart';
+import 'dialog_manager.dart';
+
+
 
 class RouteHelper {
 

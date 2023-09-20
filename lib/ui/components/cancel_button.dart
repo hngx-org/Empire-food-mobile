@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:free_lunch_app/utils/colors.dart';
-import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../utils/colors.dart';
+import '../../utils/size_calculator.dart';
+
+
 class CancelButton extends StatelessWidget {
-  // final double width;
-  // double height;
-  // Color color;
-  // String content;
   const CancelButton({
     super.key,
   });
@@ -17,7 +15,7 @@ class CancelButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-         HapticFeedback.lightImpact();
+        HapticFeedback.lightImpact();
         Navigator.of(context).pop();
       },
       child: Container(
@@ -52,7 +50,5 @@ class CancelButton extends StatelessWidget {
         ),
       ),
     );
-    
   }
 }
-
