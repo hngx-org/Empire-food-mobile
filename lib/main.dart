@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/ui/screens/auth/signUp.dart';
 
 import 'helpers/locator.dart';
 import 'helpers/router.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: Home(),
+
+      home: SignUp(),
       onGenerateRoute: RouteHelper().generateRoute,
     );
   }
