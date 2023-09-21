@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/ui/screens/auth/login.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../ui/home.dart';
@@ -52,12 +53,12 @@ class RouteHelper {
           viewToShow: GiftFreeLunchScreen3(),
         );
 
-      // case loginRoute:
-      //   return _getTransistionPageRoute(
-      //     type: PageTransitionType.rightToLeft,
-      //     routeName: settings.name!,
-      //     viewToShow: const LoginPage(),
-      //   );
+      case loginRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.rightToLeft,
+          routeName: settings.name!,
+          viewToShow: const SignIn(),
+        );
       case notificationsRoute:
         return _getTransistionPageRoute(
           type: PageTransitionType.bottomToTop,

@@ -162,7 +162,6 @@ class _StaffSignUpState extends State<StaffSignUp> {
           CustomButton(
               width: 150,
               height: 45,
-              // using the property isTextBig make the text smaller(14) if it is false, but if it is true(which is the default), the text size will be 16
               isTextBig: false,
               color: AppColors.accentPurple5,
               content: 'Sign Up',
@@ -176,8 +175,8 @@ class _StaffSignUpState extends State<StaffSignUp> {
                     ),
                   ),
                   builder: (context) => FullQuoteBottomSheet(
-                    toGo: "Go Home",
-                    toast: '🎉 Success!!! 🎉',
+                    toGo: "Login",
+                    toast: 'Success!!!',
                     message:
                         'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
                     bottomSheetImageUrl: 'images/btmSht2.png',
