@@ -112,22 +112,22 @@ Widget buttonPop(
 }
 
 Widget menuIcon() {
-  const String assetName = 'images/ham_icon.svg';
+  const String assetName = 'images/svg/ham_icon.svg';
   return SvgPicture.asset(
     assetName, semanticsLabel: 'Menu');
 }
 Widget searchIcon() {
-  const String assetName = 'images/search_icon.svg';
+  const String assetName = 'images/svg/search_icon.svg';
   return SvgPicture.asset(
     assetName, semanticsLabel: 'Menu');
 }
 Widget settingsIcon() {
-  const String assetName = 'images/settings_icon.svg';
+  const String assetName = 'images/svg/settings_icon.svg';
   return SvgPicture.asset(
       assetName, semanticsLabel: 'Settings');
 }
 Widget editIcon() {
-  const String assetName = 'images/edit_icon.svg';
+  const String assetName = 'images/svg/edit_icon.svg';
   return InkWell(
     onTap: (){},
     child: SvgPicture.asset(
@@ -135,12 +135,12 @@ Widget editIcon() {
   );
 }
 Widget pizzaIcon() {
-  const String assetName = 'images/pizza_icon.svg';
+  const String assetName = 'images/svg/pizza_icon.svg';
   return SvgPicture.asset(
       assetName, semanticsLabel: 'Pizza');
 }
 Widget backIcon() {
-  const String assetName = 'images/back_icon.svg';
+  const String assetName = 'images/svg/back_icon.svg';
   return InkWell(
     onTap: (){},
     child: SvgPicture.asset(
