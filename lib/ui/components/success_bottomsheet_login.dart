@@ -6,8 +6,8 @@ import 'package:free_lunch_app/utils/colors.dart';
 import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FullQuoteBottomSheet extends StatelessWidget {
-  const FullQuoteBottomSheet(
+class FullQuoteBottomSheetLogin extends StatelessWidget {
+  const FullQuoteBottomSheetLogin(
       {Key? key,
       required this.toast,
       required this.message,
@@ -79,7 +79,7 @@ class FullQuoteBottomSheet extends StatelessWidget {
                 onTap: () {
                   HapticFeedback.lightImpact();
                   Navigator.pop(context);
-                  Navigator.of(context).pushNamed(RouteHelper.loginRoute);
+                  Navigator.of(context).pushNamed(RouteHelper.home);
                 })
           ],
         ),
