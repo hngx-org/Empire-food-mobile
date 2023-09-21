@@ -106,7 +106,4 @@ Widget buttonPop(
   );
 }
 
-Widget menuIcon() {
-  final String assetName = 'images/ham_icon.svg';
-  return SvgPicture.asset(assetName, semanticsLabel: 'Menu');
-}
+
