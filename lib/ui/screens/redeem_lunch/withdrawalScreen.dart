@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../../../helpers/router.dart';
@@ -64,197 +62,232 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text(
-            'Please ensure that you provide accurate information in this form to avoid any hiccups in this process.',
-            style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w400,),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            'Amount to Redeem',
-            style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          TextField(
-            decoration: InputDecoration(
-              // labelText: '20',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Text(
+              'Please ensure that you provide accurate information in this form to avoid any hiccups in this process.',
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
               ),
             ),
-          ),
-          const Text('10 🍕 = ₦1,000'),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            'Country',
-            style: TextStyle(
-                fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          SizedBox(
-            width: 380,
-            child: DropdownButtonFormField<String>(
-              hint: const Center(
-                  child: Text(
-                    'Please select your country of residence',
-                    style: TextStyle(
-                        fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-                  )), // Hint text for the dropdown
-
-              value: _selectedCountry!.isNotEmpty ? _selectedCountry : null,
-              items: _country
-                  .map((String transferMode) => DropdownMenuItem<String>(
-                value: transferMode,
-                child: Text(
-                  transferMode,
-                  style: const TextStyle(
-                      fontFamily: 'Nunito',  fontSize: 16, fontWeight: FontWeight.w600),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Amount to Redeem',
+              style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                // labelText: '20',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
-              ))
-                  .toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedCountry = newValue!; // Update the selected item
-                });
-              },
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            'Redemption Method',
-            style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 380,
-            child: DropdownButtonFormField<String>(
-              hint: const Center(
-                  child: Text(
-                    'Please select your Payment mode',
-                    style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-                  )), // Hint text for the dropdown
-
-              value: _selectedTransferMode!.isNotEmpty
-                  ? _selectedTransferMode
-                  : null,
-              items: _paymentMode
-                  .map((String transferMode) => DropdownMenuItem<String>(
-                value: transferMode,
-                child: Text(
-                  transferMode,
-                  style: const TextStyle(
-                      fontFamily: 'Nunito', fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-              ))
-                  .toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedTransferMode = newValue!; // Update the selected item
-                });
-              },
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            'Account Name',
-            style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextField(
-            decoration: InputDecoration(
-              // labelText: '20',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            'Account Number',
-            style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          TextField(
-            decoration: InputDecoration(
-              // labelText: '20',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
+            const Text('10 🍕 = ₦1,000'),
+            const SizedBox(
+              height: 10,
             ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          const Text(
-            'Bank',
-            style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 380,
-            child: DropdownButtonFormField<String>(
-              hint: const Center(
-                  child: Text(
-                    'Please select your Bank Name',
-                    style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-                  )), // Hint text for the dropdown
-
-              value: _selectedBank!.isNotEmpty ? _selectedBank : null,
-              items: _banks
-                  .map((String item) => DropdownMenuItem<String>(
-                value: item,
-                child: Text(
-                  item,
-                  style: const TextStyle(
+            const Text(
+              'Country',
+              style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SizedBox(
+              width: 380,
+              child: DropdownButtonFormField<String>(
+                hint: const Center(
+                    child: Text(
+                  'Please select your country of residence',
+                  style: TextStyle(
                       fontFamily: 'Nunito',
-                      fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-              ))
-                  .toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedBank = newValue!; // Update the selected item
-                });
-              },
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                )), // Hint text for the dropdown
+
+                value: _selectedCountry!.isNotEmpty ? _selectedCountry : null,
+                items: _country
+                    .map((String transferMode) => DropdownMenuItem<String>(
+                          value: transferMode,
+                          child: Text(
+                            transferMode,
+                            style: const TextStyle(
+                                fontFamily: 'Nunito',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedCountry = newValue!; // Update the selected item
+                  });
+                },
+              ),
             ),
-          ),
-          const SizedBox(height: 40),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const CancelButton(),
-              const SizedBox(width: 25),
-              NextButton(onTap: () {
-                Navigator.pushNamed(
-                    context, RouteHelper.withdrawalConfirmRoute);
-              }),
-            ],
-          )
-        ]),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Redemption Method',
+              style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 380,
+              child: DropdownButtonFormField<String>(
+                hint: const Center(
+                    child: Text(
+                  'Please select your Payment mode',
+                  style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                )),
+                value: _selectedTransferMode!.isNotEmpty
+                    ? _selectedTransferMode
+                    : null,
+                items: _paymentMode
+                    .map((String transferMode) => DropdownMenuItem<String>(
+                          value: transferMode,
+                          child: Text(
+                            transferMode,
+                            style: const TextStyle(
+                                fontFamily: 'Nunito',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedTransferMode = newValue!;
+                  });
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Account Name',
+              style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                // labelText: '20',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Account Number',
+              style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                // labelText: '20',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Text(
+              'Bank',
+              style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 380,
+              child: DropdownButtonFormField<String>(
+               
+                hint: const Center(
+                    child: Text(
+                  'Please select your Bank Name',
+                  style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                )),
+                value: _selectedBank!.isNotEmpty ? _selectedBank : null,
+                items: _banks
+                    .map((String item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: const TextStyle(
+                                fontFamily: 'Nunito',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedBank = newValue!;
+                  });
+                },
+              ),
+            ),
+            const SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CancelButton(),
+                const SizedBox(width: 25),
+                NextButton(onTap: () {
+                  Navigator.pushNamed(
+                      context, RouteHelper.withdrawalConfirmRoute);
+                }),
+              ],
+            )
+          ]),
+        ),
       ),
     );
   }
 }
-
