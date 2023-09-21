@@ -13,9 +13,10 @@ class FullQuoteBottomSheet extends StatelessWidget {
       required this.toast,
       required this.message,
       // required this.bgColor,
-      required this.bottomSheetImageUrl})
+      required this.bottomSheetImageUrl,  this.toGo})
       : super(key: key);
   final String toast, message, bottomSheetImageUrl;
+  final String? toGo;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,7 @@ class FullQuoteBottomSheet extends StatelessWidget {
               width: 172,
               height: 51,
               color: AppColors.accentPurple5,
-              content: 'Go Back Home',
+              content: toGo ?? 'Go Back Home',
               onTap: () {
                 HapticFeedback.lightImpact();
                 Navigator.pop(context);

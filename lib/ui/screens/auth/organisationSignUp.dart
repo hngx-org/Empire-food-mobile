@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/size_calculator.dart';
 import '../../components/custom_button.dart';
+import '../../components/success_bottomSheet.dart';
 
 class OrganisationSignUp extends StatefulWidget {
   const OrganisationSignUp({super.key});
@@ -146,7 +148,25 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
             isTextBig: false,
             color: AppColors.accentPurple5,
             content: 'Sign Up',
-            onTap: (){}
+            onTap: (){
+              showModalBottomSheet(
+                context: context,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft:
+                    Radius.circular(sizer(true, 24, context)),
+                    topRight:
+                    Radius.circular(sizer(true, 24, context)),
+                  ),
+                ),
+                builder: (context) => FullQuoteBottomSheet(
+                  toGo: "Go Home",
+                  toast:   '🎉 Success!!! 🎉',
+                  message: 'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
+                  bottomSheetImageUrl: 'images/btmSht2.png',
+                ),
+              );
+            }
         ),
       ],
     ),
