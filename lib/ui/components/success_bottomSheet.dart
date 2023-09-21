@@ -8,14 +8,14 @@ import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FullQuoteBottomSheet extends StatelessWidget {
-  const FullQuoteBottomSheet({
-    Key? key,
-    required this.toast,
-    required this.message,
-    // required this.bgColor,
-    required this.bottomSheetImageUrl
-  }) : super(key: key);
-  final String toast, message, bottomSheetImageUrl ;
+  const FullQuoteBottomSheet(
+      {Key? key,
+      required this.toast,
+      required this.message,
+      // required this.bgColor,
+      required this.bottomSheetImageUrl})
+      : super(key: key);
+  final String toast, message, bottomSheetImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +67,9 @@ class FullQuoteBottomSheet extends StatelessWidget {
               ),
             ),
           ),
-
           SizedBox(
             height: 67,
           ),
-
           CustomButton(
               width: 172,
               height: 51,
@@ -80,7 +78,7 @@ class FullQuoteBottomSheet extends StatelessWidget {
               onTap: () {
                 HapticFeedback.lightImpact();
                 Navigator.pop(context);
-                Navigator.of(context).pushNamed(RouteHelper.homeRoute);
+                Navigator.of(context).pushNamed(RouteHelper.home);
               })
         ],
       ),
