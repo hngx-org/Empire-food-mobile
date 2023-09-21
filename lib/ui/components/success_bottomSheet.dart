@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/ui/components/custom_button.dart';
-import 'package:free_lunch_app/ui/components/full_button.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +11,7 @@ class FullQuoteBottomSheet extends StatelessWidget {
       {Key? key,
       required this.toast,
       required this.message,
-      // required this.bgColor,
+      
       required this.bottomSheetImageUrl,
       this.toGo})
       : super(key: key);

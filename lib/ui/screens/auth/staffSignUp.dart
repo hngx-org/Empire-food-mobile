@@ -16,7 +16,6 @@ class StaffSignUp extends StatefulWidget {
 }
 
 class _StaffSignUpState extends State<StaffSignUp> {
-
   var _passwordVisible;
   var _confirmPasswordVisible;
 
@@ -27,42 +26,51 @@ class _StaffSignUpState extends State<StaffSignUp> {
     _passwordVisible = false;
     _confirmPasswordVisible = false;
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Column(
         children: [
-
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Work Email Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                SizedBox(height: 10,),
+                Text(
+                  "Work Email Address",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
                   decoration: InputDecoration(
                       hintText: "Please enter your work email address",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))
-                      )
-                  ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
-
+          SizedBox(
+            height: 20,
+          ),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Password", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                SizedBox(height: 10,),
+                Text(
+                  "Password",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
-                  obscureText:
-                  !_passwordVisible,
+                  obscureText: !_passwordVisible,
                   decoration: InputDecoration(
                       hintText: "Please enter your password",
                       suffixIcon: IconButton(
@@ -81,24 +89,27 @@ class _StaffSignUpState extends State<StaffSignUp> {
                         },
                       ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))
-                      )
-                  ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
-
+          SizedBox(
+            height: 20,
+          ),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Confirm Password", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                SizedBox(height: 10,),
+                Text(
+                  "Confirm Password",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
-                  obscureText:
-                  !_confirmPasswordVisible,
+                  obscureText: !_confirmPasswordVisible,
                   decoration: InputDecoration(
                       hintText: "Please re-enter your password",
                       suffixIcon: IconButton(
@@ -117,33 +128,37 @@ class _StaffSignUpState extends State<StaffSignUp> {
                         },
                       ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))
-                      )
-                  ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
-
+          SizedBox(
+            height: 20,
+          ),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Verification Code", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                SizedBox(height: 10,),
+                Text(
+                  "Verification Code",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
                   decoration: InputDecoration(
                       hintText: "Please enter your verification code",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))
-                      )
-                  ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           CustomButton(
               width: 150,
               height: 45,
@@ -151,27 +166,26 @@ class _StaffSignUpState extends State<StaffSignUp> {
               isTextBig: false,
               color: AppColors.accentPurple5,
               content: 'Sign Up',
-              onTap: (){
+              onTap: () {
                 showModalBottomSheet(
                   context: context,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                      topLeft:
-                      Radius.circular(sizer(true, 24, context)),
-                      topRight:
-                      Radius.circular(sizer(true, 24, context)),
+                      topLeft: Radius.circular(sizer(true, 24, context)),
+                      topRight: Radius.circular(sizer(true, 24, context)),
                     ),
                   ),
                   builder: (context) => FullQuoteBottomSheet(
                     toGo: "Go Home",
-                    toast:   '🎉 Success!!! 🎉',
-                    message: 'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
+                    toast: '🎉 Success!!! 🎉',
+                    message:
+                        'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
                     bottomSheetImageUrl: 'images/btmSht2.png',
                   ),
                 );
-              }
-          ),
+              }),
         ],
       ),
     );
-  }}
+  }
+}
