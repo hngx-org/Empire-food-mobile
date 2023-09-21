@@ -48,65 +48,71 @@ class _SignUpState extends State<SignUp> {
 
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              children: [
-
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    SizedBox(
-                      height: 60,
-                        width: 180,
-                        child: GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                selected = !selected;
-                              });
-                            },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: selected ? AppColors.activeBackground : AppColors.inactiveBackground ,
+        child: GestureDetector(
+          onTap: () {
+            // Dismiss the keyboard when the user taps on the screen
+            FocusScope.of(context).unfocus();
+          },
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: [
+        
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      SizedBox(
+                        height: 60,
+                          width: 180,
+                          child: GestureDetector(
+                              onTap: (){
+                                setState(() {
+                                  selected = !selected;
+                                });
+                              },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: selected ? AppColors.activeBackground : AppColors.inactiveBackground ,
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), topLeft: Radius.circular(10))
+        
+                              ),
+                              child: Center(child: Text("Organisation")),),
+                          )),
+                      GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            selected = !selected;
+                          });
+                        }
+                        ,
+                        child: SizedBox(
+                          height: 60, width: 180,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: selected ? AppColors.inactiveBackground : AppColors.activeBackground,
                                 border: Border.all(color: Colors.black),
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), topLeft: Radius.circular(10))
-
-                            ),
-                            child: Center(child: Text("Organisation")),),
-                        )),
-                    GestureDetector(
-                      onTap: (){
-                        setState(() {
-                          selected = !selected;
-                        });
-                      }
-                      ,
-                      child: SizedBox(
-                        height: 60, width: 180,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: selected ? AppColors.inactiveBackground : AppColors.activeBackground,
-                              border: Border.all(color: Colors.black),
-                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(10), topRight: Radius.circular(10))
-
-                            ),
-                            child: Center(child: Text("Staff")),)),
-                    )
-                  ],
+                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(10), topRight: Radius.circular(10))
+        
+                              ),
+                              child: Center(child: Text("Staff")),)),
+                      )
+                    ],
+                    ),
                   ),
-                ),
-
-                SizedBox(height: 15,),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text("Please ensure that you provide accurate information in this form to avoid any hiccups in this process.",
-                    style: TextStyle(fontSize: 17),),
-                ),
-                selected ? StaffSignUp() : OrganisationSignUp(),
-
-              ],
+        
+                  SizedBox(height: 15,),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text("Please ensure that you provide accurate information in this form to avoid any hiccups in this process.",
+                      style: TextStyle(fontSize: 17),),
+                  ),
+                  selected ? StaffSignUp() : OrganisationSignUp(),
+        
+                ],
+              ),
             ),
           ),
         ),

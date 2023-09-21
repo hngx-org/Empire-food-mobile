@@ -3,16 +3,18 @@
 <!-- ![App Logo](app-logo.png) -->
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [App Screenshots](#app-screenshots)
-- [Apk Test](#test)
-- [Contributing](#contributing)
-- [License](#license)
+- [Free Lunch App](#free-lunch-app)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Features](#features)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [Usage](#usage)
+  - [App Screenshots](#app-screenshots)
+  - [Test](#test)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Introduction
 
@@ -67,8 +69,8 @@ Before you begin, ensure you have met the following requirements:
 
 ## App Screenshots
 
-![Screenshot 1](images/screenshots/Screenshot_1.png)
-![Screenshot 2](images/screenshots/Screenshot_2.png)
+![Screenshot 1](/images/screenshots/Screenshot_1.png)
+![Screenshot 2](/images/screenshots/Screenshot_2.png)
 
 ## Test
 
