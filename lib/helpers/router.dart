@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/ui/screens/auth/login.dart';
+import 'package:free_lunch_app/ui/screens/redeem_lunch/withdrawalConfScreen.dart';
+import 'package:free_lunch_app/ui/screens/redeem_lunch/withdrawalScreen.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../ui/home.dart';
@@ -19,6 +21,10 @@ class RouteHelper {
   static const String giftFreeLunchScreen3 = "GiftFreeLunchScreen3";
   static const String notificationsRoute = "NotificationScreen";
   static const String userProfileRoute = "GiftFreeLunchScreen3";
+  static const String withdrawalRoute = "WithdrawalScreen";
+  static const String withdrawalConfirmRoute = "WithdrawalConfirmScreen";
+
+
 
   Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -64,6 +70,18 @@ class RouteHelper {
           type: PageTransitionType.bottomToTop,
           routeName: settings.name!,
           viewToShow: NotificationScreen(),
+        );
+      case withdrawalRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.bottomToTop,
+          routeName: settings.name!,
+          viewToShow: WithdrawalScreen(),
+        );
+      case withdrawalConfirmRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.bottomToTop,
+          routeName: settings.name!,
+          viewToShow: WithdrawalConfirmation(),
         );
 
       default:

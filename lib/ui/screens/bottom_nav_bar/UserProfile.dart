@@ -29,7 +29,7 @@ class UserProfile extends StatelessWidget {
         title: Text(
           'Profile',
           style: GoogleFonts.nunito(
-            color: Color(0xFF583208),
+            color: const Color(0xFF583208),
             fontSize: 24,
             fontWeight: FontWeight.w700,
             height: 1.0,
@@ -48,18 +48,18 @@ class UserProfile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset('images/dummy_profile.png'),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 15, 0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 15, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Alexandra Bennett",
                         style: TextStyle(
                             fontSize: 23,
@@ -70,36 +70,36 @@ class UserProfile extends StatelessWidget {
                       editIcon()
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 7,
                   ),
-                  Text(
+                  const Text(
                     "Product Design Team",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Nunito'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 7,
                   ),
-                  Text("Product Team",
+                  const Text("Product Team",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Nunito')),
-                  SizedBox(
+                  const SizedBox(
                     height: 14,
                   ),
-                  Text("ABOUT ME",
+                  const Text("ABOUT ME",
                       style: TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.w600,
                           fontFamily: 'Nunito')),
-                  SizedBox(
+                  const SizedBox(
                     height: 3,
                   ),
-                  Text("🎨 Design enthusiast by day, pixel magician by night.",
+                  const Text("🎨 Design enthusiast by day, pixel magician by night.",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -108,13 +108,13 @@ class UserProfile extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                   color: AppColors.cardBackground,
                   border: Border.all(color: Colors.black, width: 2),
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
+                  borderRadius: const BorderRadius.all(Radius.circular(8))),
               child: Row(
                 children: [
                   Container(
@@ -123,19 +123,19 @@ class UserProfile extends StatelessWidget {
                       children: [pizzaIcon()],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           "🌟 You've hit the free lunch jackpot! Ready to redeem or spread "
                           "the love with more free lunches? Your call! 🎁😊",
                           textAlign: TextAlign.start,
                           style: TextStyle(fontSize: 17),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -147,8 +147,11 @@ class UserProfile extends StatelessWidget {
                                 isTextBig: false,
                                 color: AppColors.accentPurple5,
                                 content: 'Reedeem Now',
-                                onTap: () {}),
-                            SizedBox(width: 10),
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, RouteHelper.withdrawalRoute);
+                                }),
+                            const SizedBox(width: 10),
                             CustomButton(
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 height: 45,
@@ -168,16 +171,16 @@ class UserProfile extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("STATISTICS",
+                  const Text("STATISTICS",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           fontFamily: 'Nunito')),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +206,7 @@ class UserProfile extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
