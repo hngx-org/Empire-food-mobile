@@ -40,7 +40,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
               children: [
                 Text(
                   "Work Email Address",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
@@ -63,7 +63,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
               children: [
                 Text(
                   "Password",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
@@ -77,8 +77,8 @@ class _StaffSignUpState extends State<StaffSignUp> {
                           // Based on passwordVisible state choose the icon
                           _passwordVisible
                               ? Icons.visibility
-                              : Icons.visibility_off_outlined,
-                          color: Colors.grey,
+                              : Icons.visibility_off,
+                          color: Colors.black,
                         ),
                         onPressed: () {
                           // Update the state i.e. toogle the state of passwordVisible variable
@@ -102,7 +102,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
               children: [
                 Text(
                   "Confirm Password",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
@@ -116,8 +116,8 @@ class _StaffSignUpState extends State<StaffSignUp> {
                           // Based on passwordVisible state choose the icon
                           _confirmPasswordVisible
                               ? Icons.visibility
-                              : Icons.visibility_off_outlined,
-                          color: Colors.grey,
+                              : Icons.visibility_off,
+                          color: Colors.black,
                         ),
                         onPressed: () {
                           // Update the state i.e. toogle the state of passwordVisible variable
@@ -141,7 +141,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
               children: [
                 Text(
                   " Verification Code",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,

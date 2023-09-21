@@ -36,7 +36,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Work Email Address", style: TextStyle(fontSize: 18),),
+              Text("Work Email Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
               SizedBox(height: 10,),
               TextFormField(
                 decoration: InputDecoration(
@@ -55,7 +55,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Password", style: TextStyle(fontSize: 18),),
+              Text("Password", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
               SizedBox(height: 10,),
               TextFormField(
                 obscureText:
@@ -67,8 +67,8 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                         // Based on passwordVisible state choose the icon
                         _passwordVisible
                             ? Icons.visibility
-                            : Icons.visibility_off_outlined,
-                        color: Colors.grey,
+                            : Icons.visibility_off,
+                        color: Colors.black,
                       ),
                       onPressed: () {
                         // Update the state i.e. toogle the state of passwordVisible variable
@@ -91,7 +91,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Confirm Password", style: TextStyle(fontSize: 18),),
+              Text("Confirm Password", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
               SizedBox(height: 10,),
               TextFormField(
                 obscureText:
@@ -103,8 +103,8 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                         // Based on passwordVisible state choose the icon
                         _confirmPasswordVisible
                             ? Icons.visibility
-                            : Icons.visibility_off_outlined,
-                        color: Colors.grey,
+                            : Icons.visibility_off,
+                        color: Colors.black,
                       ),
                       onPressed: () {
                         // Update the state i.e. toogle the state of passwordVisible variable
@@ -127,7 +127,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Verification Code", style: TextStyle(fontSize: 18),),
+              Text("Verification Code", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
               SizedBox(height: 10,),
               TextFormField(
                 decoration: InputDecoration(
