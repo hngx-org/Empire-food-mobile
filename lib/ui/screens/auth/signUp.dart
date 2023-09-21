@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/ui/screens/auth/staffSignUp.dart';
 import 'package:free_lunch_app/utils/colors.dart';
+import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../components/bottom_navigator.dart';
@@ -21,6 +22,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -39,7 +41,7 @@ class _SignUpState extends State<SignUp> {
           'Sign Up',
           style: GoogleFonts.nunito(
             color: Color(0xFF583208),
-            fontSize: 24,
+            fontSize: sizer(true, 24, context),
             fontWeight: FontWeight.w700,
             height: 1.0,
             letterSpacing: 0.24,
@@ -79,7 +81,18 @@ class _SignUpState extends State<SignUp> {
                                 topLeft: Radius.circular(10),
                               ),
                             ),
-                            child: Center(child: Text("Organisation")),
+                            child: Center(child: Text(
+                              "ORGANISATION",
+                              style: GoogleFonts.nunito(
+                                fontSize: sizer(true, 16, context),
+                                fontWeight: FontWeight.w600,
+                                color: selected
+                                    ? AppColors.black
+                                    : AppColors.greyColor,
+                                height: 1.0,
+                                letterSpacing: 0.24,
+                              ),
+                            )),
                           ),
                         ),
                       ),
@@ -102,7 +115,16 @@ class _SignUpState extends State<SignUp> {
                                 topRight: Radius.circular(10),
                               ),
                             ),
-                            child: Center(child: Text("Staff")),
+                            child: Center(child: Text("STAFF",
+                            style: GoogleFonts.nunito(
+                                fontSize: sizer(true, 16, context),
+                                fontWeight: FontWeight.w600,
+                                color: selected
+                                    ? AppColors.greyColor
+                                    : AppColors.black,
+                                height: 1.0,
+                                letterSpacing: 0.24,
+                              ),)),
                           ),
                         ),
                       ),
@@ -115,10 +137,10 @@ class _SignUpState extends State<SignUp> {
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
                       "Please ensure that you provide accurate information in this form to avoid any hiccups in this process.",
-                      style: TextStyle(fontSize: 17),
+                      style: GoogleFonts.nunito(fontSize: sizer(true, 18, context), fontWeight: FontWeight.w400, color: AppColors.black),
                     ),
                   ),
-                  selected ? StaffSignUp() : OrganisationSignUp(),
+                  selected ?  OrganisationSignUp() : StaffSignUp(),
                 ],
               ),
             ),

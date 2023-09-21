@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, avoid_unnecessary_containers, body_might_complete_normally_nullable
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/size_calculator.dart';
@@ -34,52 +35,55 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 23,
+                  color: Color.fromRGBO(89, 51, 8, 1),
+                ));
+          },
+        ),
+        centerTitle: true,
+        title: Text(
+          'Sign In',
+          style: GoogleFonts.nunito(
+            color: Color(0xFF583208),
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            height: 1.0,
+            letterSpacing: 0.24,
+          ),
+        ),
+      ),
+      backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: SafeArea(
             child: Center(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(15, 25, 15, 20),
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
             child: Form(
               key: _formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          size: 23,
-                          color: Color.fromRGBO(89, 51, 8, 1),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 80,
-                      ),
-                      Text(
-                        'Sign In',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(89, 51, 8, 1),
-                        ),
-                      ),
-                    ],
-                  ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Text(
                     'Please ensure that you provide accurate information in this form to avoid any hiccups in this process. ',
-                    style: TextStyle(
+                    style: GoogleFonts.nunito(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
+                      letterSpacing: 0.35,
                       color: Color.fromRGBO(0, 0, 0, 1),
                     ),
                   ),
@@ -89,8 +93,8 @@ class _SignInState extends State<SignIn> {
                   Text(
                     "Work Email Address",
                     style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                       color: Color.fromRGBO(0, 0, 0, 1),
                     ),
                   ),
@@ -114,7 +118,10 @@ class _SignInState extends State<SignIn> {
                       ),
                       hintText: 'Please enter your work email address',
                       hintStyle: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 1), fontSize: 15),
+                        // color: Color.fromRGBO(0, 0, 0, 1),
+                        fontSize: sizer(true, 16, context),
+                        fontWeight: FontWeight.w500
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
@@ -127,7 +134,7 @@ class _SignInState extends State<SignIn> {
                   Text(
                     "Password",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(0, 0, 0, 1),
                     ),
@@ -150,7 +157,10 @@ class _SignInState extends State<SignIn> {
                         ),
                         hintText: 'Please enter your password',
                         hintStyle: TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 1), fontSize: 15),
+                            // color: Color.fromRGBO(0, 0, 0, 1), 
+                            fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500
+                         ),
                         suffixIcon: togglepassword(),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
@@ -161,14 +171,15 @@ class _SignInState extends State<SignIn> {
                     },
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 50,
                   ),
 
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: CustomButton(
                         width: 150,
-                        height: 45,
+                        height: 51,
+                        singleBigButton: true,
                         isTextBig: false,
                         color: AppColors.accentPurple5,
                         content: 'Sign In',

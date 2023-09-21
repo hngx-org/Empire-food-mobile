@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/ui/screens/auth/login.dart';
+import 'package:free_lunch_app/ui/screens/auth/signUp.dart';
 import 'package:free_lunch_app/ui/screens/redeem_lunch/withdrawalConfScreen.dart';
 import 'package:free_lunch_app/ui/screens/redeem_lunch/withdrawalScreen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -14,6 +15,7 @@ import 'dialog_manager.dart';
 
 class RouteHelper {
   static const String loginRoute = "Login";
+  static const String signUpRoute = "SignUp";
   static const String home = "Home";
   static const String homeRoute = "HomeScreen";
   static const String giftFreeLunchScreen = "GiftFreeLunchScreen";
@@ -64,6 +66,12 @@ class RouteHelper {
           type: PageTransitionType.rightToLeft,
           routeName: settings.name!,
           viewToShow: const SignIn(),
+        );
+      case signUpRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.topToBottom,
+          routeName: settings.name!,
+          viewToShow: const SignUp(),
         );
       case notificationsRoute:
         return _getTransistionPageRoute(
