@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/ui/screens/auth/login.dart';
+import 'package:free_lunch_app/ui/screens/auth/signUp.dart';
+import 'package:free_lunch_app/ui/screens/redeem_lunch/withdrawalConfScreen.dart';
+import 'package:free_lunch_app/ui/screens/redeem_lunch/withdrawalScreen.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../ui/home.dart';
@@ -12,6 +15,7 @@ import 'dialog_manager.dart';
 
 class RouteHelper {
   static const String loginRoute = "Login";
+  static const String signUpRoute = "SignUp";
   static const String home = "Home";
   static const String homeRoute = "HomeScreen";
   static const String giftFreeLunchScreen = "GiftFreeLunchScreen";
@@ -19,6 +23,10 @@ class RouteHelper {
   static const String giftFreeLunchScreen3 = "GiftFreeLunchScreen3";
   static const String notificationsRoute = "NotificationScreen";
   static const String userProfileRoute = "GiftFreeLunchScreen3";
+  static const String withdrawalRoute = "WithdrawalScreen";
+  static const String withdrawalConfirmRoute = "WithdrawalConfirmScreen";
+
+
 
   Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -59,11 +67,29 @@ class RouteHelper {
           routeName: settings.name!,
           viewToShow: const SignIn(),
         );
+      case signUpRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.topToBottom,
+          routeName: settings.name!,
+          viewToShow: const SignUp(),
+        );
       case notificationsRoute:
         return _getTransistionPageRoute(
           type: PageTransitionType.bottomToTop,
           routeName: settings.name!,
           viewToShow: NotificationScreen(),
+        );
+      case withdrawalRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.bottomToTop,
+          routeName: settings.name!,
+          viewToShow: WithdrawalScreen(),
+        );
+      case withdrawalConfirmRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.bottomToTop,
+          routeName: settings.name!,
+          viewToShow: WithdrawalConfirmation(),
         );
 
       default:

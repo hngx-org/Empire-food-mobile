@@ -41,7 +41,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
               children: [
                 Text(
                   "Work Email Address",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
@@ -49,6 +49,9 @@ class _StaffSignUpState extends State<StaffSignUp> {
                 TextFormField(
                   decoration: InputDecoration(
                       hintText: "Please enter your work email address",
+                        hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
@@ -64,7 +67,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
               children: [
                 Text(
                   "Password",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
@@ -73,6 +76,9 @@ class _StaffSignUpState extends State<StaffSignUp> {
                   obscureText: !_passwordVisible,
                   decoration: InputDecoration(
                       hintText: "Please enter your password",
+                        hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
                       suffixIcon: IconButton(
                         icon: Icon(
                           // Based on passwordVisible state choose the icon
@@ -103,7 +109,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
               children: [
                 Text(
                   "Confirm Password",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
@@ -112,6 +118,9 @@ class _StaffSignUpState extends State<StaffSignUp> {
                   obscureText: !_confirmPasswordVisible,
                   decoration: InputDecoration(
                       hintText: "Please re-enter your password",
+                        hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
                       suffixIcon: IconButton(
                         icon: Icon(
                           // Based on passwordVisible state choose the icon
@@ -142,7 +151,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
               children: [
                 Text(
                   "Verification Code",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
@@ -150,6 +159,9 @@ class _StaffSignUpState extends State<StaffSignUp> {
                 TextFormField(
                   decoration: InputDecoration(
                       hintText: "Please enter your verification code",
+                        hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
@@ -157,11 +169,12 @@ class _StaffSignUpState extends State<StaffSignUp> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 50,
           ),
           CustomButton(
-              width: 150,
-              height: 45,
+              width: sizer(true, 213, context),
+              height: 51,
+              singleBigButton: true,
               isTextBig: false,
               color: AppColors.accentPurple5,
               content: 'Sign Up',
@@ -183,6 +196,9 @@ class _StaffSignUpState extends State<StaffSignUp> {
                   ),
                 );
               }),
+                 SizedBox(
+            height: 35,
+          ),
         ],
       ),
     );

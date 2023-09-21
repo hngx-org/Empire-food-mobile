@@ -38,15 +38,19 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Work Email Address",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  "Organisation Name",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      hintText: "Please enter your work email address",
+                      hintText:
+                          "Please enter your registered organisation name",
+                      hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
@@ -56,13 +60,39 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
           SizedBox(
             height: 20,
           ),
+          SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Email Address",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      hintText: "Please enter your work email address",
+                      hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Password",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
@@ -71,6 +101,9 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                   obscureText: !_passwordVisible,
                   decoration: InputDecoration(
                       hintText: "Please enter your password",
+                      hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
                       suffixIcon: IconButton(
                         icon: Icon(
                           // Based on passwordVisible state choose the icon
@@ -101,7 +134,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
               children: [
                 Text(
                   "Confirm Password",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
@@ -110,6 +143,9 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                   obscureText: !_confirmPasswordVisible,
                   decoration: InputDecoration(
                       hintText: "Please re-enter your password",
+                      hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
                       suffixIcon: IconButton(
                         icon: Icon(
                           // Based on passwordVisible state choose the icon
@@ -131,36 +167,14 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Verification Code",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      hintText: "Please enter your verification code",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)))),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
+          const SizedBox(
+            height: 50,
           ),
           CustomButton(
-              width: 150,
-              height: 45,
+              width: sizer(true, 213, context),
+              height: 51,
               isTextBig: false,
+              singleBigButton: true,
               color: AppColors.accentPurple5,
               content: 'Sign Up',
               onTap: () {
@@ -181,6 +195,9 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                   ),
                 );
               }),
+          const SizedBox(
+            height: 35,
+          )
         ],
       ),
     );
