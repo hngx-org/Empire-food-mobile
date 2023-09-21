@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/ui/screens/auth/signUp.dart';
-
+import 'package:free_lunch_app/ui/screens/onBoarding.dart';
 import 'helpers/locator.dart';
 import 'helpers/router.dart';
-import 'ui/home.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
 
-      home: SignUp(),
+      home: OnboardingContent(),
       onGenerateRoute: RouteHelper().generateRoute,
     );
   }
