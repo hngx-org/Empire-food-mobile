@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
@@ -7,7 +8,7 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final String content;
   final VoidCallback onTap;
-  final bool isTextBig;
+  final bool isTextBig, singleBigButton;
   const CustomButton({
     super.key,
     required this.width,
@@ -16,6 +17,7 @@ class CustomButton extends StatelessWidget {
     required this.content,
     required this.onTap,
     this.isTextBig = true,
+    this.singleBigButton = false,
   });
 
   @override
@@ -46,7 +48,7 @@ class CustomButton extends StatelessWidget {
             content,
             style: GoogleFonts.nunito(
               color: Colors.black,
-              fontSize: isTextBig ? 16 : 14,
+              fontSize: isTextBig ? 16 :singleBigButton? sizer(true, 18, context): 14,
               fontWeight: FontWeight.w700,
             ),
           ),

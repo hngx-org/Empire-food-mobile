@@ -30,11 +30,11 @@ class WithdrawalConfirmation extends StatelessWidget {
             );
           },
         ),
-        title: const Text(
+        title:  Text(
           'Withdraw Free Lunches',
           style: TextStyle(
               fontFamily: 'Nunito',
-              fontSize: 24,
+              fontSize: sizer(true, 24, context),
               fontWeight: FontWeight.w700,
               color: AppColors.text1),
         ),
@@ -57,13 +57,14 @@ class WithdrawalConfirmation extends StatelessWidget {
             ),
             const WithdrawalDetails(),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             Center(
               child: CustomButton(
                 height: 59,
                 width: 249,
-                isTextBig: false,
+                singleBigButton: true,
+                // isTextBig: false,
                 color: AppColors.accentPurple5,
                 content: 'Withdraw Free Lunches',
                 onTap: () {
