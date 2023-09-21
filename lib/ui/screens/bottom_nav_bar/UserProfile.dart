@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../helpers/router.dart';
 import '../../../utils/colors.dart';
 import '../../components/bottom_navigator.dart';
 import '../../components/custom_button.dart';
@@ -109,7 +110,10 @@ class UserProfile extends StatelessWidget {
                                   isTextBig: false,
                                   color: AppColors.accentPurple5,
                                   content: 'Reedeem Now',
-                                  onTap: (){}
+                                  onTap: (){
+                                    Navigator.pushNamed(
+                                        context, RouteHelper.withdrawalRoute);
+                                  }
                               ),
                               SizedBox(width: 10,),
                               CustomButton(

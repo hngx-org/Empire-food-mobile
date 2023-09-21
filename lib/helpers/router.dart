@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/ui/screens/withdrawal/WithdrawalConfirmation.dart';
+import 'package:free_lunch_app/ui/screens/withdrawal/WithdrawalScreen1.dart';
+import 'package:free_lunch_app/ui/widget/withdrawal_details.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../ui/screens/HomeScreen.dart';
@@ -19,6 +22,8 @@ class RouteHelper {
   static const String giftFreeLunchScreen3 = "GiftFreeLunchScreen3";
   static const String notificationsRoute = "NotificationScreen";
   static const String userProfileRoute = "GiftFreeLunchScreen3";
+  static const String withdrawalRoute = "WithdrawalScreen1";
+  static const String withdrawalComfirmRoute = "WithdrawalConfirmation";
 
 
 
@@ -62,7 +67,18 @@ class RouteHelper {
           routeName: settings.name!,
           viewToShow: NotificationScreen(),
         );
- 
+      case withdrawalRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.bottomToTop,
+          routeName: settings.name!,
+          viewToShow: WithdrawalPage(),
+        );
+      case withdrawalComfirmRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.bottomToTop,
+          routeName: settings.name!,
+          viewToShow: WithdrawalConfirmation(),
+        );
 
       default:
         return MaterialPageRoute(
