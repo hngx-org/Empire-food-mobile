@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -30,7 +31,7 @@ class Auth extends ChangeNotifier {
 
   // }
 
-  Future<void> signUp(String email, String password, String firstname,
+  Future signUp(String email, String password, String firstname,
       String lastname, String phone) async {
     final response = await http.post(
       Uri.parse('${url}user/signup'),
@@ -61,8 +62,9 @@ class Auth extends ChangeNotifier {
     }
   }
 
-  Future<void> login(String email, String password) async {
+  Future login(String email, String password) async {
     final response = await http.post(
+      // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
       Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -81,12 +83,15 @@ class Auth extends ChangeNotifier {
       // Save the user's name
       // // Retrieve the user's name
       final data = responseData['data']; // Get the 'data' dictionary
-      final accessToken = data['access_token']; // Get the 'access_token'
+      final accessToken = data['access_token'];
+      log('access from the login function when saving it during log in>>>>:$accessToken'); // Get the 'access_token'
+      print('access from the login function when saving it during log in>>>>:$accessToken'); // Get the 'access_token'
       saveString(
         'token',
         accessToken,
       );
 
+      log("access token: $accessToken");
       print("access token: $accessToken");
       // print('Username: $username');
       notifyListeners();
@@ -99,7 +104,7 @@ class Auth extends ChangeNotifier {
     }
   }
 
-  void saveString(String key, String value) async {
+   saveString(String key, String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
   }
@@ -112,6 +117,8 @@ class Auth extends ChangeNotifier {
   Future<Map<String, dynamic>> allUsers() async {
     // Retrieve the access_token
     String? access_token = await getString('token');
+    print('>>>access when on home screen : $access_token');
+    print('>>>access when on home screen : $access_token');
 
     if (access_token != null) {
       final response = await http.get(
@@ -122,9 +129,10 @@ class Auth extends ChangeNotifier {
         },
       );
       final responseData = json.decode(response.body);
-      print(responseData);
+      print('>>>>>>>>>>>>>>>$responseData');
       print(response.statusCode);
-      if (response.statusCode == 201) {
+   
+      if (response.statusCode == 200) {
         notifyListeners();
         return responseData; // Return user data here
       } else {

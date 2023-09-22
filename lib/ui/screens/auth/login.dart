@@ -34,7 +34,7 @@ class _SignInState extends State<SignIn> {
     return null;
   }
 
-  Future<void> _submit(BuildContext context) async {
+  Future _submit(BuildContext context) async {
     final authProvider = Provider.of<Auth>(context, listen: false);
 
     try {
