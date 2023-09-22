@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/http_exception.dart';
 
@@ -76,18 +77,66 @@ class Auth extends ChangeNotifier {
     // _token = responseData.access_token;
     print(responseData);
     print(response.statusCode);
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
+      // Save the user's name
+      // // Retrieve the user's name
+      final data = responseData['data']; // Get the 'data' dictionary
+      final accessToken = data['access_token']; // Get the 'access_token'
+      saveString(
+        'token',
+        accessToken,
+      );
+
+      print("access token: $accessToken");
+      // print('Username: $username');
       notifyListeners();
       // print('Post successful');
     } else {
       // Handle the error
       print('Failed to post data: ${response.statusCode}');
-      print(response.body);
+      // print(response.body);
       // throw HttpException(responseData['detail']);
     }
   }
 
-  // Future<bool> tryAutoLogin() async {}
+  void saveString(String key, String value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value);
+  }
+
+  Future<String?> getString(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(key);
+  }
+
+  Future<Map<String, dynamic>> allUsers() async {
+    // Retrieve the access_token
+    String? access_token = await getString('token');
+
+    if (access_token != null) {
+      final response = await http.get(
+        Uri.parse('http://free-lunch.droncogene.com/api/v1/user/all'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'access-token': access_token,
+        },
+      );
+      final responseData = json.decode(response.body);
+      print(responseData);
+      print(response.statusCode);
+      if (response.statusCode == 201) {
+        notifyListeners();
+        return responseData; // Return user data here
+      } else {
+        // Handle the error
+        print('Failed to fetch user data: ${response.statusCode}');
+        print(response.body);
+        throw Exception('Failed to fetch user data');
+      }
+    }
+
+    throw Exception('Access token not available'); // Handle this case as needed
+  }
 
   Future<void> logout() async {}
 
