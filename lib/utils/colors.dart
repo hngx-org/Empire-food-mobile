@@ -17,7 +17,7 @@ class AppColors {
   static const Color lightGreyColor = Color(0xffF4F3F3);
   static const Color greyColor = Color(0xffB5B5B5);
   static const Color TextFieldBorderColor = Color(0xffBDBDBD);
-  static Color text2 = Color(0xFF000000).withOpacity(0.7);
+  static Color text2 = const Color(0xFF000000).withOpacity(0.7);
 
   static const Color lightGrey = Color(0xFFF5F5F5);
   static const Color text3 = Color(0xFF1B1B1B);

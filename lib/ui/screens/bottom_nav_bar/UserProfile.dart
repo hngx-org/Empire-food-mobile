@@ -117,7 +117,7 @@ class UserProfile extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(8))),
               child: Row(
                 children: [
-                  Container(
+                  SizedBox(
                     height: 100,
                     child: Column(
                       children: [pizzaIcon()],

@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/ui/home.dart';
 import 'package:provider/provider.dart';
 
-import '../../../helpers/router.dart';
 import '../../../providers/auth.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/size_calculator.dart';
@@ -66,7 +63,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
             topRight: Radius.circular(sizer(true, 24, context)),
           ),
         ),
-        builder: (context) => FullQuoteBottomSheet(
+        builder: (context) => const FullQuoteBottomSheet(
           toGo: "Login",
           toast: 'Success!!!',
           message:
@@ -80,11 +77,11 @@ class _StaffSignUpState extends State<StaffSignUp> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Error'),
+          title: const Text('Error'),
           content: Text('Something went wrong: $error'),
           actions: <Widget>[
             TextButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
@@ -100,18 +97,18 @@ class _StaffSignUpState extends State<StaffSignUp> {
     return Container(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Work Email Address",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -121,27 +118,27 @@ class _StaffSignUpState extends State<StaffSignUp> {
                       hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "First Name",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -151,24 +148,24 @@ class _StaffSignUpState extends State<StaffSignUp> {
                       hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Last Name",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -178,24 +175,24 @@ class _StaffSignUpState extends State<StaffSignUp> {
                       hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Password",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -221,24 +218,24 @@ class _StaffSignUpState extends State<StaffSignUp> {
                           });
                         },
                       ),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Confirm Password",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -263,24 +260,24 @@ class _StaffSignUpState extends State<StaffSignUp> {
                           });
                         },
                       ),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Phone number",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -290,13 +287,13 @@ class _StaffSignUpState extends State<StaffSignUp> {
                       hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           CustomButton(
@@ -326,7 +323,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
                 //   ),
                 // );
               }),
-          SizedBox(
+          const SizedBox(
             height: 35,
           ),
         ],

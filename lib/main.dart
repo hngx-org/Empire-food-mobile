@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        home: OnboardingContent(),
+        home: const OnboardingContent(),
         onGenerateRoute: RouteHelper().generateRoute,
       ),
     );

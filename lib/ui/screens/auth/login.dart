@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, avoid_unnecessary_containers, body_might_complete_normally_nullable
 
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/providers/auth.dart';
+import 'package:free_lunch_app/ui/components/success_bottomSheet.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/size_calculator.dart';
 import '../../components/custom_button.dart';
-import '../../components/success_bottomSheet.dart';
 import '../../components/success_bottomsheet_login.dart';
 
 class SignIn extends StatefulWidget {
@@ -30,6 +32,56 @@ class _SignInState extends State<SignIn> {
       return 'Please enter a valid email';
     }
     return null;
+  }
+
+  Future<void> _submit(BuildContext context) async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
+    try {
+      // Get the email and password from the input fields
+      final email =
+          emailcontroller.text; // Get the email from your TextFormField
+      final password =
+          passwordcontroller.text; // Get the password from your TextFormField
+      // Call the signUp method from your provider
+      await authProvider.login(email, password);
+
+      // Sign-up was successful, show a success message or navigate to the next screen
+      showModalBottomSheet(
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(sizer(true, 24, context)),
+            topRight: Radius.circular(sizer(true, 24, context)),
+          ),
+        ),
+        builder: (context) => FullQuoteBottomSheetLogin(
+          toGo: "Go Home",
+          toast: 'Success!!!',
+          message:
+              'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.',
+          bottomSheetImageUrl: 'images/btmSht2.png',
+        ),
+      );
+    } catch (error) {
+      // Handle the error, e.g., show an error message
+      // print(error);
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text('Something went wrong: $error'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -118,10 +170,9 @@ class _SignInState extends State<SignIn> {
                       ),
                       hintText: 'Please enter your work email address',
                       hintStyle: TextStyle(
-                        // color: Color.fromRGBO(0, 0, 0, 1),
-                        fontSize: sizer(true, 16, context),
-                        fontWeight: FontWeight.w500
-                      ),
+                          // color: Color.fromRGBO(0, 0, 0, 1),
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
@@ -157,10 +208,9 @@ class _SignInState extends State<SignIn> {
                         ),
                         hintText: 'Please enter your password',
                         hintStyle: TextStyle(
-                            // color: Color.fromRGBO(0, 0, 0, 1), 
+                            // color: Color.fromRGBO(0, 0, 0, 1),
                             fontSize: sizer(true, 16, context),
-                          fontWeight: FontWeight.w500
-                         ),
+                            fontWeight: FontWeight.w500),
                         suffixIcon: togglepassword(),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
@@ -184,24 +234,25 @@ class _SignInState extends State<SignIn> {
                         color: AppColors.accentPurple5,
                         content: 'Sign In',
                         onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft:
-                                    Radius.circular(sizer(true, 24, context)),
-                                topRight:
-                                    Radius.circular(sizer(true, 24, context)),
-                              ),
-                            ),
-                            builder: (context) => FullQuoteBottomSheetLogin(
-                              toGo: "Go Home",
-                              toast: 'Success!!!',
-                              message:
-                                  'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.',
-                              bottomSheetImageUrl: 'images/btmSht2.png',
-                            ),
-                          );
+                          _submit(context);
+                          // showModalBottomSheet(
+                          //   context: context,
+                          //   shape: RoundedRectangleBorder(
+                          //     borderRadius: BorderRadius.only(
+                          //       topLeft:
+                          //           Radius.circular(sizer(true, 24, context)),
+                          //       topRight:
+                          //           Radius.circular(sizer(true, 24, context)),
+                          //     ),
+                          //   ),
+                          //   builder: (context) => FullQuoteBottomSheetLogin(
+                          //     toGo: "Go Home",
+                          //     toast: 'Success!!!',
+                          //     message:
+                          //         'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.',
+                          //     bottomSheetImageUrl: 'images/btmSht2.png',
+                          //   ),
+                          // );
                         }),
                   )
                 ],

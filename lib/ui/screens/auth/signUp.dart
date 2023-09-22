@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/ui/screens/auth/staffSignUp.dart';
 import 'package:free_lunch_app/utils/colors.dart';
@@ -6,7 +5,6 @@ import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../components/bottom_navigator.dart';
-import '../../components/custom_button.dart';
 import 'organisationSignUp.dart';
 
 class SignUp extends StatefulWidget {
@@ -40,7 +38,7 @@ class _SignUpState extends State<SignUp> {
         title: Text(
           'Sign Up',
           style: GoogleFonts.nunito(
-            color: Color(0xFF583208),
+            color: const Color(0xFF583208),
             fontSize: sizer(true, 24, context),
             fontWeight: FontWeight.w700,
             height: 1.0,
@@ -56,7 +54,7 @@ class _SignUpState extends State<SignUp> {
           },
           child: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   Row(
@@ -76,7 +74,7 @@ class _SignUpState extends State<SignUp> {
                                   ? AppColors.activeBackground
                                   : AppColors.inactiveBackground,
                               border: Border.all(color: Colors.black),
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(10),
                                 topLeft: Radius.circular(10),
                               ),
@@ -110,7 +108,7 @@ class _SignUpState extends State<SignUp> {
                                   ? AppColors.inactiveBackground
                                   : AppColors.activeBackground,
                               border: Border.all(color: Colors.black),
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 bottomRight: Radius.circular(10),
                                 topRight: Radius.circular(10),
                               ),
@@ -130,7 +128,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Padding(
@@ -140,7 +138,7 @@ class _SignUpState extends State<SignUp> {
                       style: GoogleFonts.nunito(fontSize: sizer(true, 18, context), fontWeight: FontWeight.w400, color: AppColors.black),
                     ),
                   ),
-                  selected ?  OrganisationSignUp() : StaffSignUp(),
+                  selected ?  const OrganisationSignUp() : const StaffSignUp(),
                 ],
               ),
             ),

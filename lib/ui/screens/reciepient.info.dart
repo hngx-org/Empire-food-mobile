@@ -20,11 +20,11 @@ class RecipientInfoSection extends StatelessWidget {
           decoration: ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
-              side: BorderSide(width: 1),
+              side: const BorderSide(width: 1),
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child: Row(
+          child: const Row(
             children: [
               CircleAvatar(
                 backgroundImage: AssetImage('images/dummy.png'),

@@ -5,7 +5,6 @@ import 'package:free_lunch_app/ui/components/cancel_button.dart';
 import 'package:free_lunch_app/ui/components/next_button.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'gift_free_lunch_2.dart';
 
 class GiftFreeLunchScreen extends StatefulWidget {
   const GiftFreeLunchScreen({super.key});
@@ -50,7 +49,7 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
         title: Text(
           'Gift Free Lunch',
           style: GoogleFonts.nunito(
-            color: Color(0xFF583208),
+            color: const Color(0xFF583208),
             fontSize: 24,
             fontWeight: FontWeight.w700,
             height: 1.0,
@@ -65,11 +64,11 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
         },
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               right: 20,
               left: 20,
             ),
-            child: Container(
+            child: SizedBox(
               height: MediaQuery.of(context).size.height - 120,
               child: Column(
                 children: [
@@ -86,11 +85,11 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                       textAlign: TextAlign.justify,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Recipient Name",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -113,7 +112,7 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                           trailing: const [Icon(Icons.search)],
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Column(
                         children: List.generate(staffName.length, (index) {
                           return GestureDetector(
@@ -122,11 +121,11 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                                 selectedName = staffName[index];
                               });
                             },
-                            child: Container(
+                            child: SizedBox(
                               height: 63,
                               child: Card(
                                 color: selectedName == staffName[index]
-                                    ? Color(0xFFEBD9FC)
+                                    ? const Color(0xFFEBD9FC)
                                     : Colors.white,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -136,15 +135,15 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                                     children: [
                                       Row(
                                         children: [
-                                          CircleAvatar(
+                                          const CircleAvatar(
                                             backgroundImage:
                                                 AssetImage('images/dummy.png'),
                                             radius: 20,
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           Text(
                                             staffName[index],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 16.0,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -172,20 +171,20 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                           return Column(
                             children: [
                               widget,
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                             ],
                           );
                         }).toList(),
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CancelButton(),
-                        SizedBox(width: 25),
+                        const CancelButton(),
+                        const SizedBox(width: 25),
                         NextButton(onTap: () {
                           HapticFeedback.lightImpact();
                             Navigator.pushNamed(

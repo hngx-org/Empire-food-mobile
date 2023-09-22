@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/colors.dart';
@@ -30,18 +29,18 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
     return Container(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Organisation Name",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -51,24 +50,24 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                       hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Email Address",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -77,7 +76,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                       hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
@@ -90,11 +89,11 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Password",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -119,24 +118,24 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                           });
                         },
                       ),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Confirm Password",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -161,7 +160,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                           });
                         },
                       ),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)))),
                 ),
               ],
@@ -186,7 +185,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                       topRight: Radius.circular(sizer(true, 24, context)),
                     ),
                   ),
-                  builder: (context) => FullQuoteBottomSheet(
+                  builder: (context) => const FullQuoteBottomSheet(
                     toGo: "Login",
                     toast: 'Success!!!',
                     message:
