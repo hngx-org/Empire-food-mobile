@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/ui/home.dart';
+import 'package:provider/provider.dart';
 
 import '../../../helpers/router.dart';
+import '../../../providers/auth.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/size_calculator.dart';
 import '../../components/custom_button.dart';
@@ -19,12 +21,78 @@ class _StaffSignUpState extends State<StaffSignUp> {
   var _passwordVisible;
   var _confirmPasswordVisible;
 
+  var EmailController = TextEditingController();
+  var FirstnameController = TextEditingController();
+  var LastnameController = TextEditingController();
+  var PhoneController = TextEditingController();
+  var PasswordController = TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _passwordVisible = false;
     _confirmPasswordVisible = false;
+  }
+
+  Future<void> _submit(BuildContext context) async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
+    try {
+      // Get the email and password from the input fields
+      final email =
+          EmailController.text; // Get the email from your TextFormField
+      final password =
+          PasswordController.text; // Get the password from your TextFormField
+
+      final firstname =
+          FirstnameController.text; // Get the password from your TextFormField
+
+      final lastname =
+          LastnameController.text; // Get the password from your TextFormField
+
+      final phone =
+          PhoneController.text; // Get the password from your TextFormField
+
+      // Call the signUp method from your provider
+      await authProvider.signUp(email, password, firstname, lastname, phone);
+
+      // Sign-up was successful, show a success message or navigate to the next screen
+      showModalBottomSheet(
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(sizer(true, 24, context)),
+            topRight: Radius.circular(sizer(true, 24, context)),
+          ),
+        ),
+        builder: (context) => FullQuoteBottomSheet(
+          toGo: "Login",
+          toast: 'Success!!!',
+          message:
+              'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
+          bottomSheetImageUrl: 'images/btmSht2.png',
+        ),
+      );
+    } catch (error) {
+      // Handle the error, e.g., show an error message
+      print(error);
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Error'),
+          content: Text('Something went wrong: $error'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -47,9 +115,67 @@ class _StaffSignUpState extends State<StaffSignUp> {
                   height: 10,
                 ),
                 TextFormField(
+                  controller: EmailController,
                   decoration: InputDecoration(
                       hintText: "Please enter your work email address",
-                        hintStyle: TextStyle(
+                      hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "First Name",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: FirstnameController,
+                  decoration: InputDecoration(
+                      hintText: "Please enter your Firstname",
+                      hintStyle: TextStyle(
+                          fontSize: sizer(true, 16, context),
+                          fontWeight: FontWeight.w500),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Last Name",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: LastnameController,
+                  decoration: InputDecoration(
+                      hintText: "Please enter your last name",
+                      hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
                       border: OutlineInputBorder(
@@ -73,10 +199,11 @@ class _StaffSignUpState extends State<StaffSignUp> {
                   height: 10,
                 ),
                 TextFormField(
+                  controller: PasswordController,
                   obscureText: !_passwordVisible,
                   decoration: InputDecoration(
                       hintText: "Please enter your password",
-                        hintStyle: TextStyle(
+                      hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
                       suffixIcon: IconButton(
@@ -118,7 +245,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
                   obscureText: !_confirmPasswordVisible,
                   decoration: InputDecoration(
                       hintText: "Please re-enter your password",
-                        hintStyle: TextStyle(
+                      hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
                       suffixIcon: IconButton(
@@ -150,16 +277,17 @@ class _StaffSignUpState extends State<StaffSignUp> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Verification Code",
+                  "Phone number",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 TextFormField(
+                  controller: PhoneController,
                   decoration: InputDecoration(
-                      hintText: "Please enter your verification code",
-                        hintStyle: TextStyle(
+                      hintText: "Please enter your phone number",
+                      hintStyle: TextStyle(
                           fontSize: sizer(true, 16, context),
                           fontWeight: FontWeight.w500),
                       border: OutlineInputBorder(
@@ -179,24 +307,26 @@ class _StaffSignUpState extends State<StaffSignUp> {
               color: AppColors.accentPurple5,
               content: 'Sign Up',
               onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(sizer(true, 24, context)),
-                      topRight: Radius.circular(sizer(true, 24, context)),
-                    ),
-                  ),
-                  builder: (context) => FullQuoteBottomSheet(
-                    toGo: "Login",
-                    toast: 'Success!!!',
-                    message:
-                        'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
-                    bottomSheetImageUrl: 'images/btmSht2.png',
-                  ),
-                );
+                print("Hello");
+                _submit(context);
+                // showModalBottomSheet(
+                //   context: context,
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.only(
+                //       topLeft: Radius.circular(sizer(true, 24, context)),
+                //       topRight: Radius.circular(sizer(true, 24, context)),
+                //     ),
+                //   ),
+                //   builder: (context) => FullQuoteBottomSheet(
+                //     toGo: "Login",
+                //     toast: 'Success!!!',
+                //     message:
+                //         'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
+                //     bottomSheetImageUrl: 'images/btmSht2.png',
+                //   ),
+                // );
               }),
-                 SizedBox(
+          SizedBox(
             height: 35,
           ),
         ],
