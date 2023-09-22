@@ -17,17 +17,17 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
   String? _selectedTransferMode = '';
   String? _selectedCountry = '';
 
-  List<String> _banks = [
+  final List<String> _banks = [
     'kuda',
     'Opay',
     'GTbank',
     'UBA',
   ];
-  List<String> _paymentMode = [
+  final List<String> _paymentMode = [
     'Bank Tansfer',
     'Payapal',
   ];
-  List<String> _country = ['Nigeria', 'Ghana', 'Togo', 'Kenya', 'South-Africa'];
+  final List<String> _country = ['Nigeria', 'Ghana', 'Togo', 'Kenya', 'South-Africa'];
 
   // Store the selected item
   @override
@@ -108,7 +108,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               SizedBox(
                 width: 380,
                 child: Container(
-                  padding: EdgeInsets.all(8.0), // Adjust padding as needed
+                  padding: const EdgeInsets.all(8.0), // Adjust padding as needed
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.TextFieldBorderColor, // Border color
@@ -117,7 +117,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                     borderRadius: BorderRadius.circular(8.0), // Border radius
                   ),
                   child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
                     ),
@@ -160,7 +160,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               SizedBox(
                 width: 380,
                 child: Container(
-                  padding: EdgeInsets.all(8.0), // Adjust padding as needed
+                  padding: const EdgeInsets.all(8.0), // Adjust padding as needed
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.TextFieldBorderColor, // Border color
@@ -169,7 +169,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                     borderRadius: BorderRadius.circular(8.0), // Border radius
                   ),
                   child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
                     ),
@@ -249,7 +249,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               SizedBox(
                 width: 380,
                 child: Container(
-                  padding: EdgeInsets.all(8.0), // Adjust padding as needed
+                  padding: const EdgeInsets.all(8.0), // Adjust padding as needed
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.TextFieldBorderColor, // Border color
@@ -258,7 +258,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                     borderRadius: BorderRadius.circular(8.0), // Border radius
                   ),
                   child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
                     ),

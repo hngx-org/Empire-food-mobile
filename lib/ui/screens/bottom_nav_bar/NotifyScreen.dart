@@ -6,6 +6,8 @@ import 'package:free_lunch_app/utils/colors.dart';
 import '../../components/bottom_navigator.dart';
 
 class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key});
+
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
 }
@@ -27,7 +29,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           },
         ),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Notifications',
           style: TextStyle(
             color: Color(0xFF583208),
@@ -94,18 +96,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
     bool redeemed = false,
   }) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       width: MediaQuery.of(context).size.width,
       height: 142,
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: AppColors.cardBackground,
         border: Border.all(color: Colors.black, width: 2),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        boxShadow: [
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        boxShadow: const [
           BoxShadow(
             color: Colors.black,
-            offset: const Offset(4, 4),
+            offset: Offset(4, 4),
           ),
         ],
       ),
@@ -117,7 +119,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             innerRadius: 24,
             outerRadius: 24,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,19 +130,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Text(
                       message,
                       textAlign: TextAlign.left,
-                      style: TextStyle(fontSize: 14),
+                      style: const TextStyle(fontSize: 14),
                     ),
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Flexible(
                   child: Text(
                     time,
                     textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12),
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 if (redeemed)
                   CustomButton(
                     width: 126,

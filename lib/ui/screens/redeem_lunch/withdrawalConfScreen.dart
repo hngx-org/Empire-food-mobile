@@ -76,10 +76,9 @@ class WithdrawalConfirmation extends StatelessWidget {
                         topRight: Radius.circular(sizer(true, 24, context)),
                       ),
                     ),
-                    builder: (context) => FullQuoteBottomSheet(
-                      toast: '🎉 Bravo!🎉',
-                      message:
-                          'Your redemption request has been granted, and the rewards are on their way to you. Keep up the great work, superstar!"',
+                    builder: (context) => const FullQuoteBottomSheet(
+                      toast:   '🎉 Bravo!🎉',
+                      message: 'Your redemption request has been granted, and the rewards are on their way to you. Keep up the great work, superstar!"',
                       bottomSheetImageUrl: 'images/btmSht2.png',
                     ),
                   );

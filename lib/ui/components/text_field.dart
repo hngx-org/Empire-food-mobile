@@ -45,13 +45,13 @@ class GeneralTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _controller = TextEditingController();
+    var controller = TextEditingController();
     return TextFormField(
       focusNode: focusNode,
       maxLength: maxLength,
 
       textCapitalization: textCapitalization ?? TextCapitalization.none,
-      controller: textController ?? _controller,
+      controller: textController ?? controller,
       onSaved: onSaved,
       onChanged: onChanged,
       textAlignVertical: TextAlignVertical.center, 

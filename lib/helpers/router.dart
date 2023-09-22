@@ -45,20 +45,20 @@ class RouteHelper {
         return _getTransistionPageRoute(
           type: PageTransitionType.bottomToTop,
           routeName: settings.name!,
-          viewToShow: GiftFreeLunchScreen(),
+          viewToShow: const GiftFreeLunchScreen(),
         );
 
       case giftFreeLunchScreen2:
         return _getTransistionPageRoute(
           type: PageTransitionType.leftToRight,
           routeName: settings.name!,
-          viewToShow: GiftFreeLunchScreen2(),
+          viewToShow: const GiftFreeLunchScreen2(),
         );
       case giftFreeLunchScreen3:
         return _getTransistionPageRoute(
           type: PageTransitionType.leftToRight,
           routeName: settings.name!,
-          viewToShow: GiftFreeLunchScreen3(),
+          viewToShow: const GiftFreeLunchScreen3(),
         );
 
       case loginRoute:
@@ -77,19 +77,19 @@ class RouteHelper {
         return _getTransistionPageRoute(
           type: PageTransitionType.bottomToTop,
           routeName: settings.name!,
-          viewToShow: NotificationScreen(),
+          viewToShow: const NotificationScreen(),
         );
       case withdrawalRoute:
         return _getTransistionPageRoute(
           type: PageTransitionType.bottomToTop,
           routeName: settings.name!,
-          viewToShow: WithdrawalScreen(),
+          viewToShow: const WithdrawalScreen(),
         );
       case withdrawalConfirmRoute:
         return _getTransistionPageRoute(
           type: PageTransitionType.bottomToTop,
           routeName: settings.name!,
-          viewToShow: WithdrawalConfirmation(),
+          viewToShow: const WithdrawalConfirmation(),
         );
 
       default:

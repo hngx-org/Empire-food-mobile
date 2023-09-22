@@ -63,7 +63,7 @@ class OnboardingContent extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 13,
             ),
             CustomButton(

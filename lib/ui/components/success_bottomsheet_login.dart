@@ -56,7 +56,7 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
             SizedBox(
               height: sizer(false, 35, context),
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.5,
               child: Text(
                 message,
@@ -68,7 +68,7 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 67,
             ),
             CustomButton(

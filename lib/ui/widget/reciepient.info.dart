@@ -36,11 +36,11 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
             decoration: ShapeDecoration(
               color: Colors.white,
               shape: RoundedRectangleBorder(
-                side: BorderSide(width: 1),
+                side: const BorderSide(width: 1),
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Row(
+            child: const Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
@@ -79,14 +79,14 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
                   child: Container(
                     width: 114.67,
                     height: 78,
-                    margin: EdgeInsets.symmetric(horizontal: 4),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
                     padding: const EdgeInsets.all(12),
                     decoration: ShapeDecoration(
                       color: selectedLunch == number
-                          ? Color(0xFFEBD9FC)
+                          ? const Color(0xFFEBD9FC)
                           : Colors.white,
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1),
+                        side: const BorderSide(width: 1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
@@ -133,7 +133,7 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8.0),
-          Container(
+          SizedBox(
             height: 120,
             child: TextFormField(
               decoration: const InputDecoration(
