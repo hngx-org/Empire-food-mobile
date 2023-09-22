@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/ui/components/cancel_button.dart';
 import 'package:free_lunch_app/ui/components/custom_button.dart';
-import 'package:free_lunch_app/ui/components/next_button.dart';
 import 'package:free_lunch_app/ui/components/success_bottomSheet.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:free_lunch_app/utils/size_calculator.dart';
@@ -69,23 +68,23 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                     textAlign: TextAlign.justify,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   width: 380,
                   height: 430,
                   decoration: BoxDecoration(
-                    color: Color(0xFFDEECF6),
+                    color: const Color(0xFFDEECF6),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(width: 2),
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Container(
                         width: 150,
                         height: 150,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage("images/dummy.png"),
                             fit: BoxFit.fill,
                           ),
@@ -93,9 +92,9 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                           border: Border.all(width: 2),
                         ),
                       ),
-                      SizedBox(height: 15),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                      const SizedBox(height: 15),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           children: [
                             Expanded(
@@ -113,7 +112,7 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                                       letterSpacing: 0.16,
                                     ),
                                   ),
-                                  const SizedBox(height: 8),
+                                  SizedBox(height: 8),
                                   Opacity(
                                     opacity: 0.70,
                                     child: Text(
@@ -143,7 +142,7 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
-                                  const SizedBox(height: 8),
+                                  SizedBox(height: 8),
                                   Opacity(
                                     opacity: 0.70,
                                     child: Text(
@@ -162,11 +161,11 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Container(
                         width: 340,
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 2),
-                        child: Column(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 2),
+                        child: const Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -180,7 +179,7 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                                 letterSpacing: 0.16,
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8),
                             Opacity(
                               opacity: 0.70,
                               child: Text(
@@ -199,12 +198,12 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CancelButton(),
-                    SizedBox(width: 25),
+                    const CancelButton(),
+                    const SizedBox(width: 25),
                     // NextButton(onTap: () {}),
                     CustomButton(
                         width: 175,
@@ -222,7 +221,7 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                                     Radius.circular(sizer(true, 24, context)),
                               ),
                             ),
-                            builder: (context) => FullQuoteBottomSheet(
+                            builder: (context) => const FullQuoteBottomSheet(
                               toast:   '🎉 Hooray!!! 🎉',
                               message: 'UduakE has received your free lunch. Keep the positive vibes coming! 🚀',
                               bottomSheetImageUrl: 'images/btmSht.png',

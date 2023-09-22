@@ -26,11 +26,11 @@ class _HomeState extends State<Home> {
         'title': 'Home',
       },
       {
-        'page':  NotificationScreen(),
+        'page':  const NotificationScreen(),
         'title': 'Order',
       },
       {
-        'page': UserProfile(),
+        'page': const UserProfile(),
         'title': 'Profile',
       },
     ];
@@ -51,12 +51,12 @@ class _HomeState extends State<Home> {
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
         onTap: _selectPage,
-        backgroundColor: Color(0xffF5C2B1),
+        backgroundColor: const Color(0xffF5C2B1),
         unselectedItemColor: AppColors.navigationButtonInactive,
         selectedItemColor: Colors.black,
         currentIndex: _selectedPageIndex,
-        selectedLabelStyle: TextStyle(color: Colors.black),
-        unselectedLabelStyle: TextStyle(color: Colors.grey),
+        selectedLabelStyle: const TextStyle(color: Colors.black),
+        unselectedLabelStyle: const TextStyle(color: Colors.grey),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

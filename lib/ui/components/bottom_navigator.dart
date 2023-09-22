@@ -42,10 +42,10 @@ Widget buttonNext(
       decoration: ShapeDecoration(
         color: color,
         shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1),
+          side: const BorderSide(width: 1),
           borderRadius: BorderRadius.circular(12),
         ),
-        shadows: [
+        shadows: const [
           BoxShadow(
             color: Colors.black,
             blurRadius: 0,
@@ -57,7 +57,7 @@ Widget buttonNext(
       child: Center(
         child: Text(
           content,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 14,
             fontFamily: 'Tropiline',
@@ -83,10 +83,10 @@ Widget buttonPop(
       decoration: ShapeDecoration(
         color: color,
         shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1),
+          side: const BorderSide(width: 1),
           borderRadius: BorderRadius.circular(12),
         ),
-        shadows: [
+        shadows: const [
           BoxShadow(
             color: Colors.black,
             blurRadius: 0,
@@ -98,7 +98,7 @@ Widget buttonPop(
       child: Center(
         child: Text(
           content,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 14,
             fontFamily: 'Tropiline',

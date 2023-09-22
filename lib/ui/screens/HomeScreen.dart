@@ -9,7 +9,10 @@ import '../components/home_card.dart';
 import '../components/profile_pic.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key});
+  // const HomeScreen({super.key, Key? key});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class HomeScreen extends StatelessWidget {
         title: Text(
           'Home',
           style: GoogleFonts.nunito(
-            color: Color(0xFF583208),
+            color: const Color(0xFF583208),
             fontSize: 24,
             fontWeight: FontWeight.w700,
             height: 1.0,
@@ -69,7 +72,7 @@ class HomeScreen extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ProfilePicture(
+                  const ProfilePicture(
                     imageUrl: 'images/dummy.png',
                     outerRadius: 26,
                     innerRadius: 24,
@@ -109,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 }),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),

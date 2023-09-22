@@ -69,14 +69,14 @@ class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
                       textAlign: TextAlign.justify,
                     ),
                   ),
-                  SizedBox(height: 20),
-                  RecipientInfoSection(),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 20),
+                  const RecipientInfoSection(),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CancelButton(),
-                      SizedBox(width: 25),
+                      const CancelButton(),
+                      const SizedBox(width: 25),
 
                       NextButton(onTap: () {
                         Navigator.pushNamed(

@@ -5,7 +5,7 @@ class ProfilePicture extends StatelessWidget {
   final double outerRadius;
   final double innerRadius;
 
-  ProfilePicture({
+  const ProfilePicture({super.key, 
     required this.imageUrl,
     this.outerRadius = 22.0,
     this.innerRadius = 20.0,
@@ -18,7 +18,7 @@ class ProfilePicture extends StatelessWidget {
       backgroundColor: Colors.black,
       child: CircleAvatar(
         radius: innerRadius,
-        backgroundImage: AssetImage('${imageUrl}'),
+        backgroundImage: AssetImage(imageUrl),
       ),
     );
   }
