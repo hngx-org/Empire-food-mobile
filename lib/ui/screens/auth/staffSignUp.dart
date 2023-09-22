@@ -36,20 +36,20 @@ class _StaffSignUpState extends State<StaffSignUp> {
     final authProvider = Provider.of<Auth>(context, listen: false);
 
     try {
-      // Get the email and password from the input fields
+      
       final email =
-          EmailController.text; // Get the email from your TextFormField
+          EmailController.text;
       final password =
-          PasswordController.text; // Get the password from your TextFormField
+          PasswordController.text; 
 
       final firstname =
-          FirstnameController.text; // Get the password from your TextFormField
+          FirstnameController.text; 
 
       final lastname =
-          LastnameController.text; // Get the password from your TextFormField
+          LastnameController.text; 
 
       final phone =
-          PhoneController.text; // Get the password from your TextFormField
+          PhoneController.text; 
 
       // Call the signUp method from your provider
       await authProvider.signUp(email, password, firstname, lastname, phone);
@@ -306,22 +306,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
               onTap: () {
                 print("Hello");
                 _submit(context);
-                // showModalBottomSheet(
-                //   context: context,
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.only(
-                //       topLeft: Radius.circular(sizer(true, 24, context)),
-                //       topRight: Radius.circular(sizer(true, 24, context)),
-                //     ),
-                //   ),
-                //   builder: (context) => FullQuoteBottomSheet(
-                //     toGo: "Login",
-                //     toast: 'Success!!!',
-                //     message:
-                //         'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
-                //     bottomSheetImageUrl: 'images/btmSht2.png',
-                //   ),
-                // );
+              
               }),
           const SizedBox(
             height: 35,

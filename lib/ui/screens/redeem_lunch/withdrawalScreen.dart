@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../../../helpers/router.dart';
@@ -309,4 +307,3 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
     );
   }
 }
-

@@ -57,7 +57,7 @@ class WithdrawalConfirmation extends StatelessWidget {
             ),
             const WithdrawalDetails(),
             const SizedBox(
-              height: 40,
+              height: 10,
             ),
             Center(
               child: CustomButton(
@@ -72,10 +72,8 @@ class WithdrawalConfirmation extends StatelessWidget {
                     context: context,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                        topLeft:
-                        Radius.circular(sizer(true, 24, context)),
-                        topRight:
-                        Radius.circular(sizer(true, 24, context)),
+                        topLeft: Radius.circular(sizer(true, 24, context)),
+                        topRight: Radius.circular(sizer(true, 24, context)),
                       ),
                     ),
                     builder: (context) => const FullQuoteBottomSheet(
