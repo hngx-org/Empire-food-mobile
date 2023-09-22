@@ -107,7 +107,7 @@ class WithdrawalDetails extends StatelessWidget {
                       Opacity(
                         opacity: 0.70,
                         child: Text(
-                          'Alexandra Bennett',
+                          'Habeeb Makusota',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,

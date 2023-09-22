@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../core/models/dialog_request.dart';
+import 'dialog_request.dart';
 
 
 class DialogHandler {

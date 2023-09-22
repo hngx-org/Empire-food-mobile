@@ -52,7 +52,13 @@ class _StaffSignUpState extends State<StaffSignUp> {
           PhoneController.text; 
 
       // Call the signUp method from your provider
-      await authProvider.signUp(email, password, firstname, lastname, phone);
+      var responseJson = await authProvider.signUp(email, password, firstname, lastname, phone);
+
+    print('responseJson>>>>>: $responseJson');
+
+     
+      await authProvider.setEmail(responseJson['data']['email']);
+      await authProvider.setName(responseJson['data']['first_name']);
 
       // Sign-up was successful, show a success message or navigate to the next screen
       showModalBottomSheet(
@@ -127,9 +133,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
           const SizedBox(
             height: 20,
           ),
-          const SizedBox(
-            height: 20,
-          ),
+
           SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/http_exception.dart';
+import '../core/models/http_exception.dart';
 
 //remember to change to with
 class Auth extends ChangeNotifier {
@@ -13,6 +14,19 @@ class Auth extends ChangeNotifier {
   DateTime? _expiryDate;
   String? _userId;
   Timer? _authTimer;
+  String? _email;
+  String? _password;
+  String? _phoneNumber;
+  String? _name;
+
+
+
+
+  get phoneNumber => _phoneNumber;
+  get name => _name;
+  get password => _password;
+  get email => _email;
+
   final String url = "http://free-lunch.droncogene.com/api/v1/auth/";
   bool get isAuth {
     return _token != null;
@@ -29,8 +43,25 @@ class Auth extends ChangeNotifier {
   // Future<void> _authenticated(
 
   // }
+   Future<bool> setPhoneNumber(String value) async {
+    _phoneNumber = value;
+    notifyListeners();
+    return true;
+  }
 
-  Future<void> signUp(String email, String password, String firstname,
+    Future<bool> setName(String value) async {
+    _name = value;
+    notifyListeners();
+    return true;
+  }
+
+    Future<bool> setEmail(String value) async {
+    _email = value;
+    notifyListeners();
+    return true;
+  }
+
+  Future signUp(String email, String password, String firstname,
       String lastname, String phone) async {
     final response = await http.post(
       Uri.parse('${url}user/signup'),
@@ -61,8 +92,9 @@ class Auth extends ChangeNotifier {
     }
   }
 
-  Future<void> login(String email, String password) async {
+  Future login(String email, String password) async {
     final response = await http.post(
+      // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
       Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -80,16 +112,18 @@ class Auth extends ChangeNotifier {
     if (response.statusCode == 200) {
       // Save the user's name
       // // Retrieve the user's name
-      final data = responseData['data']; // Get the 'data' dictionary
-      final accessToken = data['access_token']; // Get the 'access_token'
+      final data = responseData['data']; // Ge
+      
+      final accessToken = data['access_token'];
+      print('>>>>>>>>>>>>> from log in function$data');
       saveString(
         'token',
         accessToken,
       );
-
-      print("access token: $accessToken");
       // print('Username: $username');
       notifyListeners();
+      return data;
+      
       // print('Post successful');
     } else {
       // Handle the error
@@ -99,7 +133,7 @@ class Auth extends ChangeNotifier {
     }
   }
 
-  void saveString(String key, String value) async {
+   saveString(String key, String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
   }
@@ -112,6 +146,8 @@ class Auth extends ChangeNotifier {
   Future<Map<String, dynamic>> allUsers() async {
     // Retrieve the access_token
     String? access_token = await getString('token');
+    print('>>>access when on home screen : $access_token');
+    print('>>>access when on home screen : $access_token');
 
     if (access_token != null) {
       final response = await http.get(
@@ -122,9 +158,10 @@ class Auth extends ChangeNotifier {
         },
       );
       final responseData = json.decode(response.body);
-      print(responseData);
+      print('>>>>>>>>>>>>>>>$responseData');
       print(response.statusCode);
-      if (response.statusCode == 201) {
+   
+      if (response.statusCode == 200) {
         notifyListeners();
         return responseData; // Return user data here
       } else {
@@ -138,7 +175,7 @@ class Auth extends ChangeNotifier {
     throw Exception('Access token not available'); // Handle this case as needed
   }
 
-  Future<void> logout() async {}
+  Future logout() async {}
 
   void _autoLogout() {}
 }

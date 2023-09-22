@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/providers/auth.dart';
+import 'package:free_lunch_app/ui/components/loader/overlayLoader.dart';
 import 'package:free_lunch_app/ui/components/success_bottomSheet.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -34,19 +35,21 @@ class _SignInState extends State<SignIn> {
     return null;
   }
 
-  Future<void> _submit(BuildContext context) async {
+  Future _submit(BuildContext context) async {
     final authProvider = Provider.of<Auth>(context, listen: false);
 
     try {
       // Get the email and password from the input fields
-      final email =
-          emailcontroller.text; // Get the email from your TextFormField
-      final password =
-          passwordcontroller.text; // Get the password from your TextFormField
+      final email = emailcontroller.text; // Get the email from your TextFormField
+      final password = passwordcontroller.text; // Get the password from your TextFormField
       // Call the signUp method from your provider
-      await authProvider.login(email, password);
-
+     var data =  await authProvider.login(email, password);
+      
+      
+      print('>>>>>> our dataaaaa${data}');
       // Sign-up was successful, show a success message or navigate to the next screen
+      //   authProvider.setEmail(data['data']['email']);
+      // authProvider.setName(data['data']['first_name']);
       showModalBottomSheet(
         context: context,
         shape: RoundedRectangleBorder(
@@ -83,6 +86,10 @@ class _SignInState extends State<SignIn> {
       );
     }
   }
+  //   loginUser() async {
+  //   final overlay = LoadingOverlay.of(context);
+  //   return await overlay.during(_submit(context));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -234,6 +241,8 @@ class _SignInState extends State<SignIn> {
                         color: AppColors.accentPurple5,
                         content: 'Sign In',
                         onTap: () {
+                    
+                          // loginUser();
                           _submit(context);
                           // showModalBottomSheet(
                           //   context: context,

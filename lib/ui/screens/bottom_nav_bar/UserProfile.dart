@@ -60,7 +60,7 @@ class UserProfile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Alexandra Bennett",
+                        "Habeeb Makusota",
                         style: TextStyle(
                             fontSize: 23,
                             color: AppColors.pinkColor,

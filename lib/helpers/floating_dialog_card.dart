@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../core/models/dialog_request.dart';
+import 'dialog_request.dart';
 import '../ui/components/full_button.dart';
 import '../utils/colors.dart';
 import '../utils/size_calculator.dart';
