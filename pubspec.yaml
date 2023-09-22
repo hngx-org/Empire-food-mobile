@@ -37,6 +37,7 @@ dependencies:
   http: ^1.1.0
   page_transition: ^2.1.0
   provider: ^6.0.5
+  shared_preferences: ^2.2.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
