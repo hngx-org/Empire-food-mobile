@@ -86,8 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
             return IconButton(
               icon: menuIcon(),
               onPressed: () {
-                _fetchUsers();
-               print('name from provider>>>>>>>>>>>>: ${ Provider.of<Auth>(context, listen: true).name}');
+                // _fetchUsers();
+              //  print('name from provider>>>>>>>>>>>>: ${ Provider.of<Auth>(context, listen: true).name}');
               },
             );
           },
