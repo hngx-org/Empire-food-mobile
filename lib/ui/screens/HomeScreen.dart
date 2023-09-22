@@ -87,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: menuIcon(),
               onPressed: () {
                 _fetchUsers();
+               print('name from provider>>>>>>>>>>>>: ${ Provider.of<Auth>(context, listen: true).name}');
               },
             );
           },
@@ -126,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    'Welcome, Alexandra',
+                    'Welcome, ${Provider.of<Auth>(context, listen: true).name ?? 'Alex'}',
                     style: GoogleFonts.nunito(
                       color: Colors.black,
                       fontSize: 18,

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/http_exception.dart';
+import '../core/models/http_exception.dart';
 
 //remember to change to with
 class Auth extends ChangeNotifier {
@@ -14,6 +14,19 @@ class Auth extends ChangeNotifier {
   DateTime? _expiryDate;
   String? _userId;
   Timer? _authTimer;
+  String? _email;
+  String? _password;
+  String? _phoneNumber;
+  String? _name;
+
+
+
+
+  get phoneNumber => _phoneNumber;
+  get name => _name;
+  get password => _password;
+  get email => _email;
+
   final String url = "http://free-lunch.droncogene.com/api/v1/auth/";
   bool get isAuth {
     return _token != null;
@@ -30,6 +43,23 @@ class Auth extends ChangeNotifier {
   // Future<void> _authenticated(
 
   // }
+   Future<bool> setPhoneNumber(String value) async {
+    _phoneNumber = value;
+    notifyListeners();
+    return true;
+  }
+
+    Future<bool> setName(String value) async {
+    _name = value;
+    notifyListeners();
+    return true;
+  }
+
+    Future<bool> setEmail(String value) async {
+    _email = value;
+    notifyListeners();
+    return true;
+  }
 
   Future signUp(String email, String password, String firstname,
       String lastname, String phone) async {
@@ -82,19 +112,18 @@ class Auth extends ChangeNotifier {
     if (response.statusCode == 200) {
       // Save the user's name
       // // Retrieve the user's name
-      final data = responseData['data']; // Get the 'data' dictionary
+      final data = responseData['data']; // Ge
+      
       final accessToken = data['access_token'];
-      log('access from the login function when saving it during log in>>>>:$accessToken'); // Get the 'access_token'
-      print('access from the login function when saving it during log in>>>>:$accessToken'); // Get the 'access_token'
+      print('>>>>>>>>>>>>> from log in function$data');
       saveString(
         'token',
         accessToken,
       );
-
-      log("access token: $accessToken");
-      print("access token: $accessToken");
       // print('Username: $username');
       notifyListeners();
+      return data;
+      
       // print('Post successful');
     } else {
       // Handle the error
@@ -146,7 +175,7 @@ class Auth extends ChangeNotifier {
     throw Exception('Access token not available'); // Handle this case as needed
   }
 
-  Future<void> logout() async {}
+  Future logout() async {}
 
   void _autoLogout() {}
 }
