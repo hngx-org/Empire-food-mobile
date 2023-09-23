@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:free_lunch_app/providers/auth.dart';
+import 'package:free_lunch_app/ui/components/bottom_navigator.dart';
 import 'package:free_lunch_app/ui/components/success_bottomSheet.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,6 @@ class _SignInState extends State<SignIn> {
   }
 
   Future<void> _submit(BuildContext context) async {
-
     setState(() {
       _isLoading = true;
     });
@@ -46,63 +46,41 @@ class _SignInState extends State<SignIn> {
     try {
       final email = emailcontroller.text;
       final password = passwordcontroller.text;
-      await authProvider.login(email, password);
 
-      // Set isLoading back to false after the operation is complete
+      // Check if the user is valid
+      final userValid = await authProvider.login(email, password);
+
       setState(() {
         _isLoading = false;
       });
 
-      showModalBottomSheet(
-        context: context,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(sizer(true, 24, context)),
-            topRight: Radius.circular(sizer(true, 24, context)),
-          ),
-        ),
-        builder: (context) => FullQuoteBottomSheetLogin(
-          toGo: "Go Home",
-          toast: 'Success!!!',
-          message:
-              'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.',
-          bottomSheetImageUrl: 'images/btmSht2.png',
-        ),
-      );
-    } catch (error) {
-      String errorMessage = "An error occurred.";
-
-      if (error is Exception) {
-        final errorDetail = error.toString();
-        final match = RegExp(r'msg: ([^\]]*)').firstMatch(errorDetail);
-        final detail = match?.group(1);
-
-        if (detail != null) {
-          final cleanDetail = detail.replaceAll(RegExp(r',\s*ctx:.*}$'), '');
-          errorMessage = "Invalid credentials. $cleanDetail";
-        }
-      }
-
-      // Set isLoading back to false in case of an error
-      setState(() {
-        _isLoading = false;
-      });
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Error'),
-          content: Text(errorMessage),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+      if (userValid) {
+        // User is valid, proceed with success message
+        showModalBottomSheet(
+          context: context,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(sizer(true, 24, context)),
+              topRight: Radius.circular(sizer(true, 24, context)),
             ),
-          ],
-        ),
-      );
+          ),
+          builder: (context) => FullQuoteBottomSheetLogin(
+            toGo: "Go Home",
+            toast: 'Success!!!',
+            message:
+                'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.',
+            bottomSheetImageUrl: 'images/btmSht2.png',
+          ),
+        );
+      } else {
+        // User is not valid (invalid credentials), show error message
+        showSnackbar(context, Colors.red,
+            'Invalid credentials. Please check your email and password.');
+      }
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -139,163 +117,172 @@ class _SignInState extends State<SignIn> {
         ),
       ),
       backgroundColor: AppColors.white,
-      body: _isLoading ?
-          Center(
-            child: CircularProgressIndicator(),
-          ) :
-      SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-              child: Form(
-                key: _formkey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Please ensure that you provide accurate information in this form to avoid any hiccups in this process. ',
-                      style: GoogleFonts.nunito(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        letterSpacing: 0.35,
-                        color: Color.fromRGBO(0, 0, 0, 1),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Work Email Address",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromRGBO(0, 0, 0, 1),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    // search box
-                    TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: _validateEmail,
-                      keyboardType: TextInputType.emailAddress,
-                      controller: emailcontroller,
-                      showCursor: true,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        hintText: 'Please enter your work email address',
-                        hintStyle: TextStyle(
-                          fontSize: sizer(true, 16, context),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Password",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(0, 0, 0, 1),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      obscureText: _issecured,
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: passwordcontroller,
-                      showCursor: true,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        hintText: 'Please enter your password',
-                        hintStyle: TextStyle(
-                          fontSize: sizer(true, 16, context),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        suffixIcon: togglepassword(),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (name) {
-                        passwordcontroller.text = name!;
-                        name.isEmpty ? 'Please enter your password' : null;
-                      },
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: TextButton(
-                        onPressed: () {
-                          HapticFeedback.lightImpact();
-                          Navigator.of(context).pushNamed(RouteHelper.forgotPasswordRoute);
-                        },
-                         child: Text("Forgot Password",
-                           style: TextStyle(fontWeight: FontWeight.w600,
-                               fontFamily: 'Nunito',
-                               color: AppColors.blackColor), ),),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: CustomButton(
-                        width: 150,
-                        height: 51,
-                        singleBigButton: true,
-                        isTextBig: false,
-                        color: AppColors.accentPurple5,
-                        content: 'Sign In',
-                        onTap: () {
-                          setState(() {
-                            _isLoading = true;
-                          });
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              child: SafeArea(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
+                    child: Form(
+                      key: _formkey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Please ensure that you provide accurate information in this form to avoid any hiccups in this process. ',
+                            style: GoogleFonts.nunito(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              letterSpacing: 0.35,
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Work Email Address",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          // search box
+                          TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: _validateEmail,
+                            keyboardType: TextInputType.emailAddress,
+                            controller: emailcontroller,
+                            showCursor: true,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              hintText: 'Please enter your work email address',
+                              hintStyle: TextStyle(
+                                fontSize: sizer(true, 16, context),
+                                fontWeight: FontWeight.w500,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Password",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            obscureText: _issecured,
+                            keyboardType: TextInputType.visiblePassword,
+                            controller: passwordcontroller,
+                            showCursor: true,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              hintText: 'Please enter your password',
+                              hintStyle: TextStyle(
+                                fontSize: sizer(true, 16, context),
+                                fontWeight: FontWeight.w500,
+                              ),
+                              suffixIcon: togglepassword(),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (name) {
+                              if (name!.isEmpty) {
+                                return 'Please enter your password';
+                              }
+                              return null; // Return null when there are no validation errors.
+                            },
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: TextButton(
+                              onPressed: () {
+                                HapticFeedback.lightImpact();
+                                Navigator.of(context)
+                                    .pushNamed(RouteHelper.forgotPasswordRoute);
+                              },
+                              child: Text(
+                                "Forgot Password",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Nunito',
+                                    color: AppColors.blackColor),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: CustomButton(
+                              width: 150,
+                              height: 51,
+                              singleBigButton: true,
+                              isTextBig: false,
+                              color: AppColors.accentPurple5,
+                              content: 'Sign In',
+                              onTap: () {
+                                setState(() {
+                                  _isLoading = true;
+                                });
 
-                          if (_formkey.currentState!.validate()){
-                            _submit(context);
-                          }
-                          setState(() {
-                            _isLoading = false;
-                          });
-                        },
+                                if (_formkey.currentState!.validate()) {
+                                  _submit(context);
+                                }
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                              },
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 

@@ -59,26 +59,26 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ),
               const SizedBox(height: 15),
               buildNotificationContainer(
-                imageUrl: 'images/dummy.png',
+                imageUrl: 'images/dummy_6.png',
                 message: "Lateef gifted you 3 free lunches.",
                 time: "Today, 14:02",
                 redeemed: true,
               ),
               buildNotificationContainer(
-                imageUrl: 'images/dummy.png',
+                imageUrl: 'images/dummy_6.png',
                 message:
                     "You successfully redeemed 20 free lunches. You currently have 100 free lunches left.",
                 time: "Yesterday, 14:02",
               ),
               buildNotificationContainer(
-                imageUrl: 'images/dummy.png',
+                imageUrl: 'images/dummy_6.png',
                 message:
                     "You gifted UduakE 20 free lunches. You currently have 100 free lunches left.",
                 time: "Yesterday, 14:02",
                 redeemed: true,
               ),
               buildNotificationContainer(
-                imageUrl: 'images/dummy.png',
+                imageUrl: 'images/dummy_6.png',
                 message: "Tola gifted you 3 free lunches.",
                 time: "Friday, 14:02",
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:free_lunch_app/helpers/router.dart';
+import 'package:free_lunch_app/ui/components/bottom_navigator.dart';
 import 'package:free_lunch_app/ui/components/cancel_button.dart';
 import 'package:free_lunch_app/ui/components/next_button.dart';
 import 'package:free_lunch_app/utils/colors.dart';
@@ -40,12 +41,13 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
     final authProvider = Provider.of<Auth>(context, listen: false);
 
     try {
-      final List<Map<String, dynamic>> userData = (await authProvider.allUsers()) as List<Map<String, dynamic>>;
+      final List<Map<String, dynamic>> userData =
+          (await authProvider.allUsers()) as List<Map<String, dynamic>>;
       setState(() {
         usersData = userData;
       });
     } catch (error) {
-      // Handle any exceptions here.
+      showSnackbar(context, Colors.red, error);
       print('Error fetching users: $error');
     }
   }

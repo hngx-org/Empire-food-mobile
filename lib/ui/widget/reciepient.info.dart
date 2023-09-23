@@ -44,7 +44,7 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('images/dummy.png'),
+                  backgroundImage: AssetImage('images/dummy_2.png'),
                 ),
                 SizedBox(width: 10),
                 Text(
