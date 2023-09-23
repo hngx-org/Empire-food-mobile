@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'dialog_request.dart';
-import '../ui/components/full_button.dart';
-import '../utils/colors.dart';
-import '../utils/size_calculator.dart';
+import '../../ui/components/full_button.dart';
+import '../../utils/colors.dart';
+import '../../utils/size_calculator.dart';
 
 
 class FloatingDialogCard extends StatelessWidget {

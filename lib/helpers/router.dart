@@ -13,7 +13,7 @@ import '../ui/screens/bottom_nav_bar/NotifyScreen.dart';
 import '../ui/screens/gift_lunch/gift_free_lunch_1.dart';
 import '../ui/screens/gift_lunch/gift_free_lunch_2.dart';
 import '../ui/screens/gift_lunch/gift_free_lunch_3.dart';
-import 'dialog_manager.dart';
+import 'dialog_helper/dialog_manager.dart';
 
 class RouteHelper {
   static const String loginRoute = "Login";

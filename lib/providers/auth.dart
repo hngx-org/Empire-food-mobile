@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/ui/components/dialog/alert_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -87,6 +88,108 @@ class Auth extends ChangeNotifier {
       print('Failed to post data: ${response.statusCode}');
       // throw HttpException(responseData['details']);
     }
+  }
+
+  Future adminSignUp (String email, String password, String firstname,
+      String lastname, String phone) async {
+        try {
+           final response = await http.post(
+        Uri.parse('${url}user/signup'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "email": email,
+          "password": password,
+          "first_name": firstname,
+          "last_name": lastname,
+          "phone_number": phone
+        }),
+      );
+          final responseData = json.decode(response.body);
+      final data = responseData['data'];
+      print('>>>>>>>>>>>>> from SIGNUP ADMIN successFUL $data');
+      notifyListeners();
+       return response;
+        } catch (e) {
+          print('Error signing UP user/admin>>>>> : $e');
+        }
+   
+      }
+
+    Future adminLogin(String email, String password) async {
+      print('>>>>>>Admin email: $email');
+      print('>>>>>>>>Admin Password: $password');
+    final response = await http.post(
+      Uri.parse('${url}login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "email": email,
+        "password": password,
+      }),
+    );
+    final responseData = json.decode(response.body);
+    final  data = responseData['data'];
+      final accessToken = data['access_token'];
+      print('>>>>>>>>>>>>> from ADMIN log in SUCCESSFUL  >>>>>$data');
+      saveString(
+        'admin-token',
+        accessToken,
+      );
+      // print('Username: $username');
+      notifyListeners();
+      return data;
+
+    }
+
+      // print('Post successful');
+  
+
+    Future createOrganization(String org_name, String lunch) async {
+      
+     String? admin_token = await getString('admin-token');
+      print('>>>>>>>>>>>>> token called when creating organisation: $admin_token');
+     try {
+         if (admin_token != null) {
+        final response = await http.post(
+          Uri.parse(
+              'http://free-lunch.droncogene.com/api/v1/organization/create'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $admin_token',
+          },
+          body: jsonEncode(<String, String>{
+            "organization_name": org_name,
+            "lunch_price": lunch,
+            "currency_code": "NGN"
+          }),
+        );
+
+        //Hello
+        final responseData = json.decode(response.body);
+        // _token = responseData.access_token;
+        print('CREATE ORGANISATION SUCESSFUL >>>>>$responseData');
+        notifyListeners();
+        // print('Post successful');
+        return responseData;
+      } else {
+        print('No token');
+      }
+
+     } catch (e) {
+     print('Error error creating ORGAINSATION: $e');
+    //  displayAlert(
+    //       title: 'Error',
+    //       content:'${e}',
+    //       callToAction: 'Okay...',
+    //       success: false,
+    //       context: (e)
+    //       );
+     }
+   
+
   }
 
   Future sendOtp(String email) async {
@@ -190,11 +293,8 @@ class Auth extends ChangeNotifier {
     if (response.statusCode == 200) {
       final data = responseData['data'];
       final accessToken = data['access_token'];
-      print('Logged in successfully with access token: $accessToken');
-
       // Save the access token
       saveString('token', accessToken);
-
       notifyListeners();
       return true; // User is valid and logged in successfully
     } else {
