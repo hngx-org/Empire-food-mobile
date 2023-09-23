@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class AppColors {
   MaterialColor colorCustom = MaterialColor(0xFF2AA893, color);
 
+
   static const Color accentPurple5 = Color(0xFFEDDEFC);
   static const Color secondaryPurpleColor = Color(0xFFEBD9FC);
   static const Color pinkColor = Color(0xFFFF97D9);
+  static const Color pinkLightColor = Color(0xFFEBD9FC);
   static const Color bottomNavigationBackground = Color(0xFFF5C2B1);
   static const Color cardBackground = Color(0xFFFBE6DF);
   static const Color whiteColor = Color(0xFFFFFFFF);

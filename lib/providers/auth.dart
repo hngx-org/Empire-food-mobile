@@ -212,7 +212,7 @@ class Auth extends ChangeNotifier {
         Uri.parse('http://free-lunch.droncogene.com/api/v1/user/profile'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'access-token': access_token,
+          'Authorization': "Bearer $access_token",
         },
       );
 
