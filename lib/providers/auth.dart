@@ -109,7 +109,7 @@ class Auth extends ChangeNotifier {
     return prefs.getString(key);
   }
 
-  Future<Map<String, dynamic>> allUsers() async {
+  Future<List<Map<String, dynamic>>> allUsers() async {
     // Retrieve the access_token
     String? access_token = await getString('token');
 
@@ -121,12 +121,14 @@ class Auth extends ChangeNotifier {
           'access-token': access_token,
         },
       );
-      final responseData = json.decode(response.body);
-      print(responseData);
-      print(response.statusCode);
-      if (response.statusCode == 201) {
-        notifyListeners();
-        return responseData; // Return user data here
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        final List<dynamic> users = responseData['data'];
+
+        final List<Map<String, dynamic>> userList =
+            users.cast<Map<String, dynamic>>();
+        return userList;
       } else {
         // Handle the error
         print('Failed to fetch user data: ${response.statusCode}');

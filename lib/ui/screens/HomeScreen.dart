@@ -33,9 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final authProvider = Provider.of<Auth>(context, listen: false);
 
     try {
-      final userData = await authProvider.allUsers();
+      final List<Map<String, dynamic>> userData = await authProvider.allUsers();
       setState(() {
-        usersData = userData['data'];
+        usersData = userData;
       });
     } catch (error) {
       // Handle any exceptions here.
