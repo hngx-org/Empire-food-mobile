@@ -135,9 +135,9 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                                     children: [
                                       Row(
                                         children: [
-                                          const CircleAvatar(
+                                           CircleAvatar(
                                             backgroundImage:
-                                                AssetImage('images/dummy.png'),
+                                                AssetImage('images/dummy_$index.png'),
                                             radius: 20,
                                           ),
                                           const SizedBox(width: 10),

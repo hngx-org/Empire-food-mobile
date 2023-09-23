@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const ProfilePicture(
-                    imageUrl: 'images/dummy.png',
+                    imageUrl: 'images/dummy_6.png',
                     outerRadius: 26,
                     innerRadius: 24,
                   ),
@@ -153,9 +153,9 @@ class _HomeScreenState extends State<HomeScreen> {
               return HomeCard(
                 staffName: '${user['first_name']} ${user['last_name']}',
                 roles:
-                    'User Role', // You can replace this with the actual role data
+                    'User Role', 
                 imageUrl:
-                    'images/dummy.png', // Replace with the actual image URL from the user data
+                    'images/dummy_$index.png', 
                 onTap: () {
                   Navigator.pushNamed(context, RouteHelper.giftFreeLunchScreen);
                 },

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 
-import 'screens/HomeScreen.dart';
-import 'screens/bottom_nav_bar/NotifyScreen.dart';
-import 'screens/bottom_nav_bar/UserProfile.dart';
+import '../bottom_nav_bar/NotifyScreen.dart';
+import '../bottom_nav_bar/UserProfile.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+
+
+class HomeAdmin extends StatefulWidget {
+   HomeAdmin({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeAdmin> createState() => _HomeAdminState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeAdminState extends State<HomeAdmin> {
   late List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
 
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
 
     _pages = [
       {
-        'page': const HomeScreen(),
+        'page': const (),
         'title': 'Home',
       },
       {

@@ -94,7 +94,7 @@ class Auth extends ChangeNotifier {
 
   Future login(String email, String password) async {
     final response = await http.post(
-      // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      
       Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',

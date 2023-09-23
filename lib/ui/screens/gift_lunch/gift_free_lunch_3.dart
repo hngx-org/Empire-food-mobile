@@ -85,7 +85,7 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                         height: 150,
                         decoration: BoxDecoration(
                           image: const DecorationImage(
-                            image: AssetImage("images/dummy.png"),
+                            image: AssetImage("images/dummy_6.png"),
                             fit: BoxFit.fill,
                           ),
                           borderRadius: BorderRadius.circular(8),
@@ -204,14 +204,13 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                   children: [
                     const CancelButton(),
                     const SizedBox(width: 25),
-                    // NextButton(onTap: () {}),
                     CustomButton(
                         width: 175,
                         height: 51,
                         color: AppColors.accentPurple5,
                         content: 'Gift Free Launch',
-                        onTap: (){
-                           showModalBottomSheet(
+                        onTap: () {
+                          showModalBottomSheet(
                             context: context,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
@@ -222,12 +221,12 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                               ),
                             ),
                             builder: (context) => const FullQuoteBottomSheet(
-                              toast:   '🎉 Hooray!!! 🎉',
-                              message: 'UduakE has received your free lunch. Keep the positive vibes coming! 🚀',
+                              toast: '🎉 Hooray!!! 🎉',
+                              message:
+                                  'UduakE has received your free lunch. Keep the positive vibes coming! 🚀',
                               bottomSheetImageUrl: 'images/btmSht.png',
                             ),
                           );
-                          
                         })
                   ],
                 )
