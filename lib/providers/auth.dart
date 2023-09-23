@@ -150,6 +150,35 @@ class Auth extends ChangeNotifier {
     throw Exception('Access token not available'); // Handle this case as needed
   }
 
+  //this is the api for profile but it not working yet
+  Future<Map<String, dynamic>> profile() async {
+    // Retrieve the access_token
+    String? access_token = await getString('token');
+
+    if (access_token != null) {
+      final response = await http.get(
+        Uri.parse('http://free-lunch.droncogene.com/api/user/profile'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'access-token': access_token,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        final Map<String, dynamic> userData = responseData['data'];
+        return userData;
+      } else {
+        // Handle the error
+        print('Failed to fetch user profile data: ${response.statusCode}');
+        print(response.body);
+        throw Exception('Failed to fetch user profile data');
+      }
+    }
+
+    throw Exception('Access token not available'); // Handle this case as needed
+  }
+
   Future<void> logout() async {}
 
   void _autoLogout() {}
