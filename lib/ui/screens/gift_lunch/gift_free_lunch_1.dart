@@ -151,6 +151,7 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                                   setState(() {
                                     selectedName = recipientName;
                                   });
+                                  print(selectedName);
                                 },
                                 child: SizedBox(
                                   height: 63,
@@ -189,6 +190,7 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                                               setState(() {
                                                 selectedName = value!;
                                               });
+                                              print("Hello$selectedName");
                                             },
                                           ),
                                         ],
@@ -211,10 +213,15 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                         const CancelButton(),
                         const SizedBox(width: 25),
                         NextButton(onTap: () {
+                          print("this is the selected name $selectedName");
                           HapticFeedback.lightImpact();
                           Navigator.pushNamed(
-                              context, RouteHelper.giftFreeLunchScreen2);
-                        }),
+                            context,
+                            RouteHelper.giftFreeLunchScreen2,
+                            arguments:
+                                selectedName, // Pass the selected user information
+                          );
+                        })
                       ],
                     ),
                   )

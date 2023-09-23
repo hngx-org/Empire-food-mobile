@@ -77,7 +77,6 @@ class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
                     children: [
                       const CancelButton(),
                       const SizedBox(width: 25),
-
                       NextButton(onTap: () {
                         Navigator.pushNamed(
                             context, RouteHelper.giftFreeLunchScreen3);
