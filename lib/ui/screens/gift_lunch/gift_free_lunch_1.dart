@@ -40,7 +40,7 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
     final authProvider = Provider.of<Auth>(context, listen: false);
 
     try {
-      final List<Map<String, dynamic>> userData = await authProvider.allUsers();
+      final List<Map<String, dynamic>> userData = (await authProvider.allUsers()) as List<Map<String, dynamic>>;
       setState(() {
         usersData = userData;
       });
