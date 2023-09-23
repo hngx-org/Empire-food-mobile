@@ -55,7 +55,6 @@ class _SignInState extends State<SignIn> {
       });
 
       if (userValid) {
-        // User is valid, proceed with success message
         showModalBottomSheet(
           context: context,
           shape: RoundedRectangleBorder(

@@ -4,6 +4,7 @@ import '../../../utils/colors.dart';
 import '../../../utils/size_calculator.dart';
 import '../../components/custom_button.dart';
 import '../../components/success_bottomSheet.dart';
+import '../../components/success_bottom_sheet_admin.dart';
 
 class OrganisationSignUp extends StatefulWidget {
   const OrganisationSignUp({super.key});
@@ -67,7 +68,8 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                             fontSize: sizer(true, 16, context),
                             fontWeight: FontWeight.w500),
                         border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15)))),
                   ),
                 ],
               ),
@@ -87,7 +89,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                     height: 10,
                   ),
                   TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a value'; // Error message to display
@@ -101,7 +103,8 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                             fontSize: sizer(true, 16, context),
                             fontWeight: FontWeight.w500),
                         border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15)))),
                   ),
                 ],
               ),
@@ -150,7 +153,8 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                           },
                         ),
                         border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15)))),
                   ),
                 ],
               ),
@@ -175,9 +179,9 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a value'; // Error message to display
                       }
-                      if (value != PasswordController.text){
-                        return 'Passwords do not match';
-                      }
+                      // if (value != PasswordController.text) {
+                      //   return 'Passwords do not match';
+                      // }
                       return null; // Return null if the input is valid
                     },
                     obscureText: !_confirmPasswordVisible,
@@ -197,12 +201,14 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                           onPressed: () {
                             // Update the state i.e. toogle the state of passwordVisible variable
                             setState(() {
-                              _confirmPasswordVisible = !_confirmPasswordVisible;
+                              _confirmPasswordVisible =
+                                  !_confirmPasswordVisible;
                             });
                           },
                         ),
                         border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15)))),
                   ),
                 ],
               ),
@@ -218,25 +224,25 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                 color: AppColors.accentPurple5,
                 content: 'Sign Up',
                 onTap: () {
-                  if (_formkey.currentState!.validate()){
+                  if (_formkey.currentState!.validate()) {
                     // _submit(context);
 
-                  showModalBottomSheet(
-                    context: context,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(sizer(true, 24, context)),
-                        topRight: Radius.circular(sizer(true, 24, context)),
+                    showModalBottomSheet(
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(sizer(true, 24, context)),
+                          topRight: Radius.circular(sizer(true, 24, context)),
+                        ),
                       ),
-                    ),
-                    builder: (context) => const FullQuoteBottomSheet(
-                      toGo: "Login",
-                      toast: 'Success!!!',
-                      message:
-                          'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
-                      bottomSheetImageUrl: 'images/btmSht2.png',
-                    ),
-                  );}
+                      builder: (context) => const FullQuoteBottomSheetAdmin(
+                        toGo: "Login",
+                        toast: 'Success!!!',
+                        message:
+                            '“HNG” Organization has been created successfully. You can start gifting and receiving free lunches.',
+                      ),
+                    );
+                  }
                 }),
             const SizedBox(
               height: 35,
