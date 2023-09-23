@@ -47,6 +47,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: _pages[_selectedPageIndex]['page'] as Widget,
+      
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,

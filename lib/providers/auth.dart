@@ -19,9 +19,6 @@ class Auth extends ChangeNotifier {
   String? _phoneNumber;
   String? _name;
 
-
-
-
   get phoneNumber => _phoneNumber;
   get name => _name;
   get password => _password;
@@ -43,19 +40,19 @@ class Auth extends ChangeNotifier {
   // Future<void> _authenticated(
 
   // }
-   Future<bool> setPhoneNumber(String value) async {
+  Future<bool> setPhoneNumber(String value) async {
     _phoneNumber = value;
     notifyListeners();
     return true;
   }
 
-    Future<bool> setName(String value, String value2) async {
+  Future<bool> setName(String value, String value2) async {
     _name = value + " " + value2;
     notifyListeners();
     return true;
   }
 
-    Future<bool> setEmail(String value) async {
+  Future<bool> setEmail(String value) async {
     _email = value;
     notifyListeners();
     return true;
@@ -91,6 +88,7 @@ class Auth extends ChangeNotifier {
       // throw HttpException(responseData['details']);
     }
   }
+
   Future sendOtp(String email) async {
     final response = await http.post(
       // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
@@ -131,6 +129,7 @@ class Auth extends ChangeNotifier {
       // throw HttpException(responseData['detail']);
     }
   }
+
   Future resetPassword(String password, String Otp) async {
     final response = await http.post(
       // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
@@ -171,9 +170,9 @@ class Auth extends ChangeNotifier {
       // throw HttpException(responseData['detail']);
     }
   }
-  Future login(String email, String password) async {
+
+  Future<bool> login(String email, String password) async {
     final response = await http.post(
-      
       Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -185,79 +184,67 @@ class Auth extends ChangeNotifier {
     );
 
     final responseData = json.decode(response.body);
-    // _token = responseData.access_token;
     print(responseData);
     print(response.statusCode);
-    if (response.statusCode == 200) {
-      // Save the user's name
-      // // Retrieve the user's name
-      final data = responseData['data']; // Ge
-      
-      final accessToken = data['access_token'];
-      print('>>>>>>>>>>>>> from log in function$data');
-      saveString(
-        'token',
-        accessToken,
-      );
-      // print('Username: $username');
-      notifyListeners();
 
-      return data;
-      
-      // print('Post successful');
+    if (response.statusCode == 200) {
+      final data = responseData['data'];
+      final accessToken = data['access_token'];
+      print('Logged in successfully with access token: $accessToken');
+
+      // Save the access token
+      saveString('token', accessToken);
+
+      notifyListeners();
+      return true; // User is valid and logged in successfully
     } else {
-      // Handle the error
-      print('Failed to post data: ${response.statusCode}');
-      // print(response.body);
-      // throw HttpException(responseData['detail']);
+      print('Failed to log in: ${response.statusCode}');
+      return false; // User is not valid (credentials are incorrect)
     }
   }
+
   Future getUserProfile() async {
     String? access_token = await getString('token');
     print('>>>username accesstoken when on home screen : $access_token');
 
-    if (access_token != null){
-    final response = await http.get(
-      // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
-      Uri.parse('http://free-lunch.droncogene.com/api/v1/user/profile'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'access-token': access_token,
-      },
+    if (access_token != null) {
+      final response = await http.get(
+        Uri.parse('http://free-lunch.droncogene.com/api/v1/user/profile'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'access-token': access_token,
+        },
+      );
 
-    );
+      final responseData = json.decode(response.body);
+      // _token = responseData.access_token;
+      print(responseData);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        // Save the user's name
+        // // Retrieve the user's name
+        final data = responseData['data']; // Ge
+        print('>>>username when on home screen : ${data["first_name"]}');
 
-    final responseData = json.decode(response.body);
-    // _token = responseData.access_token;
-    print(responseData);
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      // Save the user's name
-      // // Retrieve the user's name
-      final data = responseData['data']; // Ge
-      print('>>>username when on home screen : ${data["first_name"]}');
+        setName(data["first_name"], data["last_name"]);
+        setPhoneNumber(data["phone_number"]);
+        setEmail(data["email"]);
 
-      setName(data["first_name"], data["last_name"]);
-      setPhoneNumber(data["phone_number"]);
-      setEmail(data["email"]);
+        // print('Username: $username');
+        notifyListeners();
+        return data;
 
-
-
-      // print('Username: $username');
-      notifyListeners();
-      return data;
-
-      // print('Post successful');
-    } else {
-      // Handle the error
-      print('Failed to post data: ${response.statusCode}');
-      // print(response.body);
-      // throw HttpException(responseData['detail']);
-    }}
-
+        // print('Post successful');
+      } else {
+        // Handle the error
+        print('Failed to post data: ${response.statusCode}');
+        // print(response.body);
+        // throw HttpException(responseData['detail']);
+      }
+    }
   }
 
-   saveString(String key, String value) async {
+  saveString(String key, String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
   }
@@ -284,7 +271,7 @@ class Auth extends ChangeNotifier {
       final responseData = json.decode(response.body);
       print('>>>>>>>>>>>>>>>$responseData');
       print(response.statusCode);
-   
+
       if (response.statusCode == 200) {
         notifyListeners();
         return responseData; // Return user data here
