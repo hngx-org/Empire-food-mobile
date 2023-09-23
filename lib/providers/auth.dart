@@ -49,8 +49,8 @@ class Auth extends ChangeNotifier {
     return true;
   }
 
-    Future<bool> setName(String value) async {
-    _name = value;
+    Future<bool> setName(String value, String value2) async {
+    _name = value + " " + value2;
     notifyListeners();
     return true;
   }
@@ -91,7 +91,86 @@ class Auth extends ChangeNotifier {
       // throw HttpException(responseData['details']);
     }
   }
+  Future sendOtp(String email) async {
+    final response = await http.post(
+      // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "email": email,
+        "password": password,
+      }),
+    );
 
+    final responseData = json.decode(response.body);
+    // _token = responseData.access_token;
+    print(responseData);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      // Save the user's name
+      // // Retrieve the user's name
+      final data = responseData['data']; // Ge
+
+      final accessToken = data['access_token'];
+      print('>>>>>>>>>>>>> from log in function$data');
+      saveString(
+        'token',
+        accessToken,
+      );
+      // print('Username: $username');
+      notifyListeners();
+      return data;
+
+      // print('Post successful');
+    } else {
+      // Handle the error
+      print('Failed to post data: ${response.statusCode}');
+      // print(response.body);
+      // throw HttpException(responseData['detail']);
+    }
+  }
+  Future resetPassword(String password, String Otp) async {
+    final response = await http.post(
+      // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "email": email,
+        "password": password,
+      }),
+    );
+
+    final responseData = json.decode(response.body);
+    // _token = responseData.access_token;
+    print(responseData);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      // Save the user's name
+      // // Retrieve the user's name
+      final data = responseData['data']; // Ge
+
+      final accessToken = data['access_token'];
+      print('>>>>>>>>>>>>> from log in function$data');
+      saveString(
+        'token',
+        accessToken,
+      );
+      // print('Username: $username');
+      notifyListeners();
+      return data;
+
+      // print('Post successful');
+    } else {
+      // Handle the error
+      print('Failed to post data: ${response.statusCode}');
+      // print(response.body);
+      // throw HttpException(responseData['detail']);
+    }
+  }
   Future login(String email, String password) async {
     final response = await http.post(
       
@@ -122,6 +201,7 @@ class Auth extends ChangeNotifier {
       );
       // print('Username: $username');
       notifyListeners();
+
       return data;
       
       // print('Post successful');
@@ -131,6 +211,50 @@ class Auth extends ChangeNotifier {
       // print(response.body);
       // throw HttpException(responseData['detail']);
     }
+  }
+  Future getUserProfile() async {
+    String? access_token = await getString('token');
+    print('>>>username accesstoken when on home screen : $access_token');
+
+    if (access_token != null){
+    final response = await http.get(
+      // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      Uri.parse('http://free-lunch.droncogene.com/api/v1/user/profile'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'access-token': access_token,
+      },
+
+    );
+
+    final responseData = json.decode(response.body);
+    // _token = responseData.access_token;
+    print(responseData);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      // Save the user's name
+      // // Retrieve the user's name
+      final data = responseData['data']; // Ge
+      print('>>>username when on home screen : ${data["first_name"]}');
+
+      setName(data["first_name"], data["last_name"]);
+      setPhoneNumber(data["phone_number"]);
+      setEmail(data["email"]);
+
+
+
+      // print('Username: $username');
+      notifyListeners();
+      return data;
+
+      // print('Post successful');
+    } else {
+      // Handle the error
+      print('Failed to post data: ${response.statusCode}');
+      // print(response.body);
+      // throw HttpException(responseData['detail']);
+    }}
+
   }
 
    saveString(String key, String value) async {

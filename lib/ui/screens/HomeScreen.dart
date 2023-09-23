@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     print('ENTERING THE HOME NOWW!!>>>>>>');
+
     _fetchUsers(); // Call the async function from initState
   }
 
@@ -35,8 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Future _fetchUsers() async {
     final authProvider = Provider.of<Auth>(context, listen: false);
   
-
     try {
+      await authProvider.getUserProfile();
+    } catch(error){
+      print('Error fetching usernames: $error');
+
+    }
+    try {
+
       final userData = await authProvider.allUsers();
       setState(() {
          usersData = userData['data'];
@@ -46,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       print('Error fetching users: $error');
     }
   }
+
 
   // Future<void> _fetchUsers() async {
   //   final authProvider = Provider.of<Auth>(context, listen: false);

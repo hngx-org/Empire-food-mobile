@@ -23,6 +23,8 @@ class _StaffSignUpState extends State<StaffSignUp> {
   var LastnameController = TextEditingController();
   var PhoneController = TextEditingController();
   var PasswordController = TextEditingController();
+  bool isLoading = false;
+  final _formkey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -31,34 +33,43 @@ class _StaffSignUpState extends State<StaffSignUp> {
     _passwordVisible = false;
     _confirmPasswordVisible = false;
   }
+  String? _validateEmail(String? email) {
+    RegExp emailRegex =
+    RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$');
+    final isEmailvalid = emailRegex.hasMatch(email ?? '');
+    if (!isEmailvalid || email == "") {
+      return 'Please enter a valid email';
+    }
+    return null;
+  }
 
   Future<void> _submit(BuildContext context) async {
+    setState(() {
+      isLoading = true;
+    });
     final authProvider = Provider.of<Auth>(context, listen: false);
 
     try {
-      
+      // Get the email and password from the input fields
       final email =
-          EmailController.text;
+          EmailController.text; // Get the email from your TextFormField
       final password =
-          PasswordController.text; 
+          PasswordController.text; // Get the password from your TextFormField
 
       final firstname =
-          FirstnameController.text; 
+          FirstnameController.text; // Get the password from your TextFormField
 
       final lastname =
-          LastnameController.text; 
+          LastnameController.text; // Get the password from your TextFormField
 
       final phone =
-          PhoneController.text; 
+          PhoneController.text; // Get the password from your TextFormField
 
       // Call the signUp method from your provider
-      var responseJson = await authProvider.signUp(email, password, firstname, lastname, phone);
-
-    print('responseJson>>>>>: $responseJson');
-
-     
-      await authProvider.setEmail(responseJson['data']['email']);
-      await authProvider.setName(responseJson['data']['first_name']);
+      await authProvider.signUp(email, password, firstname, lastname, phone);
+      setState(() {
+        isLoading = false;
+      });
 
       // Sign-up was successful, show a success message or navigate to the next screen
       showModalBottomSheet(
@@ -100,222 +111,290 @@ class _StaffSignUpState extends State<StaffSignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Work Email Address",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  controller: EmailController,
-                  decoration: InputDecoration(
-                      hintText: "Please enter your work email address",
-                      hintStyle: TextStyle(
-                          fontSize: sizer(true, 16, context),
-                          fontWeight: FontWeight.w500),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)))),
-                ),
-              ],
+    return isLoading
+        ? Center(
+      child: CircularProgressIndicator(), // Display a spinner
+    ): Container(
+      child: Form(
+        key: _formkey,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+            SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Work Email Address",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    controller: EmailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a value'; // Error message to display
+                      }
+                      _validateEmail(value);
+                      return null; // Return null if the input is valid
+                    },
+                    decoration: InputDecoration(
+                        hintText: "Please enter your work email address",
+                        hintStyle: TextStyle(
+                            fontSize: sizer(true, 16, context),
+                            fontWeight: FontWeight.w500),
+                        border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "First Name",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a value'; // Error message to display
+                      }
+                      return null; // Return null if the input is valid
+                    },
+                    controller: FirstnameController,
+                    decoration: InputDecoration(
+                        hintText: "Please enter your Firstname",
+                        hintStyle: TextStyle(
+                            fontSize: sizer(true, 16, context),
+                            fontWeight: FontWeight.w500),
+                        border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Last Name",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a value'; // Error message to display
+                      }
+                      return null; // Return null if the input is valid
+                    },
+                    controller: LastnameController,
+                    decoration: InputDecoration(
+                        hintText: "Please enter your last name",
+                        hintStyle: TextStyle(
+                            fontSize: sizer(true, 16, context),
+                            fontWeight: FontWeight.w500),
+                        border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Password",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a value'; // Error message to display
+                      }
+                      return null; // Return null if the input is valid
+                    },
+                    controller: PasswordController,
+                    obscureText: !_passwordVisible,
+                    decoration: InputDecoration(
+                        hintText: "Please enter your password",
+                        hintStyle: TextStyle(
+                            fontSize: sizer(true, 16, context),
+                            fontWeight: FontWeight.w500),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            // Based on passwordVisible state choose the icon
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            // Update the state i.e. toogle the state of passwordVisible variable
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                        ),
+                        border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Confirm Password",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a value'; // Error message to display
+                      }
+                      if (value != PasswordController.text){
+                        return 'Passwords do not match';
+                      }
+                      return null; // Return null if the input is valid
+                    },
+                    obscureText: !_confirmPasswordVisible,
+                    decoration: InputDecoration(
+                        hintText: "Please re-enter your password",
+                        hintStyle: TextStyle(
+                            fontSize: sizer(true, 16, context),
+                            fontWeight: FontWeight.w500),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            // Based on passwordVisible state choose the icon
+                            _confirmPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            // Update the state i.e. toogle the state of passwordVisible variable
+                            setState(() {
+                              _confirmPasswordVisible = !_confirmPasswordVisible;
+                            });
+                          },
+                        ),
+                        border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Phone number",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a value'; // Error message to display
+                      }
+                      return null; // Return null if the input is valid
+                    },
+                    controller: PhoneController,
+                    decoration: InputDecoration(
+                        hintText: "Please enter your phone number",
+                        hintStyle: TextStyle(
+                            fontSize: sizer(true, 16, context),
+                            fontWeight: FontWeight.w500),
+                        border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)))),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            CustomButton(
+                width: sizer(true, 213, context),
+                height: 51,
+                singleBigButton: true,
+                isTextBig: false,
+                color: AppColors.accentPurple5,
+                content: 'Sign Up',
+                onTap: () {
+                  print("Hello");
 
-          SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "First Name",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  controller: FirstnameController,
-                  decoration: InputDecoration(
-                      hintText: "Please enter your Firstname",
-                      hintStyle: TextStyle(
-                          fontSize: sizer(true, 16, context),
-                          fontWeight: FontWeight.w500),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)))),
-                ),
-              ],
+                   if (_formkey.currentState!.validate()){
+                     _submit(context);
+                   }
+
+
+                  // showModalBottomSheet(
+                  //   context: context,
+                  //   shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.only(
+                  //       topLeft: Radius.circular(sizer(true, 24, context)),
+                  //       topRight: Radius.circular(sizer(true, 24, context)),
+                  //     ),
+                  //   ),
+                  //   builder: (context) => FullQuoteBottomSheet(
+                  //     toGo: "Login",
+                  //     toast: 'Success!!!',
+                  //     message:
+                  //         'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
+                  //     bottomSheetImageUrl: 'images/btmSht2.png',
+                  //   ),
+                  // );
+                }),
+            const SizedBox(
+              height: 35,
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Last Name",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  controller: LastnameController,
-                  decoration: InputDecoration(
-                      hintText: "Please enter your last name",
-                      hintStyle: TextStyle(
-                          fontSize: sizer(true, 16, context),
-                          fontWeight: FontWeight.w500),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)))),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Password",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  controller: PasswordController,
-                  obscureText: !_passwordVisible,
-                  decoration: InputDecoration(
-                      hintText: "Please enter your password",
-                      hintStyle: TextStyle(
-                          fontSize: sizer(true, 16, context),
-                          fontWeight: FontWeight.w500),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          // Based on passwordVisible state choose the icon
-                          _passwordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          // Update the state i.e. toogle the state of passwordVisible variable
-                          setState(() {
-                            _passwordVisible = !_passwordVisible;
-                          });
-                        },
-                      ),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)))),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Confirm Password",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  obscureText: !_confirmPasswordVisible,
-                  decoration: InputDecoration(
-                      hintText: "Please re-enter your password",
-                      hintStyle: TextStyle(
-                          fontSize: sizer(true, 16, context),
-                          fontWeight: FontWeight.w500),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          // Based on passwordVisible state choose the icon
-                          _confirmPasswordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          // Update the state i.e. toogle the state of passwordVisible variable
-                          setState(() {
-                            _confirmPasswordVisible = !_confirmPasswordVisible;
-                          });
-                        },
-                      ),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)))),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Phone number",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  controller: PhoneController,
-                  decoration: InputDecoration(
-                      hintText: "Please enter your phone number",
-                      hintStyle: TextStyle(
-                          fontSize: sizer(true, 16, context),
-                          fontWeight: FontWeight.w500),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)))),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          CustomButton(
-              width: sizer(true, 213, context),
-              height: 51,
-              singleBigButton: true,
-              isTextBig: false,
-              color: AppColors.accentPurple5,
-              content: 'Sign Up',
-              onTap: () {
-                print("Hello");
-                _submit(context);
-              
-              }),
-          const SizedBox(
-            height: 35,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
