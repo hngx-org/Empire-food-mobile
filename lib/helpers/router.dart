@@ -105,12 +105,12 @@ class RouteHelper {
           routeName: settings.name!,
           viewToShow: const ForgotPassword(),
         );
-      case resetPasswordRoute:
-        return _getTransistionPageRoute(
-          type: PageTransitionType.rightToLeft,
-          routeName: settings.name!,
-          viewToShow: const ResetPassword(),
-        );
+      // case resetPasswordRoute:
+      //   return _getTransistionPageRoute(
+      //     type: PageTransitionType.rightToLeft,
+      //     routeName: settings.name!,
+      //     viewToShow: const ResetPassword(email: '',),
+      //   );
       case signUpRoute:
         return _getTransistionPageRoute(
           type: PageTransitionType.topToBottom,

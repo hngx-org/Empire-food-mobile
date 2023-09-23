@@ -89,17 +89,13 @@ class Auth extends ChangeNotifier {
     }
   }
 
-  Future sendOtp(String email) async {
+  Future<String?> sendOtp(String email) async {
     final response = await http.post(
-      // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
-      Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      Uri.parse('http://free-lunch.droncogene.com/api/v1/user/forget-password?email=$email'),
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json;',
       },
-      body: jsonEncode(<String, String>{
-        "email": email,
-        "password": password,
-      }),
+
     );
 
     final responseData = json.decode(response.body);
@@ -109,17 +105,14 @@ class Auth extends ChangeNotifier {
     if (response.statusCode == 200) {
       // Save the user's name
       // // Retrieve the user's name
-      final data = responseData['data']; // Ge
+      // final data = responseData['data']; // Ge
+      //
+      // final accessToken = data['access_token'];
+      // print('>>>>>>>>>>>>> from log in function$data');
 
-      final accessToken = data['access_token'];
-      print('>>>>>>>>>>>>> from log in function$data');
-      saveString(
-        'token',
-        accessToken,
-      );
       // print('Username: $username');
       notifyListeners();
-      return data;
+      return responseData["message"];
 
       // print('Post successful');
     } else {
@@ -130,17 +123,20 @@ class Auth extends ChangeNotifier {
     }
   }
 
-  Future resetPassword(String password, String Otp) async {
+  Future resetPassword(String email, String password, String Otp) async {
+    print('>>>>>>email : ${email}');
+    print('>>>>>>password : ${password}');
+    print('>>>>>>otp : ${Otp}');
+
+
+
     final response = await http.post(
-      // Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
-      Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      Uri.parse('http://free-lunch.droncogene.com/api/v1/user/reset-password?email=$email&otp=$Otp&password=$password'),
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json;',
+
       },
-      body: jsonEncode(<String, String>{
-        "email": email,
-        "password": password,
-      }),
+
     );
 
     final responseData = json.decode(response.body);
@@ -150,17 +146,12 @@ class Auth extends ChangeNotifier {
     if (response.statusCode == 200) {
       // Save the user's name
       // // Retrieve the user's name
-      final data = responseData['data']; // Ge
+      // final data = responseData['data']; // Ge
 
-      final accessToken = data['access_token'];
-      print('>>>>>>>>>>>>> from log in function$data');
-      saveString(
-        'token',
-        accessToken,
-      );
+
       // print('Username: $username');
       notifyListeners();
-      return data;
+      return responseData;
 
       // print('Post successful');
     } else {
@@ -209,9 +200,10 @@ class Auth extends ChangeNotifier {
 
     if (access_token != null) {
       final response = await http.get(
+
         Uri.parse('http://free-lunch.droncogene.com/api/v1/user/profile'),
         headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
+          'Content-Type': 'application/json;',
           'Authorization': "Bearer $access_token",
         },
       );
@@ -265,7 +257,7 @@ class Auth extends ChangeNotifier {
         Uri.parse('http://free-lunch.droncogene.com/api/v1/user/all'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'access-token': access_token,
+          'Authorization': "Bearer $access_token",
         },
       );
       final responseData = json.decode(response.body);
