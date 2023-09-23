@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/ui/screens/auth/forgot_password.dart';
 import 'package:free_lunch_app/ui/screens/auth/login.dart';
 import 'package:free_lunch_app/ui/screens/auth/signUp.dart';
 import 'package:free_lunch_app/ui/screens/redeem_lunch/withdrawalConfScreen.dart';
@@ -7,6 +8,7 @@ import 'package:page_transition/page_transition.dart';
 
 import '../ui/home.dart';
 import '../ui/screens/HomeScreen.dart';
+import '../ui/screens/auth/reset_password.dart';
 import '../ui/screens/bottom_nav_bar/NotifyScreen.dart';
 import '../ui/screens/gift_lunch/gift_free_lunch_1.dart';
 import '../ui/screens/gift_lunch/gift_free_lunch_2.dart';
@@ -15,6 +17,8 @@ import 'dialog_manager.dart';
 
 class RouteHelper {
   static const String loginRoute = "Login";
+  static const String forgotPasswordRoute = "ForgotPassword";
+  static const String resetPasswordRoute = "ResetPassword";
   static const String signUpRoute = "SignUp";
   static const String home = "Home";
   static const String homeRoute = "HomeScreen";
@@ -66,6 +70,18 @@ class RouteHelper {
           type: PageTransitionType.rightToLeft,
           routeName: settings.name!,
           viewToShow: const SignIn(),
+        );
+      case forgotPasswordRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.rightToLeft,
+          routeName: settings.name!,
+          viewToShow: const ForgotPassword(),
+        );
+      case resetPasswordRoute:
+        return _getTransistionPageRoute(
+          type: PageTransitionType.rightToLeft,
+          routeName: settings.name!,
+          viewToShow: const ResetPassword(),
         );
       case signUpRoute:
         return _getTransistionPageRoute(
