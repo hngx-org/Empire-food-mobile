@@ -30,8 +30,17 @@ class Auth extends ChangeNotifier {
 
   // }
 
-  Future<void> signUp(String email, String password, String firstname,
-      String lastname, String phone) async {
+  Future<void> signUp(
+    String email,
+    String password,
+    String firstname,
+    String lastname,
+    String phone,
+  ) async {
+    if (email.isEmpty || password.isEmpty) {
+      throw Exception("Email and password are required.");
+    }
+
     final response = await http.post(
       Uri.parse('${url}user/signup'),
       headers: <String, String>{
@@ -46,18 +55,21 @@ class Auth extends ChangeNotifier {
       }),
     );
 
-    //Hello
     final responseData = json.decode(response.body);
-    // _token = responseData.access_token;
     print(responseData);
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200 && responseData['statusCode'] == 201) {
       notifyListeners();
-      // print('Post successful');
     } else {
-      // Handle the error
-      print('Failed to post data: ${response.statusCode}');
-      // throw HttpException(responseData['details']);
+      if (response.statusCode == 401 ||
+          (response.statusCode >= 403 && response.statusCode <= 455)) {
+        final errorDetail = responseData['detail'];
+        throw Exception("Invalid credentials. ${errorDetail}");
+      } else if (response.statusCode == 500) {
+        throw Exception("Server error. Please try again later.");
+      } else {
+        throw Exception("An error occurred. Please try again.");
+      }
     }
   }
 
@@ -74,28 +86,26 @@ class Auth extends ChangeNotifier {
     );
 
     final responseData = json.decode(response.body);
-    // _token = responseData.access_token;
     print(responseData);
     print(response.statusCode);
+    final data = responseData['data'];
     if (response.statusCode == 200) {
-      // Save the user's name
-      // // Retrieve the user's name
-      final data = responseData['data']; // Get the 'data' dictionary
-      final accessToken = data['access_token']; // Get the 'access_token'
-      saveString(
-        'token',
-        accessToken,
-      );
-
+      final accessToken = data['access_token'];
+      saveString('token', accessToken);
       print("access token: $accessToken");
-      // print('Username: $username');
       notifyListeners();
-      // print('Post successful');
     } else {
-      // Handle the error
-      print('Failed to post data: ${response.statusCode}');
-      // print(response.body);
-      // throw HttpException(responseData['detail']);
+      // Handle the error based on the response status code and the error message from the server.
+      if (response.statusCode == 401 ||
+          (response.statusCode >= 403 && response.statusCode <= 455)) {
+        final errorDetail = responseData['detail'];
+        // print(errorDetail);
+        throw Exception("Invalid credentials. ${errorDetail}");
+      } else if (response.statusCode == 500) {
+        throw Exception("Server error. Please try again later.");
+      } else {
+        throw Exception("An error occurred. Please try again.");
+      }
     }
   }
 

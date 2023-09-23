@@ -64,13 +64,25 @@ class _SignInState extends State<SignIn> {
         ),
       );
     } catch (error) {
-      // Handle the error, e.g., show an error message
-      // print(error);
+      String errorMessage = "An error occurred.";
+
+      if (error is Exception) {
+        final errorDetail = error.toString();
+        final match = RegExp(r'msg: ([^\]]*)').firstMatch(errorDetail);
+        final detail = match?.group(1);
+
+        if (detail != null) {
+          // Remove the part after the last closing curly brace }
+          final cleanDetail = detail.replaceAll(RegExp(r',\s*ctx:.*}$'), '');
+          errorMessage = "Invalid credentials. $cleanDetail";
+        }
+      }
+
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Error'),
-          content: Text('Something went wrong: $error'),
+          content: Text(errorMessage),
           actions: <Widget>[
             TextButton(
               child: const Text('OK'),
