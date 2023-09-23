@@ -108,7 +108,77 @@ class Auth extends ChangeNotifier {
       }
     }
   }
+  Future<void> sendOtp(String email) async {
+    final response = await http.post(
+      Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "email": email,
 
+      }),
+    );
+
+    final responseData = json.decode(response.body);
+    print(responseData);
+    print(response.statusCode);
+    final data = responseData['data'];
+    if (response.statusCode == 200) {
+      // final accessToken = data['access_token'];
+      // saveString('token', accessToken);
+      // print("access token: $accessToken");
+      notifyListeners();
+    } else {
+      // Handle the error based on the response status code and the error message from the server.
+      if (response.statusCode == 401 ||
+          (response.statusCode >= 403 && response.statusCode <= 455)) {
+        final errorDetail = responseData['detail'];
+        // print(errorDetail);
+        throw Exception("Invalid credentials. ${errorDetail}");
+      } else if (response.statusCode == 500) {
+        throw Exception("Server error. Please try again later.");
+      } else {
+        throw Exception("An error occurred. Please try again.");
+      }
+    }
+  }
+  Future<void> resetPassword(String email, String otp) async {
+    final response = await http.post(
+      Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "password": email,
+        "otp": otp
+
+      }),
+    );
+
+    final responseData = json.decode(response.body);
+    print(responseData);
+    print(response.statusCode);
+    final data = responseData['data'];
+    if (response.statusCode == 200) {
+      // final accessToken = data['access_token'];
+      // saveString('token', accessToken);
+      // print("access token: $accessToken");
+      notifyListeners();
+    } else {
+      // Handle the error based on the response status code and the error message from the server.
+      if (response.statusCode == 401 ||
+          (response.statusCode >= 403 && response.statusCode <= 455)) {
+        final errorDetail = responseData['detail'];
+        // print(errorDetail);
+        throw Exception("Invalid credentials. ${errorDetail}");
+      } else if (response.statusCode == 500) {
+        throw Exception("Server error. Please try again later.");
+      } else {
+        throw Exception("An error occurred. Please try again.");
+      }
+    }
+  }
   void saveString(String key, String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
