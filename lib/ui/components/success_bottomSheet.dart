@@ -79,7 +79,7 @@ class FullQuoteBottomSheet extends StatelessWidget {
                 onTap: () {
                   HapticFeedback.lightImpact();
                   Navigator.pop(context);
-                  Navigator.of(context).pushNamed(RouteHelper.home);
+                  Navigator.of(context).pushNamed(RouteHelper.loginRoute);
                 })
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:free_lunch_app/utils/colors.dart';
 import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../helpers/router.dart';
 import '../../components/bottom_navigator.dart';
 import 'organisationSignUp.dart';
 
@@ -26,12 +27,17 @@ class _SignUpState extends State<SignUp> {
         elevation: 0,
         leading: Builder(
           builder: (BuildContext context) {
-            return IconButton(
-              icon: backIcon(),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            );
+            return
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 23,
+                  color: Color.fromRGBO(89, 51, 8, 1),
+                ),
+              );
           },
         ),
         centerTitle: true,

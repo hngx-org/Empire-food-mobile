@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../helpers/router.dart';
+import '../../../providers/auth.dart';
 import '../../../utils/colors.dart';
 import '../../components/bottom_navigator.dart';
 import '../../components/custom_button.dart';
@@ -12,6 +14,8 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -59,8 +63,8 @@ class UserProfile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Habeeb Makusota",
+                       Text(
+                        "${authProvider.name}",
                         style: TextStyle(
                             fontSize: 23,
                             color: AppColors.pinkColor,
