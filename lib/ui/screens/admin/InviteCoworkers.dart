@@ -55,6 +55,72 @@ class _InviteCoworkerScreenState extends State<InviteCoworkerScreen> {
     }
     return null;
   }
+  Future<void> _submit(BuildContext context) async {
+
+
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
+    try {
+      final email = EmailController.text;
+      await authProvider.sendInvite(email);
+
+      // Set isLoading back to false after the operation is complete
+
+      HapticFeedback.lightImpact();
+      // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ResetPassword(email: email)));
+      // Navigator.of(context).pushNamed(RouteHelper.resetPasswordRoute, arguments:emailcontroller.text);
+      showModalBottomSheet(
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft:
+            Radius.circular(sizer(true, 24, context)),
+            topRight:
+            Radius.circular(sizer(true, 24, context)),
+          ),
+        ),
+        builder: (context) =>
+        const FullQuoteBottomSheetInvite(
+          toGo: 'Go Home',
+          toast: 'Success!!!',
+          message:
+          'You have successfully added a new coworker. Here’s the code for the coworker: ',
+          code: '1234567',
+        ),
+      );
+    } catch (error) {
+      String errorMessage = "An error occurred.";
+
+      if (error is Exception) {
+        final errorDetail = error.toString();
+        final match = RegExp(r'msg: ([^\]]*)').firstMatch(errorDetail);
+        final detail = match?.group(1);
+
+        if (detail != null) {
+          final cleanDetail = detail.replaceAll(RegExp(r',\s*ctx:.*}$'), '');
+          errorMessage = "Invalid credentials. $cleanDetail";
+        }
+      }
+
+
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(errorMessage),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -202,25 +268,7 @@ class _InviteCoworkerScreenState extends State<InviteCoworkerScreen> {
                           color: AppColors.pinkLightColor,
                           content: 'Add Coworker',
                           onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft:
-                                      Radius.circular(sizer(true, 24, context)),
-                                  topRight:
-                                      Radius.circular(sizer(true, 24, context)),
-                                ),
-                              ),
-                              builder: (context) =>
-                                  const FullQuoteBottomSheetInvite(
-                                toGo: 'Go Home',
-                                toast: 'Success!!!',
-                                message:
-                                    'You have successfully added a new coworker. Here’s the code for the coworker: ',
-                                code: '1234567',
-                              ),
-                            );
+                            _submit(context);
                           })
                     ],
                   ))
