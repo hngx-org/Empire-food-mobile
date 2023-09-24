@@ -7,6 +7,7 @@ import 'package:free_lunch_app/ui/screens/auth/login.dart';
 import 'package:free_lunch_app/ui/screens/auth/signUp.dart';
 import 'package:free_lunch_app/ui/screens/redeem_lunch/withdrawalConfScreen.dart';
 import 'package:free_lunch_app/ui/screens/redeem_lunch/withdrawalScreen.dart';
+import 'package:free_lunch_app/ui/screens/settings.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../ui/home.dart';
@@ -37,8 +38,7 @@ class RouteHelper {
   static const String userProfileRoute = "GiftFreeLunchScreen3";
   static const String withdrawalRoute = "WithdrawalScreen";
   static const String withdrawalConfirmRoute = "WithdrawalConfirmScreen";
-
-
+  static const String settingsRoute = "SettingScreen";
 
   Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -50,7 +50,7 @@ class RouteHelper {
       case adminHome:
         return _getPageRoute(
           routeName: settings.name!,
-          viewToShow:  HomeAdmin(),
+          viewToShow: HomeAdmin(),
         );
       case homeRoute:
         return _getPageRoute(
@@ -80,18 +80,18 @@ class RouteHelper {
           viewToShow: const GiftFreeLunchScreen(),
         );
 
-      case giftFreeLunchScreen2:
-        return _getTransistionPageRoute(
-          type: PageTransitionType.leftToRight,
-          routeName: settings.name!,
-          viewToShow: const GiftFreeLunchScreen2(),
-        );
-      case giftFreeLunchScreen3:
-        return _getTransistionPageRoute(
-          type: PageTransitionType.leftToRight,
-          routeName: settings.name!,
-          viewToShow: const GiftFreeLunchScreen3(),
-        );
+      // case giftFreeLunchScreen2:
+      //   return _getTransistionPageRoute(
+      //     type: PageTransitionType.leftToRight,
+      //     routeName: settings.name!,
+      //     viewToShow: const GiftFreeLunchScreen2(user: nul,),
+      //   );
+      // case giftFreeLunchScreen3:
+      //   return _getTransistionPageRoute(
+      //     type: PageTransitionType.leftToRight,
+      //     routeName: settings.name!,
+      //     viewToShow: const GiftFreeLunchScreen3(),
+      //   );
 
       case loginRoute:
         return _getTransistionPageRoute(
@@ -130,10 +130,18 @@ class RouteHelper {
           viewToShow: const WithdrawalScreen(),
         );
       case withdrawalConfirmRoute:
+        final String withdrawalData = (settings.arguments).toString();
         return _getTransistionPageRoute(
           type: PageTransitionType.bottomToTop,
           routeName: settings.name!,
-          viewToShow: const WithdrawalConfirmation(),
+          viewToShow: WithdrawalConfirmation(data: withdrawalData),
+        );
+      case settingsRoute:
+       
+        return _getTransistionPageRoute(
+          type: PageTransitionType.bottomToTop,
+          routeName: settings.name!,
+          viewToShow: SettingsScreen(),
         );
 
       default:

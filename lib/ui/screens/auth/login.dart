@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:free_lunch_app/providers/auth.dart';
 import 'package:free_lunch_app/ui/components/bottom_navigator.dart';
-import 'package:free_lunch_app/ui/components/success_bottomSheet.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 

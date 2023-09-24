@@ -5,7 +5,6 @@ import 'package:free_lunch_app/ui/screens/auth/reset_password.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../helpers/router.dart';
 import '../../../providers/auth.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/size_calculator.dart';

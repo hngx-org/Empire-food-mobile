@@ -4,8 +4,6 @@ import 'package:free_lunch_app/utils/colors.dart';
 import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../helpers/router.dart';
-import '../../components/bottom_navigator.dart';
 import 'organisationSignUp.dart';
 
 class SignUp extends StatefulWidget {

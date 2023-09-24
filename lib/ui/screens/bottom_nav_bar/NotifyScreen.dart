@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/ui/components/custom_button.dart';
 import 'package:free_lunch_app/ui/components/profile_pic.dart';
 import 'package:free_lunch_app/utils/colors.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/auth.dart';
 import '../../components/bottom_navigator.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -14,7 +17,33 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
+  void initState() {
+    super.initState();
+    print('ENTERING THE LUNCHES NOWW!!>>>>>>');
+
+    _fetchLunches(); // Call the async function from initState
+  }
+
+  List lunchesData = [];
+
+  Future _fetchLunches() async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
+    try {
+      final lunchData = await authProvider.allLunches();
+      setState(() {
+        lunchesData = lunchData['data'];
+      });
+    } catch (error) {
+      // Handle any exceptions here.
+      print('Error fetching users: $error');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -58,29 +87,33 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-              buildNotificationContainer(
-                imageUrl: 'images/dummy_6.png',
-                message: "Lateef gifted you 3 free lunches.",
-                time: "Today, 14:02",
-                redeemed: true,
-              ),
-              buildNotificationContainer(
-                imageUrl: 'images/dummy_6.png',
-                message:
-                    "You successfully redeemed 20 free lunches. You currently have 100 free lunches left.",
-                time: "Yesterday, 14:02",
-              ),
-              buildNotificationContainer(
-                imageUrl: 'images/dummy_6.png',
-                message:
-                    "You gifted UduakE 20 free lunches. You currently have 100 free lunches left.",
-                time: "Yesterday, 14:02",
-                redeemed: true,
-              ),
-              buildNotificationContainer(
-                imageUrl: 'images/dummy_6.png',
-                message: "Tola gifted you 3 free lunches.",
-                time: "Friday, 14:02",
+                 lunchesData.isEmpty
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.2),
+                        const Center(
+                          child:
+                              Text('You have not gifted or received any free lunches!!! 😃'),
+                        ),
+                      ],
+                    )
+                  :
+              Column(
+                children: List.generate(lunchesData.length, (index) {
+                  final user = lunchesData[index];
+                  return buildNotificationContainer(
+                    sender: "${user["receiver_id"]}" == authProvider.userId.toString()
+                        ? true : false,
+                    color: "${user["receiver_id"]}" == authProvider.userId.toString()
+                        ? AppColors.lightGrey : AppColors.cardBackground,
+                    imageUrl: 'images/dummy_6.png',
+                    message: '${user["note"]}',
+                    time: "${user["created_at"]}",
+                    redeemed: "${user["redeemed"]}" == "true" ? false : true,
+                  );
+                }),
               ),
             ],
           ),
@@ -93,15 +126,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
     required String imageUrl,
     required String message,
     required String time,
+    required Color color,
+    required bool sender ,
     bool redeemed = false,
-  }) {
-    return Container(
+  }) { return
+     Container(
       padding: const EdgeInsets.all(8),
       width: MediaQuery.of(context).size.width,
       height: 142,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
+        color: color,
         border: Border.all(color: Colors.black, width: 2),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
         boxShadow: const [
@@ -114,11 +149,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfilePicture(
+          !sender ? ProfilePicture(
             imageUrl: imageUrl,
             innerRadius: 24,
             outerRadius: 24,
-          ),
+          ): SizedBox(),
           const SizedBox(width: 10),
           Expanded(
             child: Column(
@@ -143,18 +178,24 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   ),
                 ),
                 const SizedBox(height: 5),
-                if (redeemed)
                   CustomButton(
                     width: 126,
                     height: 51,
                     isTextBig: true,
                     color: AppColors.accentPurple5,
-                    content: 'Redeemed',
-                    onTap: () {},
+                    content: redeemed ? 'Redeem' : "Redeemed",
+                    onTap: () {
+                   Navigator.of(context).pushNamed(RouteHelper.withdrawalRoute);
+                    },
                   ),
               ],
             ),
-          )
+          ),
+          sender ? ProfilePicture(
+            imageUrl: imageUrl,
+            innerRadius: 24,
+            outerRadius: 24,
+          ): SizedBox(),
         ],
       ),
     );

@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/size_calculator.dart';
 import '../../components/custom_button.dart';
-import '../../components/success_bottomSheet.dart';
 import '../../components/success_bottom_sheet_admin.dart';
 
 class OrganisationSignUp extends StatefulWidget {
