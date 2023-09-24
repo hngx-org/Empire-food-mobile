@@ -62,7 +62,7 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           builder: (context) => FullQuoteBottomSheetLogin(
-            userData: userData['data']['is_admin'] == true ? "Admin" : "User",
+            userData: authProvider.isAdmin == true ? "Admin" : "User",
             toGo: "Go Home",
             toast: 'Success!!!',
             message:
@@ -76,6 +76,8 @@ class _SignInState extends State<SignIn> {
             'Invalid credentials. Please check your email and password.');
       }
     } catch (error) {
+      showSnackbar(context, Colors.red,
+          'Invalid credentials. Please check your email and password.');
       setState(() {
         _isLoading = false;
       });

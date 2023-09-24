@@ -10,6 +10,7 @@ import '../../components/bottom_navigator.dart';
 import '../../components/custom_button.dart';
 import '../../components/profile_pic.dart';
 import '../gift_lunch/gift_free_lunch_2.dart';
+import '../gift_lunch/gift_free_lunch_2.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   const AdminHomeScreen({
@@ -37,7 +38,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     try {
       await authProvider.getUserProfile();
     } catch (error) {
-      print('Error fetching usernames: $error');
+      print('Error fetching profile: $error');
     }
     try {
       final userData = await authProvider.allUsers();
@@ -79,7 +80,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         actions: [
           IconButton(
             icon: searchIcon(),
-            onPressed: () {},
+            onPressed: () {
+
+            },
           ),
         ],
       ),
@@ -155,28 +158,28 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                         child:
                             Text('No Co-workers added to the firm yet!!! 😃'),
                       ),
-                    ],
-                  )
-                : Column(
-                    children: List.generate(
-                        usersData.length > 6 ? 6 : usersData.length, (index) {
-                      final user = usersData[index];
-                      return AdminHomeCard(
-                        staffName: '${user['first_name']} ${user['last_name']}',
-                        roles: 'User Role',
-                        imageUrl: 'images/dummy_$index.png',
-                        onTap: (selectedItem) {
-                          if (selectedItem == 'Gift Lunch') {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    GiftFreeLunchScreen2(user: user)));
-                          } else if (selectedItem == 'Delete Profile') {
-                            // Handle 'Delete Profile' action
-                          }
-                        },
-                      );
-                    }),
-                  ),
+                  ],
+                )
+                :
+            Column(
+              children:List.generate(usersData.length, (index) {
+                final user = usersData[index];
+                return AdminHomeCard(
+                  staffName: '${user['first_name']} ${user['last_name']}',
+                  roles: 'User Role',
+                  imageUrl: 'images/dummy_$index.png',
+                  onTap: (selectedItem) {
+                    if (selectedItem == 'Gift Lunch') {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              GiftFreeLunchScreen2(user: user)));
+                    } else if (selectedItem == 'Delete Profile') {
+                      // Handle 'Delete Profile' action
+                    }
+                  },
+                );
+              }),
+            ),
             SizedBox(
               height: 20,
             ),
