@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RecipientInfoSection extends StatefulWidget {
-  const RecipientInfoSection({Key? key}) : super(key: key);
+  const RecipientInfoSection( {Key? key ,required this.user, required this.callback}) : super(key: key);
+  final user;
+  final void Function(dynamic) callback;
 
   @override
   State<RecipientInfoSection> createState() => _RecipientInfoSectionState();
 }
 
 class _RecipientInfoSectionState extends State<RecipientInfoSection> {
+  var messageController = TextEditingController();
   String selectedLunch = '1 Free Lunch';
   List<String> lunchNumbers = [
     '1 Free Lunch',
@@ -17,7 +20,15 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
   ];
   String selectedName = '';
   String? freeLunchMessage;
+  int lunchNumber = 1;
 
+  void sendDataToParent() {
+    var data = {
+      "message" : freeLunchMessage ?? "",
+      "lunchNumber" : lunchNumber,
+    };
+    widget.callback(data); // Call the callback function to send data to the parent
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -40,7 +51,7 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Row(
+            child:  Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
@@ -48,7 +59,7 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  'Udauke',
+                  "${widget.user["first_name"]}",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
@@ -70,10 +81,14 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: lunchNumbers.map((number) {
+                int index = lunchNumbers.indexOf(number); // Get the index of the current item
+
                 return GestureDetector(
                   onTap: () {
                     setState(() {
                       selectedLunch = number;
+                      lunchNumber = index + 1;
+                      sendDataToParent();
                     });
                   },
                   child: Container(
@@ -136,6 +151,7 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
           SizedBox(
             height: 120,
             child: TextFormField(
+              controller: messageController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -148,6 +164,7 @@ class _RecipientInfoSectionState extends State<RecipientInfoSection> {
               onChanged: (value) {
                 setState(() {
                   freeLunchMessage = value;
+                  sendDataToParent();
                 });
               },
             ),

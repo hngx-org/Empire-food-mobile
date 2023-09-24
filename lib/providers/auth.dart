@@ -12,7 +12,7 @@ import '../core/models/http_exception.dart';
 class Auth extends ChangeNotifier {
   String? _token;
   DateTime? _expiryDate;
-  String? _userId;
+  int? _userId;
   Timer? _authTimer;
   String? _email;
   String? _password;
@@ -35,7 +35,7 @@ class Auth extends ChangeNotifier {
     return null;
   }
 
-  String? get userId {
+  int? get userId {
     return _userId;
   }
 
@@ -62,6 +62,12 @@ class Auth extends ChangeNotifier {
 
   Future<bool> setLunchCreditBalance(int value) async {
     _lunch_credit_balance = value;
+    notifyListeners();
+    return true;
+  }
+  Future<bool> setUserId(int value) async {
+
+    _userId = value;
     notifyListeners();
     return true;
   }
@@ -220,6 +226,7 @@ class Auth extends ChangeNotifier {
         // // Retrieve the user's name
         final data = responseData['data']; // Ge
         print('>>>username when on home screen : ${data["first_name"]}');
+        setUserId(data["id"]);
 
         setName(data["first_name"], data["last_name"]);
         setPhoneNumber(data["phone_number"]);
@@ -348,7 +355,79 @@ class Auth extends ChangeNotifier {
 
     throw Exception('Access token not available'); // Handle this case as needed
   }
+  Future<dynamic> sendLunch(int id, int lunchNumber, String giftMessage) async {
+    print('>>>>>>>>>>>>>>>id : $id');
+    print('>>>>>>>>>>>>>>>lunchNumber:  $lunchNumber');
+    print('>>>>>>>>>>>>>>>giftMessage: $giftMessage');
 
+    String? access_token = await getString('token');
+    print('>>>>>>>>>>>>>>>access_token: $access_token');
+
+    if (access_token != null) {
+      final response = await http.post(
+        Uri.parse('http://free-lunch.droncogene.com/api/v1/lunch/send'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': "Bearer $access_token",
+        },
+        body: jsonEncode(<String, String>{
+          "note": giftMessage,
+          "quantity": "$lunchNumber",
+          "receiver_id": "$id"
+        }),
+      );
+
+      //Hello
+      final responseData = json.decode(response.body);
+      // _token = responseData.access_token;
+      print(responseData);
+
+      if (response.statusCode == 200) {
+        notifyListeners();
+        return responseData;
+        // print('Post successful');
+      } else {
+        // Handle the error
+        print('Failed to post data: ${response.statusCode}');
+        // throw HttpException(responseData['details']);
+      }
+      throw Exception('Failed to send Lunch data');
+    }
+    throw Exception('Access token not available'); // Handle this case as needed
+  }
+
+  Future<Map<String, dynamic>> allLunches() async {
+    // Retrieve the access_token
+    String? access_token = await getString('token');
+    print('>>>access when on home screen : $access_token');
+    print('>>>access when on home screen : $access_token');
+
+    if (access_token != null) {
+      final response = await http.get(
+        Uri.parse('http://free-lunch.droncogene.com/api/v1/lunch/all'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': "Bearer $access_token",
+        },
+      );
+      final responseData = json.decode(response.body);
+      print('>>>>>>>>>>>>>>>$responseData');
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        notifyListeners();
+        return responseData; // Return user data here
+      } else {
+        // Handle the error
+        print('Failed to fetch user data: ${response.statusCode}');
+        print(response.body);
+        throw Exception('Failed to fetch bank data');
+
+      }
+    }
+
+    throw Exception('Access token not available'); // Handle this case as needed
+  }
   Future logout() async {}
 
   void _autoLogout() {}
