@@ -1,22 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/ui/components/dialog/alert_dialog.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../core/models/http_exception.dart';
-
 //remember to change to with
 class Auth extends ChangeNotifier {
   String? _token;
-  DateTime? _expiryDate;
   int? _userId;
-  Timer? _authTimer;
   String? _email;
   String? _password;
   String? _phoneNumber;
@@ -42,9 +35,7 @@ class Auth extends ChangeNotifier {
     return _userId;
   }
 
-  // Future<void> _authenticated(
 
-  // }
   Future<bool> setPhoneNumber(String value) async {
     _phoneNumber = value;
     notifyListeners();
@@ -210,13 +201,7 @@ class Auth extends ChangeNotifier {
 
      } catch (e) {
      print('Error error creating ORGAINSATION: $e');
-    //  displayAlert(
-    //       title: 'Error',
-    //       content:'${e}',
-    //       callToAction: 'Okay...',
-    //       success: false,
-    //       context: (e)
-    //       );
+
      }
    
 
@@ -236,12 +221,6 @@ class Auth extends ChangeNotifier {
     print(responseData);
     print(response.statusCode);
     if (response.statusCode == 200) {
-      // Save the user's name
-      // // Retrieve the user's name
-      // final data = responseData['data']; // Ge
-      //
-      // final accessToken = data['access_token'];
-      // print('>>>>>>>>>>>>> from log in function$data');
 
       // print('Username: $username');
       notifyListeners();
@@ -274,11 +253,7 @@ class Auth extends ChangeNotifier {
     print(responseData);
     print(response.statusCode);
     if (response.statusCode == 200) {
-      // Save the user's name
-      // // Retrieve the user's name
-      // final data = responseData['data']; // Ge
 
-      // print('Username: $username');
       notifyListeners();
       return responseData;
 
@@ -286,8 +261,7 @@ class Auth extends ChangeNotifier {
     } else {
       // Handle the error
       print('Failed to post data: ${response.statusCode}');
-      // print(response.body);
-      // throw HttpException(responseData['detail']);
+
     }
   }
 
@@ -558,7 +532,7 @@ class Auth extends ChangeNotifier {
     throw Exception('Access token not available'); // Handle this case as needed
   }
   Future logout() async {
-    
+
   }
 
   void _autoLogout() {}

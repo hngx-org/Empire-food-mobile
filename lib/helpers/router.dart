@@ -80,19 +80,6 @@ class RouteHelper {
           viewToShow: const GiftFreeLunchScreen(),
         );
 
-      // case giftFreeLunchScreen2:
-      //   return _getTransistionPageRoute(
-      //     type: PageTransitionType.leftToRight,
-      //     routeName: settings.name!,
-      //     viewToShow: const GiftFreeLunchScreen2(user: nul,),
-      //   );
-      // case giftFreeLunchScreen3:
-      //   return _getTransistionPageRoute(
-      //     type: PageTransitionType.leftToRight,
-      //     routeName: settings.name!,
-      //     viewToShow: const GiftFreeLunchScreen3(),
-      //   );
-
       case loginRoute:
         return _getTransistionPageRoute(
           type: PageTransitionType.rightToLeft,
