@@ -32,7 +32,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
   Future _signUp() async {
     final authProvider = Provider.of<Auth>(context, listen: false);
     try {
-     final responseData =  await authProvider.adminSignUp(
+      final responseData = await authProvider.adminSignUp(
         EmailController.text,
         PasswordController.text,
         FirstnameController.text,
@@ -144,10 +144,10 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                   ),
                   Text(
                     "Lunch Price in #1000, #2000, #3000...",
-                     style: GoogleFonts.nunito(
-                            fontSize: sizer(true, 16, context),
-                           color: AppColors.activeBackground,
-                            fontWeight: FontWeight.w500),
+                    style: GoogleFonts.nunito(
+                        fontSize: sizer(true, 16, context),
+                        color: AppColors.activeBackground,
+                        fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -314,15 +314,13 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: PasswordController,
                     validator: (value) {
-                      
-                     final passwordPattern = r'^(?=.*[0-9])(?=.*[\W_]).{8,}$';
+                      final passwordPattern = r'^(?=.*[0-9])(?=.*[\W_]).{8,}$';
                       final passwordRegex = RegExp(passwordPattern);
 
                       if (value == null || value.isEmpty) {
                         return 'Password is required';
                       } else if (!passwordRegex.hasMatch(value)) {
-                        return 
-                        'Password must match requirement.';
+                        return 'Password must match requirement.';
                       }
                       return null; // Return null// Return null if the input is valid
                     },
@@ -355,13 +353,11 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                     height: 10,
                   ),
                   Text(
-                    'Password must be at least 8 characters long, contain at least one number and one special character',
-                    style: GoogleFonts.nunito(
-                        fontSize: sizer(true, 13, context),
-                        color: const Color.fromARGB(255, 119, 42, 196),
-                        fontWeight: FontWeight.w500)
-                  )
-                  
+                      'Password must be at least 8 characters long, contain at least one number and one special character',
+                      style: GoogleFonts.nunito(
+                          fontSize: sizer(true, 13, context),
+                          color: const Color.fromARGB(255, 119, 42, 196),
+                          fontWeight: FontWeight.w500))
                 ],
               ),
             ),
@@ -430,7 +426,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                 singleBigButton: true,
                 color: AppColors.accentPurple5,
                 content: 'Sign Up',
-                onTap: () async{
+                onTap: () async {
                   if (_formkey.currentState!.validate()) {
                     _formkey.currentState!.save();
                     final response = await _signUp();
@@ -443,13 +439,15 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                           topRight: Radius.circular(sizer(true, 24, context)),
                         ),
                       ),
-                      builder: (context) =>  FullQuoteBottomSheetAdmin(
+                      builder: (context) => FullQuoteBottomSheetAdmin(
                         toGo: "Login",
                         userData: response,
                         toast: 'Success!!!',
-                        message: response['detail'] == 'Organization name already exists' || response['detail'] == null ? 'Organization name already exists':
-                          '“HNG” Organization has been created successfully. You can start gifting and receiving free lunches.',
-
+                        message: response['detail'] ==
+                                    'Organization name already exists' ||
+                                response['detail'] == null
+                            ? 'Organization name already exists'
+                            : '“HNG” Organization has been created successfully. You can start gifting and receiving free lunches.',
                       ),
                     );
                   }

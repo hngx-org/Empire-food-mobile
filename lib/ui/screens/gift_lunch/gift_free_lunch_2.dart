@@ -102,11 +102,6 @@ class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
                                       "lunchNumber": lunchNumber,
                                       "giftMessage": giftMessage
                                     })));
-
-                        // _submit(context);
-                        //   Navigator.pushNamed(
-                        //       context, RouteHelper.giftFreeLunchScreen3);
-                        //
                       }),
                     ],
                   )
