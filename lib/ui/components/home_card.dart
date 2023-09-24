@@ -20,7 +20,7 @@ class HomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 93,
       child: Card(
         elevation: 0,
@@ -38,12 +38,12 @@ class HomeCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  ProfilePicture(
+                  const ProfilePicture(
                     imageUrl: 'images/dummy.png',
                     outerRadius: 22,
                     innerRadius: 20,
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,

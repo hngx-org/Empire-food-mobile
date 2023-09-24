@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:free_lunch_app/helpers/router.dart';
+import 'package:free_lunch_app/ui/components/bottom_navigator.dart';
 import 'package:free_lunch_app/ui/components/cancel_button.dart';
 import 'package:free_lunch_app/ui/components/next_button.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'gift_free_lunch_2.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/auth.dart';
 
 class GiftFreeLunchScreen extends StatefulWidget {
   const GiftFreeLunchScreen({super.key});
@@ -25,6 +28,29 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
     'Dorcas',
     'Yetunde',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUsers(); // Call the async function from initState
+  }
+
+  List<Map<String, dynamic>> usersData = [];
+
+  Future<void> _fetchUsers() async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
+    try {
+      final List<Map<String, dynamic>> userData =
+          (await authProvider.allUsers()) as List<Map<String, dynamic>>;
+      setState(() {
+        usersData = userData;
+      });
+    } catch (error) {
+      showSnackbar(context, Colors.red, error);
+      print('Error fetching users: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +76,7 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
         title: Text(
           'Gift Free Lunch',
           style: GoogleFonts.nunito(
-            color: Color(0xFF583208),
+            color: const Color(0xFF583208),
             fontSize: 24,
             fontWeight: FontWeight.w700,
             height: 1.0,
@@ -65,11 +91,11 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
         },
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               right: 20,
               left: 20,
             ),
-            child: Container(
+            child: SizedBox(
               height: MediaQuery.of(context).size.height - 120,
               child: Column(
                 children: [
@@ -86,11 +112,11 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                       textAlign: TextAlign.justify,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Recipient Name",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -100,8 +126,8 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                         child: SearchBar(
                           shape: const MaterialStatePropertyAll(
                             RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadiusDirectional.all(Radius.circular(8)),
+                              borderRadius: BorderRadiusDirectional.all(
+                                  Radius.circular(8)),
                               side: BorderSide(
                                 width: 2,
                                 strokeAlign: BorderSide.strokeAlignCenter,
@@ -113,84 +139,91 @@ class _GiftFreeLunchScreenState extends State<GiftFreeLunchScreen> {
                           trailing: const [Icon(Icons.search)],
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Column(
-                        children: List.generate(staffName.length, (index) {
-                          return GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                selectedName = staffName[index];
-                              });
-                            },
-                            child: Container(
-                              height: 63,
-                              child: Card(
-                                color: selectedName == staffName[index]
-                                    ? Color(0xFFEBD9FC)
-                                    : Colors.white,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
+                      const SizedBox(height: 20),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: usersData.map((userData) {
+                              final String recipientName =
+                                  '${userData['first_name']} ${userData['last_name']}';
+
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedName = recipientName;
+                                  });
+                                  print(selectedName);
+                                },
+                                child: SizedBox(
+                                  height: 63,
+                                  child: Card(
+                                    color: selectedName == recipientName
+                                        ? const Color(0xFFEBD9FC)
+                                        : Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          CircleAvatar(
-                                            backgroundImage:
-                                                AssetImage('images/dummy.png'),
-                                            radius: 20,
+                                          Row(
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundImage: AssetImage(
+                                                    'images/dummy.png'),
+                                                radius: 20,
+                                              ),
+                                              const SizedBox(width: 10),
+                                              Text(
+                                                recipientName,
+                                                style: const TextStyle(
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(width: 10),
-                                          Text(
-                                            staffName[index],
-                                            style: TextStyle(
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.w600,
-                                            ),
+                                          Radio(
+                                            value: recipientName,
+                                            groupValue: selectedName,
+                                            activeColor: Colors.black,
+                                            onChanged: (String? value) {
+                                              setState(() {
+                                                selectedName = value!;
+                                              });
+                                              print("Hello$selectedName");
+                                            },
                                           ),
                                         ],
                                       ),
-                                      Radio(
-                                        value: index,
-                                        groupValue:
-                                            staffName.indexOf(selectedName),
-                                        activeColor: Colors.black,
-                                        onChanged: (int? value) {
-                                          setState(() {
-                                            selectedName = staffName[value ?? 0];
-                                          });
-                                        },
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          );
-                        }).map((widget) {
-                          return Column(
-                            children: [
-                              widget,
-                              SizedBox(height: 8),
-                            ],
-                          );
-                        }).toList(),
+                              );
+                            }).toList(),
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CancelButton(),
-                        SizedBox(width: 25),
+                        const CancelButton(),
+                        const SizedBox(width: 25),
                         NextButton(onTap: () {
+                          print("this is the selected name $selectedName");
                           HapticFeedback.lightImpact();
-                            Navigator.pushNamed(
-                              context, RouteHelper.giftFreeLunchScreen2);
-                        }),
+                          Navigator.pushNamed(
+                            context,
+                            RouteHelper.giftFreeLunchScreen2,
+                            arguments:
+                                selectedName, // Pass the selected user information
+                          );
+                        })
                       ],
                     ),
                   )

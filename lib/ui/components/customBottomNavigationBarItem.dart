@@ -9,7 +9,7 @@ class CustomBottomNavItem extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  CustomBottomNavItem({
+  const CustomBottomNavItem({super.key, 
     required this.iconData,
     required this.label,
     required this.isSelected,
@@ -25,7 +25,7 @@ class CustomBottomNavItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
-              ProfilePicture(
+              const ProfilePicture(
                 imageUrl: 'images/dummy.png',
                 outerRadius: 20, 
                 innerRadius: 18, 
