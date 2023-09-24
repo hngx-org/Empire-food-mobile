@@ -1,20 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/ui/components/cancel_button.dart';
 import 'package:free_lunch_app/ui/components/next_button.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/auth.dart';
 import '../../widget/reciepient.info.dart';
+import 'gift_free_lunch_3.dart';
 
 class GiftFreeLunchScreen2 extends StatefulWidget {
-  const GiftFreeLunchScreen2({super.key});
-
+  const GiftFreeLunchScreen2({super.key, required this.user});
+  final user;
   @override
   State<GiftFreeLunchScreen2> createState() => _GiftFreeLunchScreen2State();
 }
 
 class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
+  int lunchNumber = 1;
+  String giftMessage = "hi";
+  bool isLoading = false;
+  void onDataReceived(dynamic receiveData) {
+    setState(() {
+      lunchNumber = receiveData["lunchNumber"];
+      giftMessage = receiveData["message"];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +84,10 @@ class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const RecipientInfoSection(),
+                  RecipientInfoSection(
+                    user: widget.user,
+                    callback: onDataReceived,
+                  ),
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -78,8 +95,18 @@ class _GiftFreeLunchScreen2State extends State<GiftFreeLunchScreen2> {
                       const CancelButton(),
                       const SizedBox(width: 25),
                       NextButton(onTap: () {
-                        Navigator.pushNamed(
-                            context, RouteHelper.giftFreeLunchScreen3);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => GiftFreeLunchScreen3(
+                                    user: widget.user,
+                                    data: {
+                                      "lunchNumber": lunchNumber,
+                                      "giftMessage": giftMessage
+                                    })));
+
+                        // _submit(context);
+                        //   Navigator.pushNamed(
+                        //       context, RouteHelper.giftFreeLunchScreen3);
+                        //
                       }),
                     ],
                   )

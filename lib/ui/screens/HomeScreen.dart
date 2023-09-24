@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/providers/auth.dart';
+import 'package:free_lunch_app/ui/screens/gift_lunch/gift_free_lunch_2.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -78,7 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: searchIcon(),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(RouteHelper.giftFreeLunchScreen);
+            },
           ),
         ],
       ),
@@ -126,8 +129,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   roles: 'User Role',
                   imageUrl: 'images/dummy_$index.png',
                   onTap: () {
-                    Navigator.pushNamed(
-                        context, RouteHelper.giftFreeLunchScreen);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            GiftFreeLunchScreen2(user: user)));
+
+                    // Navigator.pushNamed(
+                    //     context, RouteHelper.giftFreeLunchScreen2);
                   },
                 );
               }),
