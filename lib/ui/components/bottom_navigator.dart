@@ -12,7 +12,8 @@ void nextScreenReplace(context, screen) {
   );
 }
 
-void showSnackbar(context, Color color, message) {
+void showSnackbar(context, Color color,  message) {
+
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Text(
       message,

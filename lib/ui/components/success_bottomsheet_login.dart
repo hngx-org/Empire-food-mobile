@@ -12,10 +12,12 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
       required this.toast,
       required this.message,
       required this.bottomSheetImageUrl,
+      required this.userData ,
       this.toGo})
       : super(key: key);
   final String toast, message, bottomSheetImageUrl;
   final String? toGo;
+  final String userData;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,11 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
                 onTap: () {
                   HapticFeedback.lightImpact();
                   Navigator.pop(context);
-                  Navigator.of(context).pushNamed(RouteHelper.home);
+                  if (userData == 'Admin') {
+                    Navigator.of(context).pushNamed(RouteHelper.adminHome);
+                  } else{
+                      Navigator.of(context).pushNamed(RouteHelper.home);
+                  }
                 })
           ],
         ),

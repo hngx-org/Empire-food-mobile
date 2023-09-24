@@ -8,10 +8,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FullQuoteBottomSheetAdmin extends StatelessWidget {
   const FullQuoteBottomSheetAdmin(
-      {Key? key, required this.toast, required this.message, this.toGo})
+      {Key? key, required this.toast, required this.message, this.toGo, this.userData})
       : super(key: key);
   final String toast, message;
   final String? toGo;
+  final dynamic userData;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +72,9 @@ class FullQuoteBottomSheetAdmin extends StatelessWidget {
                 onTap: () {
                   HapticFeedback.lightImpact();
                   Navigator.pop(context);
+             
                   Navigator.of(context).pushNamed(RouteHelper.adminHome);
+                  
                 })
           ],
         ),

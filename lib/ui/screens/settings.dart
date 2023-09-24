@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/helpers/router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/colors.dart';
 import '../components/bottom_navigator.dart';
@@ -415,7 +417,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 15,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () async {
+                  
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.clear();
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    RouteHelper.loginRoute,
+                    (route) => true,
+                  );
+                },
                 child: Container(
                   width: 373,
                   height: 57,

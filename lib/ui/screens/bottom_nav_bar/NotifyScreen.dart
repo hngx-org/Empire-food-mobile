@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/ui/components/custom_button.dart';
 import 'package:free_lunch_app/ui/components/profile_pic.dart';
 import 'package:free_lunch_app/utils/colors.dart';
@@ -86,6 +87,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 ),
               ),
               const SizedBox(height: 15),
+                 lunchesData.isEmpty
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.2),
+                        const Center(
+                          child:
+                              Text('You have not gifted or received any free lunches!!! 😃'),
+                        ),
+                      ],
+                    )
+                  :
               Column(
                 children: List.generate(lunchesData.length, (index) {
                   final user = lunchesData[index];
@@ -170,7 +184,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     isTextBig: true,
                     color: AppColors.accentPurple5,
                     content: redeemed ? 'Redeem' : "Redeemed",
-                    onTap: () {},
+                    onTap: () {
+                   Navigator.of(context).pushNamed(RouteHelper.withdrawalRoute);
+                    },
                   ),
               ],
             ),

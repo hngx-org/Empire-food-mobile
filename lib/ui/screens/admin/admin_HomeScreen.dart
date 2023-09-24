@@ -144,8 +144,19 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
               ],
             ),
             const SizedBox(height: 15),
+            usersData.isEmpty
+                ?  Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height:MediaQuery.of(context).size.height * 0.2),
+                   const Center(
+                        child: Text('No Co-workers added to the firm yet!!! 😃'),
+                      ),
+                  ],
+                )
+                :
             Column(
-              children: List.generate(usersData.length, (index) {
+              children:List.generate(usersData.length, (index) {
                 final user = usersData[index];
                 return AdminHomeCard(
                   staffName: '${user['first_name']} ${user['last_name']}',
