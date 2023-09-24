@@ -38,8 +38,6 @@ class RouteHelper {
   static const String withdrawalRoute = "WithdrawalScreen";
   static const String withdrawalConfirmRoute = "WithdrawalConfirmScreen";
 
-
-
   Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
@@ -50,7 +48,7 @@ class RouteHelper {
       case adminHome:
         return _getPageRoute(
           routeName: settings.name!,
-          viewToShow:  HomeAdmin(),
+          viewToShow: HomeAdmin(),
         );
       case homeRoute:
         return _getPageRoute(
@@ -130,10 +128,11 @@ class RouteHelper {
           viewToShow: const WithdrawalScreen(),
         );
       case withdrawalConfirmRoute:
+        final String withdrawalData = (settings.arguments).toString();
         return _getTransistionPageRoute(
           type: PageTransitionType.bottomToTop,
           routeName: settings.name!,
-          viewToShow: const WithdrawalConfirmation(),
+          viewToShow: WithdrawalConfirmation(data: withdrawalData),
         );
 
       default:

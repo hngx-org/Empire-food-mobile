@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/providers/auth.dart';
+import 'package:provider/provider.dart';
 
 import '../../../helpers/router.dart';
 import '../../../utils/colors.dart';
@@ -27,13 +29,58 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
     'Bank Tansfer',
     'Payapal',
   ];
-  final List<String> _country = ['Nigeria', 'Ghana', 'Togo', 'Kenya', 'South-Africa'];
+  final List<String> _country = [
+    'Nigeria',
+    'Ghana',
+    'Togo',
+    'Kenya',
+    'South-Africa'
+  ];
+
+  var amount = TextEditingController();
+
+  void submitWithrawalRequest() async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+    try {
+      await authProvider.requestWithdrawal(
+        amount.text,
+      );
+    } catch (error) {}
+  }
+
+  void initState() {
+    super.initState();
+    print('ENTERING THE Withdraw Screen NOWW!!>>>>>>');
+
+    _fetchBanks(); // Call the async function from initState
+  }
+
+  List banksData = [];
+
+  Future _fetchBanks() async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
+    try {
+      await authProvider.allBanks();
+    } catch (error) {
+      print('Error fetching banks: $error');
+    }
+    try {
+      final userData = await authProvider.allUsers();
+      setState(() {
+        banksData = userData['data'];
+      });
+    } catch (error) {
+      // Handle any exceptions here.
+      print('Error fetching users: $error');
+    }
+  }
 
   // Store the selected item
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
@@ -67,22 +114,31 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const Text(
                 'Please ensure that you provide accurate information in this form to avoid any hiccups in this process.',
-                style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w400,),
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               const SizedBox(
                 height: 20,
               ),
               const Text(
                 'Amount to Redeem',
-                style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 5,
               ),
               TextField(
+                controller: amount,
                 decoration: InputDecoration(
                   // labelText: '20',
                   border: OutlineInputBorder(
@@ -90,7 +146,7 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                   ),
                 ),
               ),
-               const SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               const Text('10 🍕 = ₦1,000'),
@@ -100,7 +156,9 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               const Text(
                 'Country',
                 style: TextStyle(
-                    fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 5,
@@ -108,7 +166,8 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               SizedBox(
                 width: 380,
                 child: Container(
-                  padding: const EdgeInsets.all(8.0), // Adjust padding as needed
+                  padding:
+                      const EdgeInsets.all(8.0), // Adjust padding as needed
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.TextFieldBorderColor, // Border color
@@ -123,25 +182,31 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                     ),
                     hint: const Center(
                         child: Text(
-                          'Please select your country of residence',
-                          style: TextStyle(
-                              fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-                        )), // Hint text for the dropdown
-                        
-                    value: _selectedCountry!.isNotEmpty ? _selectedCountry : null,
+                      'Please select your country of residence',
+                      style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    )), // Hint text for the dropdown
+
+                    value:
+                        _selectedCountry!.isNotEmpty ? _selectedCountry : null,
                     items: _country
                         .map((String transferMode) => DropdownMenuItem<String>(
-                      value: transferMode,
-                      child: Text(
-                        transferMode,
-                        style: const TextStyle(
-                            fontFamily: 'Nunito',  fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                    ))
+                              value: transferMode,
+                              child: Text(
+                                transferMode,
+                                style: const TextStyle(
+                                    fontFamily: 'Nunito',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ))
                         .toList(),
                     onChanged: (String? newValue) {
                       setState(() {
-                        _selectedCountry = newValue!; // Update the selected item
+                        _selectedCountry =
+                            newValue!; // Update the selected item
                       });
                     },
                   ),
@@ -152,7 +217,10 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               ),
               const Text(
                 'Redemption Method',
-                style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 10,
@@ -160,7 +228,8 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               SizedBox(
                 width: 380,
                 child: Container(
-                  padding: const EdgeInsets.all(8.0), // Adjust padding as needed
+                  padding:
+                      const EdgeInsets.all(8.0), // Adjust padding as needed
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.TextFieldBorderColor, // Border color
@@ -175,26 +244,32 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                     ),
                     hint: const Center(
                         child: Text(
-                          'Please select your Payment mode',
-                          style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-                        )), // Hint text for the dropdown
-                        
+                      'Please select your Payment mode',
+                      style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    )), // Hint text for the dropdown
+
                     value: _selectedTransferMode!.isNotEmpty
                         ? _selectedTransferMode
                         : null,
                     items: _paymentMode
                         .map((String transferMode) => DropdownMenuItem<String>(
-                      value: transferMode,
-                      child: Text(
-                        transferMode,
-                        style: const TextStyle(
-                            fontFamily: 'Nunito', fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                    ))
+                              value: transferMode,
+                              child: Text(
+                                transferMode,
+                                style: const TextStyle(
+                                    fontFamily: 'Nunito',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ))
                         .toList(),
                     onChanged: (String? newValue) {
                       setState(() {
-                        _selectedTransferMode = newValue!; // Update the selected item
+                        _selectedTransferMode =
+                            newValue!; // Update the selected item
                       });
                     },
                   ),
@@ -205,7 +280,10 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               ),
               const Text(
                 'Account Name',
-                style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 10,
@@ -223,7 +301,10 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               ),
               const Text(
                 'Account Number',
-                style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 5,
@@ -241,7 +322,10 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               ),
               const Text(
                 'Bank',
-                style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 10,
@@ -249,7 +333,8 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
               SizedBox(
                 width: 380,
                 child: Container(
-                  padding: const EdgeInsets.all(8.0), // Adjust padding as needed
+                  padding:
+                      const EdgeInsets.all(8.0), // Adjust padding as needed
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.TextFieldBorderColor, // Border color
@@ -264,21 +349,25 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                     ),
                     hint: const Center(
                         child: Text(
-                          'Please select your Bank Name',
-                          style: TextStyle( fontFamily: 'Nunito',fontSize: 16, fontWeight: FontWeight.w600),
-                        )), // Hint text for the dropdown
-                        
+                      'Please select your Bank Name',
+                      style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    )), // Hint text for the dropdown
+
                     value: _selectedBank!.isNotEmpty ? _selectedBank : null,
                     items: _banks
                         .map((String item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(
-                        item,
-                        style: const TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                    ))
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                    fontFamily: 'Nunito',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ))
                         .toList(),
                     onChanged: (String? newValue) {
                       setState(() {
@@ -295,8 +384,12 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                   const CancelButton(),
                   const SizedBox(width: 25),
                   NextButton(onTap: () {
+                    print(amount.text);
                     Navigator.pushNamed(
-                        context, RouteHelper.withdrawalConfirmRoute);
+                      context,
+                      RouteHelper.withdrawalConfirmRoute,
+                      arguments: amount.text,
+                    );
                   }),
                 ],
               )

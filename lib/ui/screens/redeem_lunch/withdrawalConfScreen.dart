@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:free_lunch_app/providers/auth.dart';
+import 'package:free_lunch_app/ui/components/bottom_navigator.dart';
+import 'package:provider/provider.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/size_calculator.dart';
 import '../../components/custom_button.dart';
@@ -7,12 +9,51 @@ import '../../components/success_bottomSheet.dart';
 import '../../widget/withdrwal_details.dart';
 
 class WithdrawalConfirmation extends StatelessWidget {
-  const WithdrawalConfirmation({super.key});
+  final String data; // Define a field to store the argument
+
+  const WithdrawalConfirmation({required this.data});
+
+  Future _submitWithdrawal(context) async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
+    try {
+      await authProvider.getUserProfile();
+      print(authProvider.name);
+    } catch (error) {
+      print('Error fetching usernames: $error');
+    }
+    try {
+      if (int.parse(data) > 0) {
+        await authProvider.requestWithdrawal(data);
+        showModalBottomSheet(
+          context: context,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(sizer(true, 24, context)),
+              topRight: Radius.circular(sizer(true, 24, context)),
+            ),
+          ),
+          builder: (context) => const FullQuoteBottomSheet(
+            toast: '🎉 Bravo!🎉',
+            message:
+                'Your redemption request has been granted, and the rewards are on their way to you. Keep up the great work, superstar!"',
+            bottomSheetImageUrl: 'images/btmSht2.png',
+          ),
+        );
+      } else {
+        showSnackbar(context, Colors.red,
+            'Invalid Amount: amount should be greater than 0.');
+      }
+    } catch (error) {
+      showSnackbar(context, Colors.red, 'Something went wrong.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    print(data);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 26, 23, 23),
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -30,7 +71,7 @@ class WithdrawalConfirmation extends StatelessWidget {
             );
           },
         ),
-        title:  Text(
+        title: Text(
           'Withdraw Free Lunches',
           style: TextStyle(
               fontFamily: 'Nunito',
@@ -55,7 +96,7 @@ class WithdrawalConfirmation extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const WithdrawalDetails(),
+            WithdrawalDetails(data: data),
             const SizedBox(
               height: 10,
             ),
@@ -68,20 +109,7 @@ class WithdrawalConfirmation extends StatelessWidget {
                 color: AppColors.accentPurple5,
                 content: 'Withdraw Free Lunches',
                 onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(sizer(true, 24, context)),
-                        topRight: Radius.circular(sizer(true, 24, context)),
-                      ),
-                    ),
-                    builder: (context) => const FullQuoteBottomSheet(
-                      toast:   '🎉 Bravo!🎉',
-                      message: 'Your redemption request has been granted, and the rewards are on their way to you. Keep up the great work, superstar!"',
-                      bottomSheetImageUrl: 'images/btmSht2.png',
-                    ),
-                  );
+                  _submitWithdrawal(context);
                 },
               ),
             ),
