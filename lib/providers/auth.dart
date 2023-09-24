@@ -236,11 +236,17 @@ class Auth extends ChangeNotifier {
     }
   }
   Future<String?> sendInvite(String email) async {
+    String? access_token = await getString('token');
+    print('>>>username accesstoken when on home screen : $access_token');
+
+    if (access_token != null) {
     final response = await http.post(
       Uri.parse(
         'http://free-lunch.droncogene.com/api/v1/organization/invite?email=$email'),
       headers: <String, String>{
         'Content-Type': 'application/json;',
+        'Authorization': "Bearer $access_token",
+
       },
     );
 
@@ -260,7 +266,9 @@ class Auth extends ChangeNotifier {
       print('Failed to post data: ${response.statusCode}');
       // print(response.body);
       // throw HttpException(responseData['detail']);
-    }
+    } }
+
+    throw Exception('Access token not available'); //
   }
 
   Future resetPassword(String email, String password, String Otp) async {

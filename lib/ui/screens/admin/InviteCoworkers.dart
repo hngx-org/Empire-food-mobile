@@ -41,7 +41,7 @@ class _InviteCoworkerScreenState extends State<InviteCoworkerScreen> {
         usersData = userData;
       });
     } catch (error) {
-      showSnackbar(context, Colors.red, error);
+      // showSnackbar(context, Colors.red, error);
       print('Error fetching users: $error');
     }
   }
