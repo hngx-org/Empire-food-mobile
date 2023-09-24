@@ -3,11 +3,10 @@ import 'package:free_lunch_app/utils/colors.dart';
 
 import '../bottom_nav_bar/NotifyScreen.dart';
 import '../bottom_nav_bar/UserProfile.dart';
-
-
+import 'admin_HomeScreen.dart';
 
 class HomeAdmin extends StatefulWidget {
-   HomeAdmin({super.key});
+  HomeAdmin({super.key});
 
   @override
   State<HomeAdmin> createState() => _HomeAdminState();
@@ -23,7 +22,7 @@ class _HomeAdminState extends State<HomeAdmin> {
 
     _pages = [
       {
-        'page': const (),
+        'page': const AdminHomeScreen(),
         'title': 'Home',
       },
       {

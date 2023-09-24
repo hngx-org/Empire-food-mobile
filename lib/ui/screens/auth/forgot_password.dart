@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:free_lunch_app/ui/screens/auth/reset_password.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -49,8 +50,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       setState(() {
         isLoading = false;
       });
-
-
+      HapticFeedback.lightImpact();
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ResetPassword(email: email)));
+      // Navigator.of(context).pushNamed(RouteHelper.resetPasswordRoute, arguments:emailcontroller.text);
     } catch (error) {
       String errorMessage = "An error occurred.";
 
@@ -206,9 +208,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           setState(() {
                             _isLoading = true;
                           });
-                          HapticFeedback.lightImpact();
-                          Navigator.of(context).pushNamed(RouteHelper.resetPasswordRoute);
-                          // _submit(context);
+                          if (_formkey.currentState!.validate()){
+
+                            _submit(context);
+                          }
+
                           setState(() {
                             _isLoading = false;
                           });

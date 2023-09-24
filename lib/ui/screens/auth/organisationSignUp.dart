@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/providers/auth.dart';
+import 'package:free_lunch_app/ui/components/bottom_navigator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,7 @@ import '../../../utils/colors.dart';
 import '../../../utils/size_calculator.dart';
 import '../../components/custom_button.dart';
 import '../../components/success_bottomSheet.dart';
+import '../../components/success_bottom_sheet_admin.dart';
 
 class OrganisationSignUp extends StatefulWidget {
   const OrganisationSignUp({super.key});
@@ -31,7 +33,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
   Future _signUp() async {
     final authProvider = Provider.of<Auth>(context, listen: false);
     try {
-      await authProvider.adminSignUp(
+     final responseData =  await authProvider.adminSignUp(
         EmailController.text,
         PasswordController.text,
         FirstnameController.text,
@@ -39,20 +41,17 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
         PhoneController.text,
       );
 
-     await authProvider.adminLogin(
+      final data = await authProvider.adminLogin(
         EmailController.text,
         PasswordController.text,
       );
 
-    final response =  await authProvider.createOrganization(
-          OrganisationNameController.text, LunchPriceController.text);
+      final response = await authProvider.createOrganization(
+          OrganisationNameController.text,
+          LunchPriceController.text,
+          data['access_token']);
 
-      if(response['data']['admin'] == true){
-        // Navigator.pushNamed(context, RouteHelper.adminHome);
-         Navigator.pushNamed(context, RouteHelper.home);
-      }else{
-        Navigator.pushNamed(context, RouteHelper.home);
-      }
+      return response;
       // await authProvider.
     } catch (error) {
       print('Error signing up: $error');
@@ -316,10 +315,17 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: PasswordController,
                     validator: (value) {
+                      
+                     final passwordPattern = r'^(?=.*[0-9])(?=.*[\W_]).{8,}$';
+                      final passwordRegex = RegExp(passwordPattern);
+
                       if (value == null || value.isEmpty) {
-                        return 'Please enter a value'; // Error message to display
+                        return 'Password is required';
+                      } else if (!passwordRegex.hasMatch(value)) {
+                        return 
+                        'Password must match requirement.';
                       }
-                      return null; // Return null if the input is valid
+                      return null; // Return null// Return null if the input is valid
                     },
                     obscureText: !_passwordVisible,
                     decoration: InputDecoration(
@@ -346,6 +352,17 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(15)))),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Password must be at least 8 characters long, contain at least one number and one special character',
+                    style: GoogleFonts.nunito(
+                        fontSize: sizer(true, 13, context),
+                        color: const Color.fromARGB(255, 119, 42, 196),
+                        fontWeight: FontWeight.w500)
+                  )
+                  
                 ],
               ),
             ),
@@ -414,10 +431,11 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                 singleBigButton: true,
                 color: AppColors.accentPurple5,
                 content: 'Sign Up',
-                onTap: () {
+                onTap: () async{
                   if (_formkey.currentState!.validate()) {
-                    _signUp();
-
+                    _formkey.currentState!.save();
+                    final response = await _signUp();
+                    print(response);
                     showModalBottomSheet(
                       context: context,
                       shape: RoundedRectangleBorder(
@@ -426,12 +444,13 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                           topRight: Radius.circular(sizer(true, 24, context)),
                         ),
                       ),
-                      builder: (context) => const FullQuoteBottomSheet(
+                      builder: (context) =>  FullQuoteBottomSheetAdmin(
                         toGo: "Login",
+                        userData: response,
                         toast: 'Success!!!',
-                        message:
-                            'You’ve successfully provided your accurate information. You can start gifting and receiving free lunches.! 🚀',
-                        bottomSheetImageUrl: 'images/btmSht2.png',
+                        message: response['detail'] == 'Organization name already exists' ? 'Organization name already exists':
+                          '“HNG” Organization has been created successfully. You can start gifting and receiving free lunches.',
+
                       ),
                     );
                   }

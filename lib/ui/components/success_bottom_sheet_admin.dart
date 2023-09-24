@@ -6,33 +6,24 @@ import 'package:free_lunch_app/utils/colors.dart';
 import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FullQuoteBottomSheetLogin extends StatelessWidget {
-  const FullQuoteBottomSheetLogin(
-      {Key? key,
-      required this.toast,
-      required this.message,
-      required this.bottomSheetImageUrl,
-      required this.userData ,
-      this.toGo})
+class FullQuoteBottomSheetAdmin extends StatelessWidget {
+  const FullQuoteBottomSheetAdmin(
+      {Key? key, required this.toast, required this.message, this.toGo, this.userData})
       : super(key: key);
-  final String toast, message, bottomSheetImageUrl;
+  final String toast, message;
   final String? toGo;
-  final String userData;
+  final dynamic userData;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.55,
+      height: MediaQuery.of(context).size.height * 0.45,
       padding: EdgeInsets.symmetric(
         horizontal: sizer(true, 60, context),
         vertical: sizer(true, 21, context),
       ),
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(bottomSheetImageUrl),
-          fit: BoxFit.cover,
-        ),
-        color: AppColors.white,
+        color: AppColors.pinkColor,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(sizer(true, 24, context)),
           topRight: Radius.circular(sizer(true, 24, context)),
@@ -56,10 +47,10 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
                   letterSpacing: 1),
             ),
             SizedBox(
-              height: sizer(false, 35, context),
+              height: sizer(false, 25, context),
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: MediaQuery.of(context).size.width * 0.7,
               child: Text(
                 message,
                 textAlign: TextAlign.center,
@@ -71,7 +62,7 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 67,
+              height: 37,
             ),
             CustomButton(
                 width: 172,
@@ -81,11 +72,9 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
                 onTap: () {
                   HapticFeedback.lightImpact();
                   Navigator.pop(context);
-                  if (userData == 'Admin') {
-                    Navigator.of(context).pushNamed(RouteHelper.adminHome);
-                  } else{
-                      Navigator.of(context).pushNamed(RouteHelper.home);
-                  }
+             
+                  Navigator.of(context).pushNamed(RouteHelper.adminHome);
+                  
                 })
           ],
         ),
