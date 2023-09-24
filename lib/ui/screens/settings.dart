@@ -422,7 +422,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   final SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.clear();
-                  Navigator.pushNamed(context, RouteHelper.loginRoute);
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    RouteHelper.loginRoute,
+                    (route) => true,
+                  );
                 },
                 child: Container(
                   width: 373,
