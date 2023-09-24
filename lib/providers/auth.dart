@@ -428,6 +428,45 @@ class Auth extends ChangeNotifier {
 
     throw Exception('Access token not available'); // Handle this case as needed
   }
+  Future<dynamic> redeemLunch(int lunchId) async {
+    print('>>>>>>>>>>>>>>>id : $lunchId');
+
+    String? access_token = await getString('token');
+    print('>>>>>>>>>>>>>>>access_token: $access_token');
+
+    if (access_token != null) {
+      final response = await http.put(
+        Uri.parse('http://free-lunch.droncogene.com/api/v1/lunch/redeem?lunch_ids=$lunchId'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': "Bearer $access_token",
+        },
+        // body: jsonEncode(<String, String>{
+        //   "note": giftMessage,
+        //   "quantity": "$lunchNumber",
+        //   "receiver_id": "$id"
+        // }),
+      );
+
+      //Hello
+      final responseData = json.decode(response.body);
+      // _token = responseData.access_token;
+      print(responseData);
+
+      if (response.statusCode == 200) {
+        notifyListeners();
+        return responseData;
+        // print('Post successful');
+      } else {
+        // Handle the error
+        print('Failed to post data: ${response.statusCode}');
+        // throw HttpException(responseData['details']);
+      }
+      throw Exception('Failed to send Lunch data');
+    }
+    throw Exception('Access token not available'); // Handle this case as needed
+  }
+
   Future logout() async {}
 
   void _autoLogout() {}

@@ -1,10 +1,14 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/ui/components/custom_button.dart';
 import 'package:free_lunch_app/ui/components/profile_pic.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/auth.dart';
+import '../../../utils/size_calculator.dart';
 import '../../components/bottom_navigator.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -24,7 +28,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
   List lunchesData = [];
-
+  bool isLoading = false;
   Future _fetchLunches() async {
     final authProvider = Provider.of<Auth>(context, listen: false);
 
@@ -38,10 +42,58 @@ class _NotificationScreenState extends State<NotificationScreen> {
       print('Error fetching users: $error');
     }
   }
+  Future<void> _submit(BuildContext context, int lunchId ) async {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
+    try {
+      await authProvider.redeemLunch(lunchId);
+
+      // Set isLoading back to false after the operation is complete
+      setState(() {
+        isLoading = true;
+      });
+      Navigator.of(context).pushNamed(RouteHelper.withdrawalConfirmRoute);
+    } catch (error) {
+      String errorMessage = "An error occurred.";
+
+      if (error is Exception) {
+        final errorDetail = error.toString();
+        final match = RegExp(r'msg: ([^\]]*)').firstMatch(errorDetail);
+        final detail = match?.group(1);
+
+        if (detail != null) {
+          final cleanDetail = detail.replaceAll(RegExp(r',\s*ctx:.*}$'), '');
+          errorMessage = "Invalid credentials. $cleanDetail";
+        }
+      }
+
+      // Set isLoading back to false in case of an error
+      setState(() {
+        isLoading = false;
+      });
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(errorMessage),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<Auth>(context, listen: false);
+
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -98,6 +150,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     message: '${user["note"]}',
                     time: "${user["created_at"]}",
                     redeemed: "${user["redeemed"]}" == "true" ? false : true,
+                    lunchId: int.parse("${user["id"]}")
                   );
                 }),
               ),
@@ -114,6 +167,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     required String time,
     required Color color,
     required bool sender ,
+    required int lunchId ,
     bool redeemed = false,
   }) { return
      Container(
@@ -170,7 +224,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     isTextBig: true,
                     color: AppColors.accentPurple5,
                     content: redeemed ? 'Redeem' : "Redeemed",
-                    onTap: () {},
+                    onTap: () {
+                      // _submit(context, lunchId );
+                      Navigator.of(context).pushNamed(RouteHelper.withdrawalRoute);
+                    },
                   ),
               ],
             ),
