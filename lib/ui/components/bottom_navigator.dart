@@ -126,6 +126,41 @@ Widget settingsIcon() {
   return SvgPicture.asset(
       assetName, semanticsLabel: 'Settings');
 }
+Widget securityIcon() {
+  const String assetName = 'images/svg/security-account.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Security');
+}
+Widget languageIcon() {
+  const String assetName = 'images/svg/symbols_language.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Settings');
+}
+Widget paswordIcon() {
+  const String assetName = 'images/svg/password-reset.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Pasword-Reset');
+}
+Widget notifyIcon() {
+  const String assetName = 'images/svg/notify.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Notification');
+}
+Widget helpIcon() {
+  const String assetName = 'images/svg/help.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Help');
+}
+Widget aboutIcon() {
+  const String assetName = 'images/svg/about.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'About');
+}
+Widget logoutIcon() {
+  const String assetName = 'images/svg/logout.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Logout');
+}
 Widget editIcon() {
   const String assetName = 'images/svg/edit_icon.svg';
   return InkWell(
