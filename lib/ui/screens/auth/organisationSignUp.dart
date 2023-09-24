@@ -447,7 +447,7 @@ class _OrganisationSignUpState extends State<OrganisationSignUp> {
                         toGo: "Login",
                         userData: response,
                         toast: 'Success!!!',
-                        message: response['detail'] == 'Organization name already exists' ? 'Organization name already exists':
+                        message: response['detail'] == 'Organization name already exists' || response['detail'] == null ? 'Organization name already exists':
                           '“HNG” Organization has been created successfully. You can start gifting and receiving free lunches.',
 
                       ),
