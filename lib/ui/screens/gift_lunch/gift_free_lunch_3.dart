@@ -7,6 +7,7 @@ import 'package:free_lunch_app/utils/colors.dart';
 import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../providers/auth.dart';
 import '../../components/success_bottomsheet_login.dart';
@@ -26,15 +27,23 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
   bool isLoading = false;
   Future<void> _submit(BuildContext context) async {
     final authProvider = Provider.of<Auth>(context, listen: false);
-
     try {
-      await authProvider.sendLunch(widget.user["id"],
+      final data = await authProvider.getUserProfile();
+      print("sssssssssssssss ${data["is_admin"]}");
+    } catch (error) {
+      print('Error fetching usernames: $error');
+    }
+    try {
+      final response = await authProvider.sendLunch(widget.user["id"],
           widget.data["lunchNumber"], widget.data["giftMessage"]);
-
+      // print("ddddddddddddddddddddd $response");
       // Set isLoading back to false after the operation is complete
       setState(() {
         isLoading = true;
       });
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      var is_admin = await prefs.get("is_admin");
+      print("lllllllllllll${authProvider.isAdmin}");
       showModalBottomSheet(
         context: context,
         shape: RoundedRectangleBorder(
@@ -44,7 +53,7 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
           ),
         ),
         builder: (context) => FullQuoteBottomSheetLogin(
-          userData: '',
+          userData: authProvider.isAdmin == true ? "Admin" : "User Role",
           toGo: "Go Home",
           toast: 'Success!!!',
           message:
@@ -285,7 +294,6 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                         color: AppColors.accentPurple5,
                         content: 'Gift Free Launch',
                         onTap: () {
-                          print("heeeeeeeeeeeeeeeeeeee");
                           _submit(context);
                           // showModalBottomSheet(
                           //   context: context,
