@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/ui/components/pin_textfield.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/auth.dart';
@@ -158,6 +160,20 @@ class _StaffSignUpState extends State<StaffSignUp> {
                       ),
                     ),
                     SizedBox(height: 20,),
+                    //   Padding(
+                    //   padding: EdgeInsets.symmetric(
+                    //       horizontal: sizer(true, 5, context)),
+                    //   child: Center(
+                    //     child: PinTextInput(
+                    //       pinEditingController: _codeController,
+                    //       onChanged: (text) {
+                    //         // setState(() {
+                    //         //   _otp = text ?? '';
+                    //         // });
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -282,8 +298,14 @@ class _StaffSignUpState extends State<StaffSignUp> {
                           ),
                           TextFormField(
                             validator: (value) {
+                                  final passwordPattern =
+                                  r'^(?=.*[0-9])(?=.*[\W_]).{8,}$';
+                              final passwordRegex = RegExp(passwordPattern);
+
                               if (value == null || value.isEmpty) {
-                                return 'Please enter a value'; // Error message to display
+                                return 'Password is required';
+                              } else if (!passwordRegex.hasMatch(value)) {
+                                return 'Password must match requirement.';
                               }
                               return null; // Return null if the input is valid
                             },
@@ -313,6 +335,16 @@ class _StaffSignUpState extends State<StaffSignUp> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)))),
                           ),
+                            SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                              'Password must be at least 8 characters long, contain at least one number and one special character',
+                              style: GoogleFonts.nunito(
+                                  fontSize: sizer(true, 13, context),
+                                  color:
+                                      const Color.fromARGB(255, 119, 42, 196),
+                                  fontWeight: FontWeight.w500))
                         ],
                       ),
                     ),

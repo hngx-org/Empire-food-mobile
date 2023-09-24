@@ -34,7 +34,7 @@ class AdminHomeCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Row(
                 children: [
@@ -70,11 +70,12 @@ class AdminHomeCard extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.35,
                 child: CustomButtonDrop(
-                  width: sizer(true, 133, context),
+                  width: sizer(false, 33, context),
                   height: 51,
                   items: ['Gift Lunch', 'Delete Profile'],
                   onChanged: (selectedItem) {
-                    if (selectedItem == 'Gift Lunch' || selectedItem == 'Delete Profile') {
+                    if (selectedItem == 'Gift Lunch' ||
+                        selectedItem == 'Delete Profile') {
                       onTap(selectedItem!);
                     }
                   },
