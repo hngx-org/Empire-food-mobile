@@ -46,7 +46,7 @@ Widget button(double width, double height, Color color, String content) {
 
 Widget CardWidget (staffs, roles,){
   return  
-  Container(
+  SizedBox(
     height: 93,
     child: Card(
       elevation: 0,
@@ -64,26 +64,26 @@ Widget CardWidget (staffs, roles,){
           children: [
             Row(
               children: [
-                ProfilePicture(
+                const ProfilePicture(
                   imageUrl: 'images/dummy.png',
                   outerRadius: 22,
                   innerRadius: 20,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       staffs,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
                     roles,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14.0,
                         color: Colors.grey,
                       ),

@@ -23,7 +23,7 @@ class NextButton extends StatelessWidget {
       decoration: ShapeDecoration(
         color: AppColors.accentPurple5,
         shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1),
+          side: const BorderSide(width: 1),
           borderRadius: BorderRadius.circular(12),
         ),
         shadows: const [

@@ -12,7 +12,8 @@ void nextScreenReplace(context, screen) {
   );
 }
 
-void showSnackbar(context, Color color, message) {
+void showSnackbar(context, Color color,  message) {
+
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Text(
       message,
@@ -42,10 +43,10 @@ Widget buttonNext(
       decoration: ShapeDecoration(
         color: color,
         shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1),
+          side: const BorderSide(width: 1),
           borderRadius: BorderRadius.circular(12),
         ),
-        shadows: [
+        shadows: const [
           BoxShadow(
             color: Colors.black,
             blurRadius: 0,
@@ -57,7 +58,7 @@ Widget buttonNext(
       child: Center(
         child: Text(
           content,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 14,
             fontFamily: 'Tropiline',
@@ -83,10 +84,10 @@ Widget buttonPop(
       decoration: ShapeDecoration(
         color: color,
         shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1),
+          side: const BorderSide(width: 1),
           borderRadius: BorderRadius.circular(12),
         ),
-        shadows: [
+        shadows: const [
           BoxShadow(
             color: Colors.black,
             blurRadius: 0,
@@ -98,7 +99,7 @@ Widget buttonPop(
       child: Center(
         child: Text(
           content,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 14,
             fontFamily: 'Tropiline',
@@ -112,22 +113,57 @@ Widget buttonPop(
 }
 
 Widget menuIcon() {
-  const String assetName = 'images/ham_icon.svg';
+  const String assetName = 'images/svg/ham_icon.svg';
   return SvgPicture.asset(
     assetName, semanticsLabel: 'Menu');
 }
 Widget searchIcon() {
-  const String assetName = 'images/search_icon.svg';
+  const String assetName = 'images/svg/search_icon.svg';
   return SvgPicture.asset(
     assetName, semanticsLabel: 'Menu');
 }
 Widget settingsIcon() {
-  const String assetName = 'images/settings_icon.svg';
+  const String assetName = 'images/svg/settings_icon.svg';
   return SvgPicture.asset(
       assetName, semanticsLabel: 'Settings');
 }
+Widget securityIcon() {
+  const String assetName = 'images/svg/security-account.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Security');
+}
+Widget languageIcon() {
+  const String assetName = 'images/svg/symbols_language.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Settings');
+}
+Widget paswordIcon() {
+  const String assetName = 'images/svg/password-reset.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Pasword-Reset');
+}
+Widget notifyIcon() {
+  const String assetName = 'images/svg/notify.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Notification');
+}
+Widget helpIcon() {
+  const String assetName = 'images/svg/help.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Help');
+}
+Widget aboutIcon() {
+  const String assetName = 'images/svg/about.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'About');
+}
+Widget logoutIcon() {
+  const String assetName = 'images/svg/logout.svg';
+  return SvgPicture.asset(
+      assetName, semanticsLabel: 'Logout');
+}
 Widget editIcon() {
-  const String assetName = 'images/edit_icon.svg';
+  const String assetName = 'images/svg/edit_icon.svg';
   return InkWell(
     onTap: (){},
     child: SvgPicture.asset(
@@ -135,7 +171,15 @@ Widget editIcon() {
   );
 }
 Widget pizzaIcon() {
-  const String assetName = 'images/pizza_icon.svg';
+  const String assetName = 'images/svg/pizza_icon.svg';
   return SvgPicture.asset(
       assetName, semanticsLabel: 'Pizza');
+}
+Widget backIcon() {
+  const String assetName = 'images/svg/back_icon.svg';
+  return InkWell(
+    onTap: (){},
+    child: SvgPicture.asset(
+        assetName, semanticsLabel: 'Back'),
+  );
 }

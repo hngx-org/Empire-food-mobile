@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:free_lunch_app/helpers/dialog_handler.dart';
+import 'package:free_lunch_app/helpers/dialog_helper/dialog_handler.dart';
 GetIt locator = GetIt.instance;
 
 ///Register [DialogHandler] as a service locator

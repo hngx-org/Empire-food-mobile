@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/core/models/dialog_request.dart';
-import 'package:free_lunch_app/helpers/dialog_handler.dart';
-import 'package:free_lunch_app/helpers/floating_dialog_card.dart';
+import 'package:free_lunch_app/helpers/dialog_helper/dialog_request.dart';
+import 'package:free_lunch_app/helpers/dialog_helper/dialog_handler.dart';
+import 'package:free_lunch_app/helpers/dialog_helper/floating_dialog_card.dart';
 import 'package:free_lunch_app/helpers/locator.dart';
 
 class DialogManager extends StatefulWidget {

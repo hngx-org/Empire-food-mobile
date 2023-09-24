@@ -47,7 +47,7 @@ class CustomButtonStatistics extends StatelessWidget {
         child:  Row(
           children: [
             pizzaIcon(),
-            SizedBox(width: 3,),
+            const SizedBox(width: 3,),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class CustomButtonStatistics extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 4,),
+                  const SizedBox(height: 4,),
                   SizedBox(
                     child: Text(
                       title,
