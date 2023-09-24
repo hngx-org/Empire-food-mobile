@@ -18,11 +18,13 @@ class Auth extends ChangeNotifier {
   String? _password;
   String? _phoneNumber;
   String? _name;
+  int? _lunch_credit_balance;
 
   get phoneNumber => _phoneNumber;
   get name => _name;
   get password => _password;
   get email => _email;
+  get lunch_credit_balance => _lunch_credit_balance;
 
   final String url = "http://free-lunch.droncogene.com/api/v1/auth/";
   bool get isAuth {
@@ -54,6 +56,12 @@ class Auth extends ChangeNotifier {
 
   Future<bool> setEmail(String value) async {
     _email = value;
+    notifyListeners();
+    return true;
+  }
+
+  Future<bool> setLunchCreditBalance(int value) async {
+    _lunch_credit_balance = value;
     notifyListeners();
     return true;
   }
@@ -91,11 +99,11 @@ class Auth extends ChangeNotifier {
 
   Future<String?> sendOtp(String email) async {
     final response = await http.post(
-      Uri.parse('http://free-lunch.droncogene.com/api/v1/user/forget-password?email=$email'),
+      Uri.parse(
+          'http://free-lunch.droncogene.com/api/v1/user/forget-password?email=$email'),
       headers: <String, String>{
         'Content-Type': 'application/json;',
       },
-
     );
 
     final responseData = json.decode(response.body);
@@ -128,15 +136,12 @@ class Auth extends ChangeNotifier {
     print('>>>>>>password : ${password}');
     print('>>>>>>otp : ${Otp}');
 
-
-
     final response = await http.post(
-      Uri.parse('http://free-lunch.droncogene.com/api/v1/user/reset-password?email=$email&otp=$Otp&password=$password'),
+      Uri.parse(
+          'http://free-lunch.droncogene.com/api/v1/user/reset-password?email=$email&otp=$Otp&password=$password'),
       headers: <String, String>{
         'Content-Type': 'application/json;',
-
       },
-
     );
 
     final responseData = json.decode(response.body);
@@ -147,7 +152,6 @@ class Auth extends ChangeNotifier {
       // Save the user's name
       // // Retrieve the user's name
       // final data = responseData['data']; // Ge
-
 
       // print('Username: $username');
       notifyListeners();
@@ -200,7 +204,6 @@ class Auth extends ChangeNotifier {
 
     if (access_token != null) {
       final response = await http.get(
-
         Uri.parse('http://free-lunch.droncogene.com/api/v1/user/profile'),
         headers: <String, String>{
           'Content-Type': 'application/json;',
@@ -221,6 +224,7 @@ class Auth extends ChangeNotifier {
         setName(data["first_name"], data["last_name"]);
         setPhoneNumber(data["phone_number"]);
         setEmail(data["email"]);
+        setLunchCreditBalance(data["lunch_credit_balance"] as int);
 
         // print('Username: $username');
         notifyListeners();
@@ -272,6 +276,73 @@ class Auth extends ChangeNotifier {
         print('Failed to fetch user data: ${response.statusCode}');
         print(response.body);
         throw Exception('Failed to fetch user data');
+      }
+    }
+
+    throw Exception('Access token not available'); // Handle this case as needed
+  }
+
+  Future requestWithdrawal(amount) async {
+    String? access_token = await getString('token');
+    print('>>>username accesstoken when on withdrawalScreen : $access_token');
+    print('>>>user amount from form : $amount');
+    if (amount <= 0) {
+      throw Exception('Invalid amount: amount should greater than 0');
+    }
+    if (access_token != null) {
+      final response = await http.post(
+        Uri.parse('http://free-lunch.droncogene.com/api/v1/withdrawal/request'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;',
+          'Authorization': "Bearer $access_token",
+        },
+        body: jsonEncode(<String, String>{
+          "amount": amount,
+        }),
+      );
+
+      final responseData = json.decode(response.body);
+      // _token = responseData.access_token;
+      print(responseData);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        // Save the user's name
+        // // Retrieve the user's name
+        final data = responseData['data']; // Ge
+
+        notifyListeners();
+        return data;
+      } else {
+        // Handle the error
+        print('Failed to post data: ${response.statusCode}');
+      }
+    }
+  }
+
+  Future<Map<String, dynamic>> allBanks() async {
+    // Retrieve the access_token
+    String? access_token = await getString('token');
+
+    if (access_token != null) {
+      final response = await http.get(
+        Uri.parse('http://free-lunch.droncogene.com/api/v1/user/bank'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': "Bearer $access_token",
+        },
+      );
+      final responseData = json.decode(response.body);
+      print('>>>>>>>>>>>>>>>$responseData');
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        notifyListeners();
+        return responseData; // Return user data here
+      } else {
+        // Handle the error
+        print('Failed to fetch user data: ${response.statusCode}');
+        print(response.body);
+        throw Exception('Failed to fetch bank data');
       }
     }
 

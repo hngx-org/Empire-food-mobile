@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class WithdrawalDetails extends StatelessWidget {
-  const WithdrawalDetails({super.key});
+  final String data;
+  WithdrawalDetails({required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +14,14 @@ class WithdrawalDetails extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(width: 2),
       ),
-      child: const Padding(
-        padding: EdgeInsets.only(left: 20.0, top: 23, ),
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 20.0,
+          top: 23,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Row(
               children: [
                 Expanded(
@@ -52,7 +55,6 @@ class WithdrawalDetails extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 Expanded(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -85,7 +87,9 @@ class WithdrawalDetails extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             Row(
               children: [
                 Expanded(
@@ -151,8 +155,9 @@ class WithdrawalDetails extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15,),
-
+            SizedBox(
+              height: 15,
+            ),
             Row(
               children: [
                 Expanded(
@@ -204,9 +209,9 @@ class WithdrawalDetails extends StatelessWidget {
                       Opacity(
                         opacity: 0.70,
                         child: Text(
-                          '₦20,000',
+                          '₦${(data == 'null') ? 0 : data}',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.black,  
                             fontSize: 16,
                             fontFamily: 'Nunito',
                             fontWeight: FontWeight.w500,
@@ -224,4 +229,3 @@ class WithdrawalDetails extends StatelessWidget {
     );
   }
 }
-
