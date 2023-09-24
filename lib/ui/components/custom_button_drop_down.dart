@@ -30,7 +30,7 @@ class _CustomButtonDropState extends State<CustomButtonDrop> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width + 25,
+      width: widget.width + 30,
       height: widget.height,
       padding: const EdgeInsets.all(10),
       decoration: ShapeDecoration(
@@ -60,7 +60,7 @@ class _CustomButtonDropState extends State<CustomButtonDrop> {
                 style: GoogleFonts.nunito(
                   color: Colors.black,
                   fontSize: widget.isTextBig
-                      ? 15
+                      ? sizer(true, 15, context)
                       : widget.singleBigButton
                           ? sizer(true, 16, context)
                           : 12,
