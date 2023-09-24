@@ -43,7 +43,9 @@ class UserProfile extends StatelessWidget {
         actions: [
           IconButton(
             icon: settingsIcon(),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, RouteHelper.settingsRoute);
+            },
           ),
         ],
       ),
@@ -63,7 +65,7 @@ class UserProfile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                       Text(
+                      Text(
                         "${authProvider.name}",
                         style: TextStyle(
                             fontSize: 23,
@@ -103,7 +105,8 @@ class UserProfile extends StatelessWidget {
                   const SizedBox(
                     height: 3,
                   ),
-                  const Text("🎨 Design enthusiast by day, pixel magician by night.",
+                  const Text(
+                      "🎨 Design enthusiast by day, pixel magician by night.",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,

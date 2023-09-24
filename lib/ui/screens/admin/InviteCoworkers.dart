@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/auth.dart';
 import '../../../utils/size_calculator.dart';
-import '../../components/success_bottom_sheet_admin.dart';
 
 class InviteCoworkerScreen extends StatefulWidget {
   const InviteCoworkerScreen({super.key});

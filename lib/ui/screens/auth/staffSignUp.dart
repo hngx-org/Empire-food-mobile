@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/ui/components/bottom_navigator.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/auth.dart';

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/ui/components/bottom_navigator.dart';
-import 'package:free_lunch_app/ui/components/cancel_button.dart';
-import 'package:free_lunch_app/ui/components/next_button.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

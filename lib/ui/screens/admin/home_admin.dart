@@ -68,7 +68,7 @@ class _HomeAdminState extends State<HomeAdmin> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'User Profile',
+            label: 'Profile',
           ),
         ],
       ),
