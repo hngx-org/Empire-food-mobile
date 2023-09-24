@@ -23,6 +23,8 @@ class _StaffSignUpState extends State<StaffSignUp> {
   var LastnameController = TextEditingController();
   var PhoneController = TextEditingController();
   var PasswordController = TextEditingController();
+  var _codeController = TextEditingController();
+
   bool isLoading = false;
   final _formkey = GlobalKey<FormState>();
 
@@ -59,9 +61,10 @@ class _StaffSignUpState extends State<StaffSignUp> {
       final firstname = FirstnameController.text; // Get the first name
       final lastname = LastnameController.text; // Get the last name
       final phone = PhoneController.text; // Get the phone number
+      final otp = _codeController.text; // Get the phone number
 
       // Call the signUp method from your provider
-      await authProvider.signUp(email, password, firstname, lastname, phone);
+      await authProvider.signUp(email, password, firstname, lastname, phone, otp);
       setState(() {
         isLoading = false;
       });
@@ -120,6 +123,40 @@ class _StaffSignUpState extends State<StaffSignUp> {
                     const SizedBox(
                       height: 10,
                     ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Enter the 6-Digit Code:',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: TextFormField(
+                        validator: (value) {
+                          String? enteredCode = value;
+                          if (enteredCode?.length == 6) {
+                            // Handle the 6-digit code, e.g., submit it or validate it
+                            print('Entered Code: $enteredCode');
+                          } else {
+                            // Code is not 6 digits long, show an error message
+                            print('Invalid Code');
+                          }
+                          return null;
+                        },
+
+                        controller: _codeController,
+                        keyboardType: TextInputType.number,
+                        maxLength: 6, // Limit to 6 characters
+                        decoration: InputDecoration(
+                          hintText: '123456',
+                          counterText: '', // Hide the character counter
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -367,6 +404,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
                         ],
                       ),
                     ),
+
                     const SizedBox(
                       height: 50,
                     ),
