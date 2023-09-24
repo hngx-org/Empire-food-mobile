@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/helpers/router.dart';
 import 'package:free_lunch_app/providers/auth.dart';
 import 'package:free_lunch_app/ui/components/bottom_navigator.dart';
 import 'package:google_fonts/google_fonts.dart';

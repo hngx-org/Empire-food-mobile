@@ -10,6 +10,7 @@ import '../../components/bottom_navigator.dart';
 import '../../components/custom_button.dart';
 import '../../components/profile_pic.dart';
 import '../gift_lunch/gift_free_lunch_2.dart';
+import '../gift_lunch/gift_free_lunch_2.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   const AdminHomeScreen({
@@ -148,12 +149,14 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
             ),
             const SizedBox(height: 15),
             usersData.isEmpty
-                ?  Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height:MediaQuery.of(context).size.height * 0.2),
-                   const Center(
-                        child: Text('No Co-workers added to the firm yet!!! 😃'),
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.2),
+                      const Center(
+                        child:
+                            Text('No Co-workers added to the firm yet!!! 😃'),
                       ),
                   ],
                 )

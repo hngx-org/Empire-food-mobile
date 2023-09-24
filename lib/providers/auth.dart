@@ -1,15 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:free_lunch_app/ui/components/dialog/alert_dialog.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../core/models/http_exception.dart';
+
 //remember to change to with
 class Auth extends ChangeNotifier {
   String? _token;
+  DateTime? _expiryDate;
   int? _userId;
+  Timer? _authTimer;
   bool? _isAdmin;
   String? _email;
   String? _password;
