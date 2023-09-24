@@ -67,9 +67,9 @@ class Auth extends ChangeNotifier {
   }
 
   Future signUp(String email, String password, String firstname,
-      String lastname, String phone) async {
+      String lastname, String phone, String otp) async {
     final response = await http.post(
-      Uri.parse('${url}user/signup'),
+      Uri.parse('http://free-lunch.droncogene.com/api/v1/organization/staff/signup'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -78,7 +78,8 @@ class Auth extends ChangeNotifier {
         "password": password,
         "first_name": firstname,
         "last_name": lastname,
-        "phone_number": phone
+        "phone_number": phone,
+        "otp_token": otp
       }),
     );
 
@@ -211,6 +212,33 @@ class Auth extends ChangeNotifier {
     final response = await http.post(
       Uri.parse(
           'http://free-lunch.droncogene.com/api/v1/user/forget-password?email=$email'),
+      headers: <String, String>{
+        'Content-Type': 'application/json;',
+      },
+    );
+
+    final responseData = json.decode(response.body);
+    // _token = responseData.access_token;
+    print(responseData);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+
+      // print('Username: $username');
+      notifyListeners();
+      return responseData["message"];
+
+      // print('Post successful');
+    } else {
+      // Handle the error
+      print('Failed to post data: ${response.statusCode}');
+      // print(response.body);
+      // throw HttpException(responseData['detail']);
+    }
+  }
+  Future<String?> sendInvite(String email) async {
+    final response = await http.post(
+      Uri.parse(
+        'http://free-lunch.droncogene.com/api/v1/organization/invite?email=$email'),
       headers: <String, String>{
         'Content-Type': 'application/json;',
       },
