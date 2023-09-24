@@ -67,16 +67,19 @@ class AdminHomeCard extends StatelessWidget {
                   ),
                 ],
               ),
-              CustomButtonDrop(
-                width: sizer(true, 133, context),
-                height: 51,
-                items: ['Gift Lunch', 'Delete Profile'],
-                onChanged: (selectedItem) {
-                  if (selectedItem == 'Gift Lunch' || selectedItem == 'Delete Profile') {
-                    onTap(selectedItem!);
-                  }
-                },
-                selectedValue: 'Gift Lunch',
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.35,
+                child: CustomButtonDrop(
+                  width: sizer(true, 133, context),
+                  height: 51,
+                  items: ['Gift Lunch', 'Delete Profile'],
+                  onChanged: (selectedItem) {
+                    if (selectedItem == 'Gift Lunch' || selectedItem == 'Delete Profile') {
+                      onTap(selectedItem!);
+                    }
+                  },
+                  selectedValue: 'Gift Lunch',
+                ),
               )
             ],
           ),

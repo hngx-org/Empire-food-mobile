@@ -9,6 +9,7 @@ import '../../components/admin_home_card.dart';
 import '../../components/bottom_navigator.dart';
 import '../../components/custom_button.dart';
 import '../../components/profile_pic.dart';
+import '../gift_lunch/gift_free_lunch_2.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   const AdminHomeScreen({
@@ -78,7 +79,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         actions: [
           IconButton(
             icon: searchIcon(),
-            onPressed: () {},
+            onPressed: () {
+
+            },
           ),
         ],
       ),
@@ -164,8 +167,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   imageUrl: 'images/dummy_$index.png',
                   onTap: (selectedItem) {
                     if (selectedItem == 'Gift Lunch') {
-                      Navigator.pushNamed(
-                          context, RouteHelper.giftFreeLunchScreen);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              GiftFreeLunchScreen2(user: user)));
                     } else if (selectedItem == 'Delete Profile') {
                       // Handle 'Delete Profile' action
                     }

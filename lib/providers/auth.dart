@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Auth extends ChangeNotifier {
   String? _token;
   int? _userId;
+  bool? _isAdmin;
   String? _email;
   String? _password;
   String? _phoneNumber;
@@ -20,6 +21,8 @@ class Auth extends ChangeNotifier {
   get name => _name;
   get password => _password;
   get email => _email;
+  get isAdmin => _isAdmin;
+
   get lunch_credit_balance => _lunch_credit_balance;
 
   final String url = "http://free-lunch.droncogene.com/api/v1/auth/";
@@ -34,7 +37,6 @@ class Auth extends ChangeNotifier {
   int? get userId {
     return _userId;
   }
-
 
   Future<bool> setPhoneNumber(String value) async {
     _phoneNumber = value;
@@ -59,9 +61,18 @@ class Auth extends ChangeNotifier {
     notifyListeners();
     return true;
   }
-  Future<bool> setUserId(int value) async {
 
+  Future<bool> setUserId(int value) async {
     _userId = value;
+    notifyListeners();
+    return true;
+  }
+
+  Future<bool> setAdmin(bool value) async {
+    print('>>>>>>>>>>>>> from ADMIN ADMIN successFUL $value');
+
+    _isAdmin = value;
+
     notifyListeners();
     return true;
   }
@@ -69,7 +80,8 @@ class Auth extends ChangeNotifier {
   Future signUp(String email, String password, String firstname,
       String lastname, String phone, String otp) async {
     final response = await http.post(
-      Uri.parse('http://free-lunch.droncogene.com/api/v1/organization/staff/signup'),
+      Uri.parse(
+          'http://free-lunch.droncogene.com/api/v1/organization/staff/signup'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -98,10 +110,10 @@ class Auth extends ChangeNotifier {
     }
   }
 
-  Future adminSignUp (String email, String password, String firstname,
+  Future adminSignUp(String email, String password, String firstname,
       String lastname, String phone) async {
-        try {
-           final response = await http.post(
+    try {
+      final response = await http.post(
         Uri.parse('${url}user/signup'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -112,17 +124,16 @@ class Auth extends ChangeNotifier {
           "first_name": firstname,
           "last_name": lastname,
           "phone_number": phone,
-
         }),
       );
-          final responseData = json.decode(response.body);
+      final responseData = json.decode(response.body);
       final data = responseData['data'];
       print('>>>>>>>>>>>>> from SIGNUP ADMIN successFUL $data');
       notifyListeners();
-       return responseData;
-        } catch (e) {
-          print('Error signing UP user/admin>>>>> : $e');
-                  return SnackBar(
+      return responseData;
+    } catch (e) {
+      print('Error signing UP user/admin>>>>> : $e');
+      return SnackBar(
           content: Text(
         'User already exists',
         style: GoogleFonts.nunito(
@@ -132,13 +143,12 @@ class Auth extends ChangeNotifier {
           backgroundColor: Colors.red,
         ),
       ));
-        }
-   
-      }
+    }
+  }
 
-    Future adminLogin(String email, String password) async {
-      print('>>>>>>Admin email: $email');
-      print('>>>>>>>>Admin Password: $password');
+  Future adminLogin(String email, String password) async {
+    print('>>>>>>Admin email: $email');
+    print('>>>>>>>>Admin Password: $password');
     final response = await http.post(
       Uri.parse('${url}login'),
       headers: <String, String>{
@@ -150,31 +160,32 @@ class Auth extends ChangeNotifier {
       }),
     );
     final responseData = json.decode(response.body);
-    final  data = responseData['data'];
-      final accessToken = data['access_token'];
-      print('>>>>>>>>>>>>> from ADMIN log in SUCCESSFUL  >>>>>$data');
-      // clearString('admin-token');
-      
-      saveString(
-        'admin-token',
-        accessToken,
-      );
-      // print('Username: $username');
-      notifyListeners();
-      return data;
+    final data = responseData['data'];
+    final accessToken = data['access_token'];
+    print('>>>>>>>>>>>>> from ADMIN log in SUCCESSFUL  >>>>>$data');
+    // clearString('admin-token');
 
-    }
+    saveString(
+      'admin-token',
+      accessToken,
+    );
+    // print('Username: $username');
+    notifyListeners();
+    return data;
+  }
 
-      // print('Post successful');
-  
+  // print('Post successful');
 
-    Future createOrganization(String org_name, String lunch, String admin_tok) async {
-      print('THE PARSEDDDDDDDDDDDDDD >>>>>>> admin token when creating organisation: $admin_tok');
-      
-     String? admin_token = await getString('admin-token');
-      print('>>>>>>>>>>>>> token called when creating organisation: $admin_token');
-     try {
-         if (admin_token != null) {
+  Future createOrganization(
+      String org_name, String lunch, String admin_tok) async {
+    print(
+        'THE PARSEDDDDDDDDDDDDDD >>>>>>> admin token when creating organisation: $admin_tok');
+
+    String? admin_token = await getString('admin-token');
+    print(
+        '>>>>>>>>>>>>> token called when creating organisation: $admin_token');
+    try {
+      if (admin_token != null) {
         final response = await http.post(
           Uri.parse(
               'http://free-lunch.droncogene.com/api/v1/organization/create'),
@@ -199,13 +210,9 @@ class Auth extends ChangeNotifier {
       } else {
         print('No token');
       }
-
-     } catch (e) {
-     print('Error error creating ORGAINSATION: $e');
-
-     }
-   
-
+    } catch (e) {
+      print('Error error creating ORGAINSATION: $e');
+    }
   }
 
   Future<String?> sendOtp(String email) async {
@@ -222,7 +229,6 @@ class Auth extends ChangeNotifier {
     print(responseData);
     print(response.statusCode);
     if (response.statusCode == 200) {
-
       // print('Username: $username');
       notifyListeners();
       return responseData["message"];
@@ -235,38 +241,38 @@ class Auth extends ChangeNotifier {
       // throw HttpException(responseData['detail']);
     }
   }
+
   Future<String?> sendInvite(String email) async {
     String? access_token = await getString('token');
     print('>>>username accesstoken when on home screen : $access_token');
 
     if (access_token != null) {
-    final response = await http.post(
-      Uri.parse(
-        'http://free-lunch.droncogene.com/api/v1/organization/invite?email=$email'),
-      headers: <String, String>{
-        'Content-Type': 'application/json;',
-        'Authorization': "Bearer $access_token",
+      final response = await http.post(
+        Uri.parse(
+            'http://free-lunch.droncogene.com/api/v1/organization/invite?email=$email'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;',
+          'Authorization': "Bearer $access_token",
+        },
+      );
 
-      },
-    );
+      final responseData = json.decode(response.body);
+      // _token = responseData.access_token;
+      print(responseData);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        // print('Username: $username');
+        notifyListeners();
+        return responseData["message"];
 
-    final responseData = json.decode(response.body);
-    // _token = responseData.access_token;
-    print(responseData);
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-
-      // print('Username: $username');
-      notifyListeners();
-      return responseData["message"];
-
-      // print('Post successful');
-    } else {
-      // Handle the error
-      print('Failed to post data: ${response.statusCode}');
-      // print(response.body);
-      // throw HttpException(responseData['detail']);
-    } }
+        // print('Post successful');
+      } else {
+        // Handle the error
+        print('Failed to post data: ${response.statusCode}');
+        // print(response.body);
+        // throw HttpException(responseData['detail']);
+      }
+    }
 
     throw Exception('Access token not available'); //
   }
@@ -289,7 +295,6 @@ class Auth extends ChangeNotifier {
     print(responseData);
     print(response.statusCode);
     if (response.statusCode == 200) {
-
       notifyListeners();
       return responseData;
 
@@ -297,14 +302,12 @@ class Auth extends ChangeNotifier {
     } else {
       // Handle the error
       print('Failed to post data: ${response.statusCode}');
-
     }
   }
 
   Future login(String email, String password) async {
-
     try {
-          final response = await http.post(
+      final response = await http.post(
         Uri.parse('http://free-lunch.droncogene.com/api/v1/auth/login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -328,14 +331,12 @@ class Auth extends ChangeNotifier {
         return responseData; // User is valid and logged in successfully
       } else {
         print('Failed to log in: ${response.statusCode}');
-        return response.statusCode; // User is not valid (credentials are incorrect)
+        return response
+            .statusCode; // User is not valid (credentials are incorrect)
       }
     } catch (e) {
-      print(
-        'Error logging in: $e'
-      );
+      print('Error logging in: $e');
     }
-
   }
 
   Future getUserProfile() async {
@@ -359,15 +360,15 @@ class Auth extends ChangeNotifier {
         // Save the user's name
         // // Retrieve the user's name
         final data = responseData['data']; // Ge
-        print('>>>username when on home screen : ${data["first_name"]}');
-        setUserId(data["id"]);
+        print('>>>Admin when on home screen : ${data["is_admin"]}');
+        await setUserId(data["id"]);
+        await setAdmin(data["is_admin"] == true ? true : false);
+        await saveString("is_admin", data["is_admin"]);
+        await setName(data["first_name"], data["last_name"]);
+        await setPhoneNumber(data["phone_number"]);
+        await setEmail(data["email"]);
+        await setLunchCreditBalance(data["lunch_credit_balance"] as int);
 
-        setName(data["first_name"], data["last_name"]);
-        setPhoneNumber(data["phone_number"]);
-        setEmail(data["email"]);
-        setLunchCreditBalance(data["lunch_credit_balance"] as int);
-
-        // print('Username: $username');
         notifyListeners();
         return data;
 
@@ -494,6 +495,7 @@ class Auth extends ChangeNotifier {
 
     throw Exception('Access token not available'); // Handle this case as needed
   }
+
   Future<dynamic> sendLunch(int id, int lunchNumber, String giftMessage) async {
     print('>>>>>>>>>>>>>>>id : $id');
     print('>>>>>>>>>>>>>>>lunchNumber:  $lunchNumber');
@@ -523,7 +525,7 @@ class Auth extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         notifyListeners();
-        return responseData;
+        return responseData['data'];
         // print('Post successful');
       } else {
         // Handle the error
@@ -561,15 +563,13 @@ class Auth extends ChangeNotifier {
         print('Failed to fetch user data: ${response.statusCode}');
         print(response.body);
         throw Exception('Failed to fetch bank data');
-
       }
     }
 
     throw Exception('Access token not available'); // Handle this case as needed
   }
-  Future logout() async {
 
-  }
+  Future logout() async {}
 
   void _autoLogout() {}
 }
