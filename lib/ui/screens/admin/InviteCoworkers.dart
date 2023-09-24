@@ -84,8 +84,7 @@ class _InviteCoworkerScreenState extends State<InviteCoworkerScreen> {
           toGo: 'Go Home',
           toast: 'Success!!!',
           message:
-          'You have successfully added a new coworker. Here’s the code for the coworker: ',
-          code: '1234567',
+          'You have successfully added a new coworker.'
         ),
       );
     } catch (error) {

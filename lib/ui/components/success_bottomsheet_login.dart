@@ -5,6 +5,9 @@ import 'package:free_lunch_app/ui/components/custom_button.dart';
 import 'package:free_lunch_app/utils/colors.dart';
 import 'package:free_lunch_app/utils/size_calculator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/auth.dart';
 
 class FullQuoteBottomSheetLogin extends StatelessWidget {
   const FullQuoteBottomSheetLogin(
@@ -12,7 +15,7 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
       required this.toast,
       required this.message,
       required this.bottomSheetImageUrl,
-      required this.userData ,
+      required this.userData,
       this.toGo})
       : super(key: key);
   final String toast, message, bottomSheetImageUrl;
@@ -21,6 +24,8 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<Auth>(context, listen: false);
+
     return Container(
       height: MediaQuery.of(context).size.height * 0.55,
       padding: EdgeInsets.symmetric(
@@ -78,13 +83,16 @@ class FullQuoteBottomSheetLogin extends StatelessWidget {
                 height: 51,
                 color: AppColors.accentPurple5,
                 content: toGo ?? 'Go Back Home',
-                onTap: () {
+                onTap: () async {
                   HapticFeedback.lightImpact();
-                  Navigator.pop(context);
-                  if (userData == 'Admin') {
+                  // Navigator.pop(context);
+
+                  await authProvider.getUserProfile();
+
+                  if (authProvider.isAdmin == true) {
                     Navigator.of(context).pushNamed(RouteHelper.adminHome);
-                  } else{
-                      Navigator.of(context).pushNamed(RouteHelper.home);
+                  } else {
+                    Navigator.of(context).pushNamed(RouteHelper.home);
                   }
                 })
           ],
