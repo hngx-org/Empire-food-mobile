@@ -183,7 +183,7 @@ class Auth extends ChangeNotifier {
 
     String? admin_token = await getString('admin-token');
     print(
-        '>>>>>>>>>>>>> token called when creating organisation: $admin_token');
+        '>>>>>>>>>>>>> token called when creating organisation: $admin_tok');
     try {
       if (admin_token != null) {
         final response = await http.post(
@@ -191,7 +191,7 @@ class Auth extends ChangeNotifier {
               'http://free-lunch.droncogene.com/api/v1/organization/create'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer $admin_token',
+            'Authorization': 'Bearer $admin_tok',
           },
           body: jsonEncode(<String, String>{
             "organization_name": org_name,
@@ -363,10 +363,10 @@ class Auth extends ChangeNotifier {
         print('>>>Admin when on home screen : ${data["is_admin"]}');
         await setUserId(data["id"]);
         await setAdmin(data["is_admin"] == true ? true : false);
-        await saveString("is_admin", data["is_admin"]);
+        await saveString("is_admin", data["is_admin"].toString());
         await setName(data["first_name"], data["last_name"]);
-        await setPhoneNumber(data["phone_number"]);
-        await setEmail(data["email"]);
+        // await setPhoneNumber(data["phone_number"]);
+        // await setEmail(data["email"]);
         await setLunchCreditBalance(data["lunch_credit_balance"] as int);
 
         notifyListeners();

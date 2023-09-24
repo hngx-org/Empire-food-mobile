@@ -73,7 +73,7 @@ class FullQuoteBottomSheetAdmin extends StatelessWidget {
                   HapticFeedback.lightImpact();
                   Navigator.pop(context);
              
-                  Navigator.of(context).pushNamed(RouteHelper.adminHome);
+                  Navigator.of(context).pushNamed(RouteHelper.loginRoute);
                   
                 })
           ],

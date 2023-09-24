@@ -8,13 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FullQuoteBottomSheetInvite extends StatelessWidget {
   const FullQuoteBottomSheetInvite(
-      {Key? key,
-      required this.toast,
-      required this.message,
-      required this.code,
-      this.toGo})
+      {Key? key, required this.toast, required this.message, this.toGo})
       : super(key: key);
-  final String toast, message, code;
+  final String toast, message;
   final String? toGo;
 
   @override
@@ -64,13 +60,6 @@ class FullQuoteBottomSheetInvite extends StatelessWidget {
                             color: AppColors.black,
                             fontWeight: FontWeight.w600,
                           )),
-                      TextSpan(
-                          text: code,
-                          style: GoogleFonts.nunito(
-                            fontSize: sizer(true, 22, context),
-                            color: AppColors.black,
-                            fontWeight: FontWeight.bold,
-                          )),
                     ],
                   ),
                   textAlign: TextAlign.center,
@@ -78,30 +67,16 @@ class FullQuoteBottomSheetInvite extends StatelessWidget {
             const SizedBox(
               height: 37,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CustomButton(
-                    width: 127,
-                    height: 59,
-                    color: AppColors.accentPurple5,
-                    content: toGo ?? 'Go Back Home',
-                    onTap: () {
-                      HapticFeedback.lightImpact();
-                      Navigator.pop(context);
-                      Navigator.of(context).pushNamed(RouteHelper.adminHome);
-                    }),
-                CustomButton(
-                    width: 127,
-                    height: 59,
-                    color: AppColors.accentPurple5,
-                    content: 'Copy Code',
-                    onTap: () {
-                      HapticFeedback.lightImpact();
-                      Navigator.pop(context);
-                    }),
-              ],
-            )
+            CustomButton(
+                width: 127,
+                height: 59,
+                color: AppColors.accentPurple5,
+                content: toGo ?? 'Go Back Home',
+                onTap: () {
+                  HapticFeedback.lightImpact();
+                  Navigator.pop(context);
+                  Navigator.of(context).pushNamed(RouteHelper.adminHome);
+                }),
           ],
         ),
       ),

@@ -37,7 +37,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     try {
       await authProvider.getUserProfile();
     } catch (error) {
-      print('Error fetching usernames: $error');
+      print('Error fetching profile: $error');
     }
     try {
       final userData = await authProvider.allUsers();

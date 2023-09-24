@@ -135,6 +135,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: TextFormField(
+
                         validator: (value) {
                           String? enteredCode = value;
                           if (enteredCode?.length == 6) {
@@ -385,6 +386,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
                             height: 10,
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.phone,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter a value'; // Error message to display
