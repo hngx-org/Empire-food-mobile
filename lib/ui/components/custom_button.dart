@@ -48,7 +48,11 @@ class CustomButton extends StatelessWidget {
             content,
             style: GoogleFonts.nunito(
               color: Colors.black,
-              fontSize: isTextBig ? 16 :singleBigButton? sizer(true, 18, context): 14,
+              fontSize: isTextBig
+                  ? 16
+                  : singleBigButton
+                      ? sizer(true, 16, context)
+                      : 14,
               fontWeight: FontWeight.w700,
             ),
           ),

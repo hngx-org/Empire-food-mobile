@@ -55,6 +55,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: SizedBox(
           height: MediaQuery.of(context).size.height - 120,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 width: 373,
