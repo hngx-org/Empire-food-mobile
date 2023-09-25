@@ -295,23 +295,6 @@ class _GiftFreeLunchScreen3State extends State<GiftFreeLunchScreen3> {
                         content: 'Gift Free Launch',
                         onTap: () {
                           _submit(context);
-                          // showModalBottomSheet(
-                          //   context: context,
-                          //   shape: RoundedRectangleBorder(
-                          //     borderRadius: BorderRadius.only(
-                          //       topLeft:
-                          //           Radius.circular(sizer(true, 24, context)),
-                          //       topRight:
-                          //           Radius.circular(sizer(true, 24, context)),
-                          //     ),
-                          //   ),
-                          //   builder: (context) => const FullQuoteBottomSheet(
-                          //     toast: '🎉 Hooray!!! 🎉',
-                          //     message:
-                          //         'UduakE has received your free lunch. Keep the positive vibes coming! 🚀',
-                          //     bottomSheetImageUrl: 'images/btmSht.png',
-                          //   ),
-                          // );
                         })
                   ],
                 )
