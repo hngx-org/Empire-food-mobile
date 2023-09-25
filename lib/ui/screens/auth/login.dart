@@ -176,7 +176,8 @@ class _SignInState extends State<SignIn> {
                                   borderSide: BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                hintText: 'Please enter your work email address',
+                                hintText:
+                                    'Please enter your work email address',
                                 hintStyle: TextStyle(
                                   fontSize: sizer(true, 16, context),
                                   fontWeight: FontWeight.w500,
@@ -240,8 +241,8 @@ class _SignInState extends State<SignIn> {
                               child: TextButton(
                                 onPressed: () {
                                   HapticFeedback.lightImpact();
-                                  Navigator.of(context)
-                                      .pushNamed(RouteHelper.forgotPasswordRoute);
+                                  Navigator.of(context).pushNamed(
+                                      RouteHelper.forgotPasswordRoute);
                                 },
                                 child: Text(
                                   "Forgot Password",
@@ -258,8 +259,8 @@ class _SignInState extends State<SignIn> {
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: CustomButton(
-                                width: 150,
-                                height: 51,
+                                width: 155,
+                                height: 65,
                                 singleBigButton: true,
                                 isTextBig: false,
                                 color: AppColors.accentPurple5,
@@ -268,7 +269,7 @@ class _SignInState extends State<SignIn> {
                                   setState(() {
                                     _isLoading = true;
                                   });
-    
+
                                   if (_formkey.currentState!.validate()) {
                                     _submit(context);
                                   }
