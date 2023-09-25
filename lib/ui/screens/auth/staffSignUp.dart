@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:free_lunch_app/ui/components/pin_textfield.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -160,20 +159,7 @@ class _StaffSignUpState extends State<StaffSignUp> {
                       ),
                     ),
                     SizedBox(height: 20,),
-                    //   Padding(
-                    //   padding: EdgeInsets.symmetric(
-                    //       horizontal: sizer(true, 5, context)),
-                    //   child: Center(
-                    //     child: PinTextInput(
-                    //       pinEditingController: _codeController,
-                    //       onChanged: (text) {
-                    //         // setState(() {
-                    //         //   _otp = text ?? '';
-                    //         // });
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
+                    
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

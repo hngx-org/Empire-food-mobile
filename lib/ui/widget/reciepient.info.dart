@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class RecipientInfoSection extends StatefulWidget {
   const RecipientInfoSection( {Key? key ,required this.user, required this.callback}) : super(key: key);
-  final user;
+   final Map<String, dynamic> user;
   final void Function(dynamic) callback;
 
   @override

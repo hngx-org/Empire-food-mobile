@@ -36,7 +36,6 @@ dependencies:
   google_fonts: ^6.0.0
   http: ^1.1.0
   page_transition: ^2.1.0
-  pin_input_text_field: ^4.5.1
   provider: ^6.0.5
   shared_preferences: ^2.2.1
 

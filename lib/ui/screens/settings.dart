@@ -418,14 +418,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               GestureDetector(
                 onTap: () async {
-                  
                   final SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.clear();
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     RouteHelper.loginRoute,
-                    (route) => true,
+                    (route) => false,
                   );
                 },
                 child: Container(

@@ -147,7 +147,7 @@ class _ViewCoworkerScreenState extends State<ViewCoworkerScreen> {
                                     .toList();
                               } else {
                                 isSearching = false;
-                                // Clear the search results when there's no search text
+                               
                                 usersData = [];
                               }
                             });

@@ -13,7 +13,7 @@ import 'gift_free_lunch_3.dart';
 
 class GiftFreeLunchScreen2 extends StatefulWidget {
   const GiftFreeLunchScreen2({super.key, required this.user});
-  final user;
+  final Map<String, dynamic> user;
   @override
   State<GiftFreeLunchScreen2> createState() => _GiftFreeLunchScreen2State();
 }

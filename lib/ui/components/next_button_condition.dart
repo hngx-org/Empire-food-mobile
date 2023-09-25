@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../utils/colors.dart';
+
+class NextButtonCondition extends StatelessWidget {
+  final VoidCallback onTap;
+  const NextButtonCondition({super.key, required this.onTap, required bool isEnabled});
+
+  @override
+  Widget build(BuildContext context) {
+
+  return GestureDetector(
+    onTap: (){
+             HapticFeedback.lightImpact();
+             onTap ();
+    },
+    child: Container(
+      width: 84,
+      height: 51,
+      padding: const EdgeInsets.all(10),
+      decoration: ShapeDecoration(
+        color: AppColors.accentPurple5,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(width: 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        shadows: const [
+          BoxShadow(
+            color: Colors.black,
+            blurRadius: 0,
+            offset: Offset(2, 2),
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      child: Center(
+        child: Text(
+          'Next',
+          style: GoogleFonts.nunito(
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            height: 1.0,
+          ),
+        ),
+      ),
+    ),
+  );
+  }}
